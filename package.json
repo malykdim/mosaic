@@ -1,6 +1,7 @@
 {
   "name": "mosaic",
   "description": "Virtual gallery",
+  "homepage": "https://damyanovi.netlify.app/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
