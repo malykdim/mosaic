@@ -36,6 +36,14 @@ const msg = ref('Home');
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+
+  h2 {
+    color: var(--primary);
+  }
 }
 .card {
   background-color: transparent;

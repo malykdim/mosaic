@@ -6,10 +6,15 @@ const message = ref('Gallery');
 </script>
 
 <template>
-    <div>
+    <div class="gallery">
         <h2>{{ message }}</h2>
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+.gallery {
+    h2 {
+        color: var(--primary);
+    }
+}
 </style>

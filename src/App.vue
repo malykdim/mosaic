@@ -18,9 +18,9 @@ import router from './config/router';
 
 <style lang='scss' scoped>
 .nav {
-  position: absolute;
-  top: 0;
-  left: 0;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
   width: 100vw;
   margin: 0 auto;
 
@@ -34,7 +34,7 @@ import router from './config/router';
 
   a {
     text-decoration: none;
-    color: rgba(66, 184, 131, 0.667);
+    color: var(--primary);
   }
 }
 .content {
