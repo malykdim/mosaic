@@ -3,60 +3,40 @@ import router from './config/router';
 </script>
 
 <template>
-  <div class="nav">
-      <router-link to="/">
-        <img src="/logo.png" class="logo" alt="Logo" />
-      </router-link>
-      <router-link to="/gallery">Gallery</router-link>
-  </div>
+  <header class="header">
+    <Navigation />
+  </header>
 
-  <div class="content">
+  <main class="content">
     <router-view />
-  </div>
+  </main>
+
+  <footer class="footer"></footer>
 
 </template>
 
 <style lang='scss' scoped>
-.nav {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
+.header {
   width: 100vw;
   margin: 0 auto;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
 
-  background-color: #f8f8f8;
-  overflow: hidden;
-
-  a {
-    text-decoration: none;
-    color: var(--primary);
-  }
+  // padding: 0;
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
+  
+  background-color: rgba(245, 245, 245, 0.569);
 }
 .content {
-  margin: 0 auto;
+  margin: 5rem auto 0;
   max-width: 1200px;
   padding: 0 20px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-}
-.logo {
-  height: 3em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em rgba(66, 184, 131, 0.667));
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
