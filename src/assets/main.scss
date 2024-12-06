@@ -4,7 +4,8 @@
     --primary: rgba(66, 184, 131, 0.667);
     --hover: rgba(66, 184, 131, 0.05);
     --secondary: rgba(206, 211, 209, 0.667);
-    --warning: rgba(247, 22, 116, 0.644);
+    --warning: rgba(172, 15, 68, 0.644);
+    --input: rgba(39, 41, 39, 0.667);
 
     --border: 1px solid var(--secondary);
     --border-radius: 4px;
@@ -27,6 +28,11 @@
 body {
     background-color: #fafafa;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+}
+
 a {
     text-decoration: none;
 }
@@ -74,6 +80,7 @@ form {
         width: 100%;
         box-sizing: border-box;
         margin: 20px auto;
+        color: var(--input);
     }
 }
 
