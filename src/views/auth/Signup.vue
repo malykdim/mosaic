@@ -17,7 +17,7 @@ const handleSubmit = async () => {
 
     if (!error.value) {
         console.log('user signed up')
-        router.push({ name: 'home' })
+        router.push({ name: 'dashboard' })
     }
 }
 </script>

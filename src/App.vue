@@ -1,4 +1,5 @@
 <script setup>
+import Auth from './components/footer/Auth.vue';
 import router from './config/router';
 </script>
 
@@ -11,7 +12,9 @@ import router from './config/router';
     <router-view />
   </main>
 
-  <footer class="footer"></footer>
+  <footer class="footer">
+    <Footer />
+  </footer>
 
 </template>
 
@@ -38,5 +41,20 @@ import router from './config/router';
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  // padding: 0;
+  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
+  
+  background-color: rgba(245, 245, 245, 0.569);
 }
 </style>

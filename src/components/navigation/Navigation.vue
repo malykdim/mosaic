@@ -1,19 +1,4 @@
 <script setup>
-import { useRouter } from 'vue-router'
-
-import useLogout from '../../composables/useLogout'
-import getUser from '../../composables/getUser'
-
-const router = useRouter()
-
-const { user } = getUser()
-const { logout } = useLogout()
-
-const logOut = async () => {
-    const response = await logout()
-    console.log('user logged out')
-    router.push({ name: 'login' })
-}
 </script>
 
 <template>
@@ -22,11 +7,6 @@ const logOut = async () => {
             <img src="/logo.png" class="logo" alt="Logo" />
         </router-link>
         <router-link :to="{ name: 'gallery'}" class="link btn">Gallery</router-link>
-        <div class="auth">
-            <router-link v-if="!user" :to="{ name: 'login'}" class="link btn">Login</router-link>
-            <router-link v-if="!user" :to="{ name: 'signup'}" class="link btn">Register</router-link>
-            <button v-if="user" @click="logOut" class="link btn">Logout</button>
-        </div>
     </nav>
 </template>
 
