@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 
+import useStorage from '../../composables/useStorage'
+
 const title = ref('')
 const author = ref('')
 const file = ref(null)
@@ -12,9 +14,13 @@ const description = ref('')
 // allowed file types
 const types = ['image/png', 'image/jpeg']
 
-const handleCreate = () => {
+const { filePath, url, uploadImage } = useStorage()
+
+const handleCreate = async () => {
     if (file.value) {
-        console.log(title.value, author.value, file.value, dimensions.value, materials.value, description.value)
+        // console.log(title.value, author.value, file.value, dimensions.value, materials.value, description.value)
+        await uploadImage(file.value)
+        console.log('image uploaded, url: ', url.value)
     }
 }
 
