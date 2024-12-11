@@ -1,4 +1,7 @@
 <script setup>
+import getUser from '../../composables/getUser'
+
+const { user } = getUser()
 </script>
 
 <template>
@@ -7,6 +10,7 @@
             <img src="/logo.png" class="logo" alt="Logo" />
         </router-link>
         <router-link :to="{ name: 'gallery'}" class="link btn">Gallery</router-link>
+        <router-link v-if="user" :to="{ name: 'dashboard'}" class="link btn">Dashboard</router-link>
     </nav>
 </template>
 
