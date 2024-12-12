@@ -2,39 +2,53 @@
 import { ref } from 'vue'
 
 import useStorage from '../../composables/useStorage'
+import useCollection from '../../composables/useCollection'
 
 const title = ref('')
 const author = ref('')
 const file = ref(null)
 const fileError = ref(null)
-const dimensions = ref('')
-const materials = ref('')
-const description = ref('')
+const imageUrl = ref(null)
+const isPending = ref(false)
 
 // allowed file types
 const types = ['image/png', 'image/jpeg']
 
 const { filePath, url, uploadImage } = useStorage()
+const { error, addDoc } = useCollection('panneaux')
 
 const handleCreate = async () => {
+    isPending.value = true
     if (file.value) {
-        // console.log(title.value, author.value, file.value, dimensions.value, materials.value, description.value)
         await uploadImage(file.value)
-        console.log('image uploaded, url: ', url.value)
     }
+    await addDoc({
+        title: title.value,
+        author: author.value,
+        imageUrl: imageUrl.value,
+    })
+    isPending.value = false
+    if (!error.value) {
+        console.log('item added', title.value, author.value, imageUrl.value)
+        // title.value = ''
+        // author.value = ''
+        // imageUrl.value = ''
+    }
+
+
 }
 
 const handleChange = (e) => {
     const selected = e.target.files[0]
     console.log(selected)
 
-    if (selected && types.includes(selected.type)) {
-        file.value = selected
-        fileError.value = null
-    } else {
-        file.value = null
-        fileError.value = 'Please select an image file (png or jpeg)'
-    }
+    // if (selected && types.includes(selected.type)) {
+    //     file.value = selected
+    //     fileError.value = null
+    // } else {
+    //     file.value = null
+    //     fileError.value = 'Please select an image file (png or jpeg)'
+    // }
 }
 </script>
 
@@ -44,19 +58,16 @@ const handleChange = (e) => {
     <input type="text" v-model="title" placeholder="panneaux title" required>
     <input type="text" v-model="author" placeholder="author" required>
 
-    <label>Upload an image</label>
+    <!-- <label>Upload an image</label>
     <input type="file" @change="handleChange" class="file">
-    <div class="error">{{ fileError }}</div>
+    <div class="error">{{ fileError }}</div> -->
 
-
-    <input type="text" v-model="dimensions" placeholder="dimensions" required>
-    <input type="text" v-model="materials" placeholder="materials" required>
-
-    <textarea v-model="description" placeholder="description" required></textarea>
+    <input type="text" v-model="imageUrl" placeholder="imageUrl" required>
 
     <div class="error"></div>
 
-    <button type="submit">Create</button>
+    <button v-if="!isPending" type="submit">Create</button>
+    <button v-else disabled>Saving...</button>
 </form>
 </template>
 

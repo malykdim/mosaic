@@ -1,13 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 
+// import supabase from '../../config/supabase';
+
 const msg = ref('Home');
+
+// console.log(supabase);
 
 </script>
 
 <template>
   <div class="home">
     <h2>{{ msg }}</h2>
+   
     
     <!-- <div class="content">
 
