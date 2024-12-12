@@ -3,6 +3,8 @@ import { ref } from 'vue'
 
 import useStorage from '../../composables/useStorage'
 import useCollection from '../../composables/useCollection'
+import getUser from '../../composables/getUser'
+import { timestamp } from '../../config/firebase'
 
 const title = ref('')
 const author = ref('')
@@ -15,7 +17,8 @@ const isPending = ref(false)
 const types = ['image/png', 'image/jpeg']
 
 const { filePath, url, uploadImage } = useStorage()
-const { error, addDoc } = useCollection('panneaux')
+const { error, addDoc } = useCollection('mosaics')
+const { user } = getUser()
 
 const handleCreate = async () => {
     isPending.value = true
@@ -25,7 +28,10 @@ const handleCreate = async () => {
     await addDoc({
         title: title.value,
         author: author.value,
+        userId: user.value.uid,
+        userName: user.value.displayName,
         imageUrl: imageUrl.value,
+        createdAt: timestamp()
     })
     isPending.value = false
     if (!error.value) {

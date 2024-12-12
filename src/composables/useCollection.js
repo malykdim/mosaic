@@ -6,7 +6,6 @@ const useCollection = (collection) => {
   const error = ref(null)
   const isPending = ref(false)
 
-
   // add a new document
   const addDoc = async (doc) => {
     error.value = null

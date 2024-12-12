@@ -6,12 +6,10 @@ import getCollection from '../../composables/getCollection'
 const { error, documents } = getCollection('mosaics')
 console.log(documents)
 
-const message = ref('Gallery')
 </script>
 
 <template>
     <div class="gallery">
-        <h2>{{ message }}</h2>
         <div v-if="error" class="error">Could not fetch the data</div>
         <div v-if="documents" class="items">
             <div v-for="document in documents" :key="document.id">
