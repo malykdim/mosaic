@@ -3,6 +3,8 @@ import { ref } from 'vue';
 
 import getCollection from '../../composables/getCollection'
 
+
+
 const { error, documents } = getCollection('mosaics')
 console.log(documents)
 
@@ -12,7 +14,7 @@ console.log(documents)
     <div class="gallery">
         <div v-if="error" class="error">Could not fetch the data</div>
         <div v-if="documents" class="items">
-            <div v-for="document in documents" :key="document.id">
+            <div v-for="document in documents" :key="document.id" :item="document">
                     <h4>{{ document.title }}</h4>
             </div>
         </div>
