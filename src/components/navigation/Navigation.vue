@@ -1,7 +1,7 @@
 <script setup>
-import getUser from '../../composables/getUser'
+import { useUserStore } from '../../stores/useUserStore'
 
-const { user } = getUser()
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const { user } = getUser()
             <img src="/logo.png" class="logo" alt="Logo" />
         </router-link>
         <router-link :to="{ name: 'gallery'}" class="link btn">Gallery</router-link>
-        <router-link v-if="user" :to="{ name: 'dashboard'}" class="link btn">Dashboard</router-link>
+        <router-link v-if="userStore.user" :to="{ name: 'dashboard'}" class="link btn">Dashboard</router-link>
     </nav>
 </template>
 

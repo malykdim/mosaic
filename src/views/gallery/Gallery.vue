@@ -1,12 +1,28 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-import getCollection from '../../composables/getCollection'
-
-
-
-const { error, documents } = getCollection('mosaics')
-console.log(documents)
+const documents = ref([
+    {
+        id: 1,
+        title: 'Document 1',
+    },
+    {
+        id: 2,
+        title: 'Document 2',
+    },
+    {
+        id: 3,
+        title: 'Document 3',
+    },
+    {
+        id: 4,
+        title: 'Document 4',
+    },
+    {
+        id: 5,
+        title: 'Document 5',
+    }
+])
 
 </script>
 

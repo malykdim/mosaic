@@ -1,26 +1,14 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useUserStore } from '../../stores/useUserStore'
 
-import useLogout from '../../composables/useLogout'
-import getUser from '../../composables/getUser'
-
-const router = useRouter()
-
-const { user } = getUser()
-const { logout } = useLogout()
-
-const logOut = async () => {
-    const response = await logout()
-    console.log('user logged out')
-    router.push({ name: 'login' })
-}
+const userStore = useUserStore()
 </script>
 
 <template>
     <nav class="auth">
-        <router-link v-if="!user" :to="{ name: 'login'}" class="link btn">Login</router-link>
-        <router-link v-if="!user" :to="{ name: 'signup'}" class="link btn">Register</router-link>
-        <button v-if="user" @click="logOut" class="link btn">Logout</button>
+        <router-link v-if="!userStore.user" :to="{ name: 'login'}" class="link btn">Login</router-link>
+        <router-link v-if="!userStore.user" :to="{ name: 'signup'}" class="link btn">Register</router-link>
+        <button v-if="userStore.user" @click="userStore.logout" class="link btn">Logout</button>
     </nav>
 </template>
 

@@ -1,11 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// import supabase from '../../config/supabase';
-
 const msg = ref('Home');
-
-// console.log(supabase);
 
 </script>
 

@@ -1,22 +1,39 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStorage } from '../../stores/useUserStore'
 
-import useLogin from '../../composables/useLogin'
 
 const router = useRouter()
+const userStore = useUserStorage()
 
-const { error, login, isPending } = useLogin()
 const email = ref('')
 const password = ref('')
+const error = ref(null)
+const isPending = ref(false)
+
+/* Supabase Sign in an existing user */
+const signIn = async (email, password) => {
+    const { user, error } = await supabase.auth.signIn({ email, password })
+}
 
 const handleSubmit = async () => {
-    const response = await login(email.value, password.value)
+  if (!email.value || !password.value) {
+    error.value = 'Please fill in all fields'
+    return
+  }
 
-    if (!error.value) {
-        console.log('user logged in')
-        router.push({ name: 'dashboard' })
-    }
+  isPending.value = true
+  const { user, error: signInError } = await userStore.signIn(email.value, password.value)
+  isPending.value = false
+
+  if (!signInError) {
+    console.log('user logged in: ', user)
+    router.push({ name: 'dashboard' })
+  } else {
+    console.log('error:', signInError.message)
+    error.value = signInError.message
+  }
 }
 </script>
 
