@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
 
-import useStorage from '../../composables/useStorage'
-import useCollection from '../../composables/useCollection'
-import getUser from '../../composables/getUser'
-import { timestamp } from '../../config/firebase'
+// import useStorage from '../../composables/useStorage'
+// import useCollection from '../../composables/useCollection'
+// import getUser from '../../composables/getUser'
+// import { timestamp } from '../../config/firebase'
 
 const title = ref('')
 const author = ref('')
@@ -16,9 +16,9 @@ const isPending = ref(false)
 // allowed file types
 const types = ['image/png', 'image/jpeg']
 
-const { filePath, url, uploadImage } = useStorage()
-const { error, addDoc } = useCollection('mosaics')
-const { user } = getUser()
+// const { filePath, url, uploadImage } = useStorage()
+// const { error, addDoc } = useCollection('mosaics')
+// const { user } = getUser()
 
 const handleCreate = async () => {
     isPending.value = true

@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStorage } from '../../stores/useUserStore'
+import { useUserStore } from '../../stores/useUserStore'
 
 
 const router = useRouter()
-const userStore = useUserStorage()
+const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
