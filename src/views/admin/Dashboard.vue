@@ -1,5 +1,5 @@
 <script setup>
-import MiniGallery from './MiniGallery.vue'
+import MiniGallery from './components/MiniGallery.vue'
 
 </script>
 
