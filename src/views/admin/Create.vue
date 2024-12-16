@@ -25,7 +25,7 @@ const addDocError = ref(null)
 const title = ref('')
 const author = ref('')
 const image = ref(null)
-const dimensions = ref('') // toDo: for width and height - type number with a dropdown for cm or inches
+const dimensions = ref({}) // toDo: for width and height - type number with a dropdown for cm or inches
 const materials = ref([])
 
 const handleFileChange = (e) => {
