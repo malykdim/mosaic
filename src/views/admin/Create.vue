@@ -1,10 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import { useStorage } from '../../stores/useStorage'
 import { useCollection } from '../../stores/useCollection'
-// import { getUser } from '../../stores/getUser'
 import { useUserStore } from '../../stores/useUserStore'
+import { useCreateItem } from '../../stores/useCreateItem'
 
 import Title from './components/Title.vue'
 import Author from './components/Author.vue'
@@ -12,126 +11,78 @@ import Image from './components/Image.vue'
 import Dimensions from './components/Dimensions.vue'
 import Materials from './components/Materials.vue'
 
-const { filePath, url, uploadImage } = useStorage()
 const { error, addDoc } = useCollection('mosaics')
-// const { user } = getUser()
 const { user, checkUser } = useUserStore()
+const { item } = useCreateItem()
 
 const isPending = ref(false)
-const fileError = ref(null)
-const uploadFileError = ref(null)
 const addDocError = ref(null)
-
-const title = ref('')
-const author = ref('')
-const image = ref(null)
-const dimensions = ref({}) // toDo: for width and height - type number with a dropdown for cm or inches
-const materials = ref([])
-
-const handleFileChange = (e) => {
-    fileError.value = null
-
-    const selected = e.target.files[0]
-    console.log(selected)
-
-    if (selected && selected.type==='image/jpeg' && selected.size < 1000000) {
-        image.value = selected
-        fileError.value = null
-    } else {
-        file.value = null
-        fileError.value = 'Please select an image file (jpg or jpeg) of size less than 1MB'
-    }
-}
+const newItem = ref(null)
 
 const handleCreate = async () => {
-    if (!title.value || !author.value || !image.value) {
+    if (!title.value || !author.value || !image.value || !materials.value || !dimensions.value) {
         alert('Please fill in all fields')
         return
     }
-
-    // I want to have an input type radio for the author property.
-    // I want to make a check if any of the radio buttons are checked as oppose to the default undefined/unchecked value
-    // if (author.value === undefined) {
-    //     alert('Please select an author')
-    //     return
-    // }
-
-    // I want to check if the selected file is an image and has a .jpg extension
-    // if (image.value.type !== 'image/jpeg') {
-    //     alert('Please select a .jpg image with a file size less than 1MB')
-    //     return
-    // } else if (image.value.size > 1000000) {
-    //     alert('The file size is too big. Please select an image with a file size less than 1MB')
-    //     return
-    // }
-
-    // I want to check if there are any materials selected
-    // if (materials.value.length === 0) {
-    //     alert('Please select at least two materials')
-    //     return
-    // }
+    
+    if (!user.value) {
+        alert('Please log in to create a new item')
+        return
+    }
 
     isPending.value = true
 
-    if (file.value) {    
-        const { error: uploadError, filePath: uploadedFilePath } = await uploadImage(image.value)
-        if (uploadError) {
-            error.value = uploadError
-            console.error('Error uploading image:', uploadError)
-            isPending.value = false
-            return
-        }
+    try {
+        const { data } = await addDoc(item)
+        newItem.value = data
+        isPending.value = false
+        alert('Mosaic added successfully', newItem.value)
 
-        const imageUrl = url(uploadedFilePath)
+        item.title.value = ''
+        item.author.value = ''
+        item.dimensions.value = { w: 0, h: 0, unit: '' }
+        item.materials.value = []
+        item.imageUrl.value = ''
+        // Emit event to reset preview URL
+        emit('formSubmitted')
+        resetPreviewUrl()
+    } catch (error) {
+        console.error('Error adding document:', error)
+        addDocError.value = error
+        isPending.value = false        
+    }        
+}
 
-        const { error: addDocError } = await addDoc({
-            title: title.value,
-            author: author.value,
-            image: imageUrl,
-            materials: materials.value,
-            userId: user.value.id
-        })
-
-        if (addDocError) {
-            error.value = addDocError
-            console.error('Error adding document:', addDocError)
-            isPending.value = false
-        } else {
-            alert('Mosaic added successfully')
-        }
-
-        if (!error.value) {
-            Alert(`Mosaic added successfully: ${title.value} by ${author.value}`)
-            console.log('Mosaic added successfully:', title.value, author.value, title.value, author.value)
-        }
-        
-        // title.value = ''
-        // author.value = ''
-        // imageUrl.value = ''
-        // materials.value = []
+function resetPreviewUrl() {
+  // This function will be called when the form is submitted to reset the preview URL
+  const imageComponent = this.$refs.imageComponent
+  if (imageComponent) {
+    imageComponent.resetPreviewUrl()
+  }
 }
 </script>
 
 <template>
 <div class="create-container">
-    <h3>Create new panneaux</h3>
+    <h3 class="title">Create new panneaux</h3>
 
     <form @submit.prevent="handleCreate" class="create">
         <div class="formFields">
             <!-- LEFT -->
-            <div class="info">
-                <Title :title="title" />
-                <Author :author="author" />
-                <Dimensions :dimensions="dimensions" />
-                <Materials :materials="materials" />
-                <div class="error"></div>
-            </div>
-
-            <!-- RIGHT -->        
             <div class="picture">
-                <Image :image="image" @change="handleFileChange" />   
+                <Image />   
                 <div class="error"></div>             
             </div>
+
+
+            <!-- RIGHT -->    
+            <div class="info">
+                <Title />
+                <Author />
+                <Dimensions />
+                <Materials />
+                <div class="error"></div>
+            </div>    
         </div>
 
         <Notifications />
@@ -145,11 +96,40 @@ const handleCreate = async () => {
 </template>
 
 <style lang='scss' scoped>
-.create {
-    {/* I'll do that later */}
-    .file {
-        border: 0;
-        padding: 0;
+.create-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .title {
+        margin: -1rem 0 3rem 0;
+    }
+
+    .create {
+        width: 100%;
+        margin: 0 auto;
+
+        .formFields {
+            width: 100%;
+            margin: 0 auto;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+
+            .info {
+                width: 40%;
+            }
+
+            .picture {
+                width: 40%;
+            }
+        }
     }
 }
 </style>

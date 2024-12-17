@@ -9,6 +9,4 @@ import Copy from './Copy.vue'
     <div style="margin-right: 0.5rem;">other</div>
 </template>
 
-<style lang='scss' scoped>
-    
-</style>
+<style lang='scss' scoped></style>

@@ -1,77 +1,158 @@
 <script setup>
-defineProps(['materials'])
+import { ref, computed, watch } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { minLength } from '@vuelidate/validators'
+import { useCreateItem } from '../../../stores/useCreateItem'
 
-const checkBoxHandler = (e) => {
-    if (e.target.checked) {
-        materials.value.push(e.target.value)
-    } else {
-        materials.value = materials.value.filter(material => material !== e.target.value)
-    }
-    console.log(materials.value)
+const { item } = useCreateItem()
+
+const rules = {
+  materials: { minLength: minLength(2) }
 }
+
+const v$ = useVuelidate(rules, item)
+
+const errors = computed(() => {
+  const errorMessages = []
+  if (!v$.value.materials.minLength) {
+    errorMessages.push('Please select at least two materials')
+  }
+  return errorMessages
+})
+
+const selectedMaterials = ref([...item.value.materials])
+
+watch(selectedMaterials, (newVal) => {
+  item.value.materials = newVal
+})
 </script>
 
 <template>
-    <fieldset>
+    <fieldset class="materials">
         <legend>Materials used</legend>
 
-        <input @change="checkBoxHandler" type="checkbox" id="marbel" name="marbel" value="Marbel" class="material"/>
-        <label htmlFor="marbel">Marbel</label>
+        <label>
+            <input type="checkbox" value="Marbel" v-model="selectedMaterials" class="material"/>
+            Marbel
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="mountain crystal" name="mountain crystal" value="MountainCrystal" class="material"/>
-        <label htmlFor="mountain crystal">Mountain Crystal</label>
+        <label>            
+            <input type="checkbox" value="MountainCrystal" v-model="selectedMaterials" class="material"/>
+            Mountain Crystal
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="amethyst" name="amethyst" value="Аmethyst" class="material"/>
-        <label htmlFor="amethyst">Amethyst</label>
+        <label>
+            <input type="checkbox" value="Аmethyst" v-model="selectedMaterials" class="material"/>
+            Amethyst
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="jasper" name="jasper" value="Jasper" class="material"/>
-        <label htmlFor="jasper">Jasper</label>
+        <label>
+            <input type="checkbox" value="Jasper" v-model="selectedMaterials" class="material"/>
+            Jasper
+        </label>
+        <br/><br>
+        
+        <label>
+            <input type="checkbox" value="Labrador" v-model="selectedMaterials" class="material"/>
+            Labrador
+        </label>
+        
+        <label>
+            <input type="checkbox" value="Pyryt" v-model="selectedMaterials" class="material"/>
+            Pyrite
+        </label>
+        
+        <label>
+            <input type="checkbox" value="Agate" v-model="selectedMaterials" class="material"/>
+            Agate
+        </label>
+        
+        <label>
+            <input type="checkbox" value="Onyx" v-model="selectedMaterials" class="material"/>
+            Onyx
+        </label>
         <br/>
         
-        <input @change="checkBoxHandler" type="checkbox" id="labrador" name="labrador" value="Labrador" class="material"/>
-        <label htmlFor="labrador">Labrador</label>
+        <label>
+            <input type="checkbox" value="Jade" v-model="selectedMaterials" class="material"/>
+            Jade
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="pyryt" name="pyryt" value="Pyryt" class="material"/>
-        <label htmlFor="pyrite">Pyrite</label>
+        <label>
+            <input type="checkbox" value="Malachite" v-model="selectedMaterials" class="material"/>
+            Malachite
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="agate" name="agate" value="Аgate" class="material"/>
-        <label htmlFor="agate">Agate</label>
+        <label>
+            <input type="checkbox" value="Citrine" v-model="selectedMaterials" class="material"/>
+            Citrine
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="onyx" name="onyx" value="Onyx" class="material"/>
-        <label htmlFor="onyx">Onyx</label>
+        <label>
+            <input type="checkbox" value="Obsidian" v-model="selectedMaterials" class="material"/>
+            Obsidian
+        </label>
         <br/>
         
-        <input @change="checkBoxHandler" type="checkbox" id="jade" name="jade" value="Jade" class="material"/>
-        <label htmlFor="jade">Jade</label>
+        <label>
+            <input type="checkbox" value="Serpentine" v-model="selectedMaterials" class="material"/>
+            Serpentine
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="malachite" name="malachite" value="Malachite"class="material"/>
-        <label htmlFor="malachite">Malachite</label>
+        <label>
+            <input type="checkbox" value="Quartz" v-model="selectedMaterials" class="material"/>
+            Quartz
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="citrine" name="citrine" value="Citrine"class="material"/>
-        <label htmlFor="citrine">Citrine</label>
+        <label>
+            <input type="checkbox" value="Firestone" v-model="selectedMaterials" class="material"/>
+            Firestone
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="obsidian" name="obsidian" value="Obsidian"class="material"/>
-        <label htmlFor="obsidian">Obsidian</label>
-        <br/>
+        <label>
+            <input type="checkbox" value="Tiger'sEye" v-model="selectedMaterials" class="material"/>
+            Tiger's eye
+        </label>
         
-        <input @change="checkBoxHandler" type="checkbox" id="serpentine" name="serpentine" value="serpentine" class="material"/>
-        <label htmlFor="serpentine">Serpentine</label>
-        
-        <input @change="checkBoxHandler" type="checkbox" id="quartz" name="quartz" value="quartz" class="material"/>
-        <label htmlFor="quartz">Quartz</label>
-        
-        <input @change="checkBoxHandler" type="checkbox" id="firestone" name="firestone" value="Firestone" class="material"/>
-        <label htmlFor="firestone">Firestone</label>
-        
-        <input @change="checkBoxHandler" type="checkbox" id="tiger's eye" name="tiger's eye" value="Tiger'sEye" class="material"/>
-        <label htmlFor="tiger's eye">Tiger's eye</label>
-        
-        <input @change="checkBoxHandler" type="checkbox" id="other" name="other" value="Other" class="material"/>
-        <label htmlFor="other">Other</label>
+        <label>
+            <input type="checkbox" value="Other" v-model="selectedMaterials" class="material"/>
+            Other
+        </label>
+        <br/><br>
 
+        
     </fieldset>
+    <p class="preview">Selected materials: {{ selectedMaterials.join(', ') }}</p>
 </template>
 
 <style lang='scss' scoped>
+.materials {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: .5rem 0 .5rem 1rem;
+    border: 1px solid var(--secondary);
 
+    legend {
+        padding: 0 .5rem;
+        font-size: 1em;
+        font-weight: 600;
+        margin-bottom: .5rem;
+        color: var(--input);
+        display: inline-block;
+    }
+
+    input {
+        margin-right: .5rem;
+    }
+
+    label {
+        font-size: 0.8em;
+        color: var(--input);
+        display: flex;
+        align-items: center;
+    }
+}
 </style>

@@ -6,7 +6,7 @@ export const useCreateItem = () => {
         title: '',
         author: '',
         image: '',
-        dimensions: {w: 0, h: 0},
+        dimensions: {w: 0, h: 0, unit: ''},
         materials: [],
     })	
 
@@ -17,7 +17,7 @@ export const useCreateItem = () => {
             title: '',
             author: '',
             image: '',
-            dimensions: {w: 0, h: 0},
+            dimensions: {w: 0, h: 0, unit: ''},
             materials: []
         }
     }

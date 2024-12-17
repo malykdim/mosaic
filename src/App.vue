@@ -33,7 +33,7 @@ import router from './config/router';
 }
 .content {
   margin: 5rem auto 0;
-  max-width: 1200px;
+  max-width: 80vw;
   padding: 0 20px;
 
   display: flex;
@@ -43,7 +43,7 @@ import router from './config/router';
   overflow: hidden;
 }
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   
   width: 100vw;
