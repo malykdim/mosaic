@@ -1,16 +1,16 @@
 <script setup>
 import { ref, watch } from 'vue'
-import { useStorage } from '../../../stores/useStorage'
+// import { useStorage } from '../../../stores/useStorage'
 import { useCreateItem } from '../../../stores/useCreateItem'
 
 const { item } = useCreateItem()
-const { uploadImage, getImageUrl } = useStorage()
+// const { uploadImage, getImageUrl } = useStorage()
 
 const image = ref(null)
 const previewUrl = ref(null)
 const fileError = ref(null)
 
-const emit = defineEmits(['formSubmitted'])
+const emit = defineEmits(['fileSelected'])
 
 const handleFileChange = (e) => {
   fileError.value = null
@@ -51,8 +51,8 @@ watch(() => item.value.image, (newVal, oldVal) => {
         <div class="error">{{ fileError }}</div>
 </fieldset>
 <div class="preview" style="margin-top: 1rem;">
-    <img v-if="previewUrl" :src="previewUrl" alt="preview">
-    <img v-else src="/src/assets/images/dummy-900x600.jpg" alt="placeholder" style="width: 470px;">
+    <img v-if="previewUrl" :src="previewUrl" alt="preview" class="image">
+    <img v-else src="/src/assets/images/dummy-900x600.jpg" alt="placeholder"  class="image">
 </div>
 </template>
 

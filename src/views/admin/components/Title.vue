@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { reactive, watch } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength } from '@vuelidate/validators'
 
@@ -7,37 +7,36 @@ import { useCreateItem } from '../../../stores/useCreateItem'
 
 const { item } = useCreateItem()
 
+const state = reactive({
+    title: item.value.title
+})
 const rules = {
-  title: { required, minLength: minLength(3) }
+    title: { required, minLength: minLength(3)  }
 }
 
-const v$ = useVuelidate(rules, item)
+const v$ = useVuelidate(rules, state)
 
-const errors = computed(() => {
-  const errorMessages = []
-  if (!v$.value.title.required) {
-    errorMessages.push('Title is required')
-  }
-  if (!v$.value.title.minLength) {
-    errorMessages.push('Title must be at least 3 characters long')
-  }
-  return errorMessages
-})</script>
+watch(() => state.title, (newTitle) => {
+  item.value.title = newTitle
+})
+
+
+</script>
 
 <template>
 <fieldset class="left">
     <legend>&nbsp; Panneau Name &nbsp;</legend>
         <label for="title"></label>
         <input 
-            v-model.trim="item.title"
+            v-model.trim="state.title"
             type="text" 
             id="title" 
             placeholder="panneaux title"
             required
             aria-describedby="title-errors"
         />
-        <div v-if="v$.$dirty && errors.length" class="error" id="title-errors">
-            <span v-for="(error, index) in errors" :key="index">{{ error }}</span>
+        <div v-if="v$.$dirty && v$.title.$errors.length" class="error" id="title-errors">
+            <span v-for="error in v$.title.$errors" :key="error.$uid">{{ error.$message }}</span>
         </div>              
 </fieldset>
 </template>

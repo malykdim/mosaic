@@ -1,35 +1,71 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 import { useCollection } from '../../stores/useCollection'
 import { useUserStore } from '../../stores/useUserStore'
 import { useCreateItem } from '../../stores/useCreateItem'
+import { useStorage } from '../../stores/useStorage'
 
+import Image from './components/Image.vue'
 import Title from './components/Title.vue'
 import Author from './components/Author.vue'
-import Image from './components/Image.vue'
 import Dimensions from './components/Dimensions.vue'
 import Materials from './components/Materials.vue'
+import Notifications from '../../components/Notifications.vue'
 
-const { error, addDoc } = useCollection('mosaics')
 const { user, checkUser } = useUserStore()
 const { item } = useCreateItem()
+const { error, addDoc } = useCollection('mosaics')
+const { uploadImage, getImageUrl } = useStorage() // Storage
 
 const isPending = ref(false)
 const addDocError = ref(null)
 const newItem = ref(null)
+const selectedFile = ref(null)
+
+const handleFileSelected = (file) => {
+  selectedFile.value = file
+}
+
+const resetForm = () => {
+    item.imageUrl.value = ''
+    item.title.value = ''
+    item.author.value = ''
+    item.dimensions.value = { w: 0, h: 0, unit: '' }
+    item.materials.value = []    
+    emit('formSubmitted') // Emit event to reset preview URL
+}
 
 const handleCreate = async () => {
-    if (!title.value || !author.value || !image.value || !materials.value || !dimensions.value) {
-        alert('Please fill in all fields')
-        return
-    }
-    
-    if (!user.value) {
-        alert('Please log in to create a new item')
-        return
-    }
+    // if (!item.value.title || !item.value.author || !selectedFile.value || !item.value.dimensions.w || !item.value.dimensions.h || !item.value.unit || item.value.materials.length < 2) {
+    //     alert('Please fill in all fields')
+    //     return
+    // }
+    console.log('item:', item.value)
 
+    switch (true) {
+        case !item.value.title:
+            alert('Title is required')
+            return
+        case !item.value.author:
+            alert('Author is required')
+            return
+        case !selectedFile.value:
+            alert('Image file is required')
+            return
+        case !item.value.dimensions.w:
+            alert('Width is required')
+            return
+        case !item.value.dimensions.h:
+            alert('Height is required')
+            return
+        case !item.value.dimensions.unit:
+            alert('Unit is required')
+            return
+        case item.value.materials.length < 2:
+            alert('At least two materials are required')
+            return
+    }
     isPending.value = true
 
     try {
@@ -37,28 +73,12 @@ const handleCreate = async () => {
         newItem.value = data
         isPending.value = false
         alert('Mosaic added successfully', newItem.value)
-
-        item.title.value = ''
-        item.author.value = ''
-        item.dimensions.value = { w: 0, h: 0, unit: '' }
-        item.materials.value = []
-        item.imageUrl.value = ''
-        // Emit event to reset preview URL
-        emit('formSubmitted')
-        resetPreviewUrl()
+        resetForm()
     } catch (error) {
         console.error('Error adding document:', error)
         addDocError.value = error
         isPending.value = false        
     }        
-}
-
-function resetPreviewUrl() {
-  // This function will be called when the form is submitted to reset the preview URL
-  const imageComponent = this.$refs.imageComponent
-  if (imageComponent) {
-    imageComponent.resetPreviewUrl()
-  }
 }
 </script>
 
@@ -71,7 +91,6 @@ function resetPreviewUrl() {
             <!-- LEFT -->
             <div class="picture">
                 <Image />   
-                <div class="error"></div>             
             </div>
 
 
@@ -81,7 +100,6 @@ function resetPreviewUrl() {
                 <Author />
                 <Dimensions />
                 <Materials />
-                <div class="error"></div>
             </div>    
         </div>
 
