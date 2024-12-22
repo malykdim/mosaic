@@ -1,25 +1,20 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 const Home = () => import('../views/home/Home.vue')
-const Gallery = () => import('../views/gallery/Gallery.vue')
-const Login = () => import('../views/auth/Login.vue')
-const Signup = () => import('../views/auth/Signup.vue')
-const Dashboard = () => import('../views/admin/Dashboard.vue')
-const Create = () => import('../views/admin/Create.vue')
 const NotFound = () => import('../views/NotFound.vue')
 
 
 const routes = [
   { path: '/', name: 'home', component: Home },
-  { path: '/gallery', name: 'gallery', component: Gallery },
-  { path: '/login', name: 'login', component: Login },
-  { path: '/signup', name: 'signup', component: Signup },
-  { path: '/admin/dashboard', name: 'dashboard', component: Dashboard },
-  { path: '/admin/create', name: 'create', component: Create },
+  { path: '/gallery', name: 'gallery', component: () => import('../views/gallery/Gallery.vue') },
+  { path: '/login', name: 'login', component: () => import('../views/auth/Login.vue') },
+  { path: '/signup', name: 'signup', component: () => import('../views/auth/Signup.vue') },
+  { path: '/admin/dashboard', name: 'dashboard', component: () => import('../views/admin/Dashboard.vue') },
+  { path: '/admin/create', name: 'create', component: () => import('../views/admin/Create.vue') },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: NotFound,
+    component: () => import('../views/NotFound.vue'),
   }
 ]
 
