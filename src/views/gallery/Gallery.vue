@@ -1,37 +1,20 @@
 <script setup>
-import { ref } from 'vue'
 
-const documents = ref([
-    {
-        id: 1,
-        title: 'Document 1',
-    },
-    {
-        id: 2,
-        title: 'Document 2',
-    },
-    {
-        id: 3,
-        title: 'Document 3',
-    },
-    {
-        id: 4,
-        title: 'Document 4',
-    },
-    {
-        id: 5,
-        title: 'Document 5',
-    }
-])
+import { useGalleryListener } from '../../stores/useGalleryListener.js'
+import ListItem from './ListItem.vue'
+
+const { mosaics, startListening } = useGalleryListener()
+
+startListening()
 
 </script>
 
 <template>
-    <div class="gallery">
-        <div v-if="error" class="error">Could not fetch the data</div>
-        <div v-if="documents" class="items">
-            <div v-for="document in documents" :key="document.id" :item="document">
-                    <h4>{{ document.title }}</h4>
+    <div class="page gallery">
+        <!-- <div v-if="error" class="error">Could not fetch the data</div> -->
+        <div  v-if="mosaics.length" class="items">
+            <div v-for="item in mosaics" :key="item.id" class="item">
+                <ListItem :item="item" />
             </div>
         </div>
     </div>
@@ -44,6 +27,7 @@ const documents = ref([
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 
     h2 {
         color: var(--primary);
@@ -55,7 +39,31 @@ const documents = ref([
         align-items: center;
         gap: 1rem;
 
+        .item {
+            width: 300px;
+            height: auto;
 
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) and (min-width: 260px) {
+    .gallery {
+        width: 100%;
+
+        .items {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+
+            .item {
+                width: 100%;
+                max-width: 300px; 
+            }
+        }
     }
 }
 </style>

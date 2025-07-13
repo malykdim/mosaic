@@ -1,14 +1,19 @@
 <script setup>
-import { ref } from 'vue'
 
+import { useGalleryListener } from '../../../stores/useGalleryListener.js'
 import MiniItem from './MiniItem.vue'
 
-const arr = [1,2,3,4,5]
+const { mosaics, startListening } = useGalleryListener()
+
+startListening()
+
 </script>
 
 <template>
 <div class="mini-gallery">
-    <MiniItem  v-for="item of arr" :item="item" />
+    <div  v-if="mosaics.length" class="items">
+      <MiniItem v-for="item in mosaics" :key="item.id" :item="item" />
+    </div>
 </div>
 </template>
 
@@ -20,5 +25,11 @@ const arr = [1,2,3,4,5]
     flex-direction: row;
     justify-content: center;
     gap: 0.5rem;
+
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 }
 </style>

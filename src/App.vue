@@ -1,6 +1,6 @@
 <script setup>
-import Auth from './components/footer/Auth.vue';
-import router from './config/router';
+import Navigation from './components/navigation/Navigation.vue'
+import Footer from './components/footer/Footer.vue'
 </script>
 
 <template>
@@ -8,53 +8,67 @@ import router from './config/router';
     <Navigation />
   </header>
 
-  <main class="content">
+  <main class="page content">
     <router-view />
   </main>
 
   <footer class="footer">
     <Footer />
   </footer>
-
 </template>
 
 <style lang='scss' scoped>
+@import './assets/partials/page';
 .header {
-  width: 100vw;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  // padding: 0;
+  background-color: var(--background);
   padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
-  
-  background-color: rgba(245, 245, 245, 0.569);
 }
 .content {
-  margin: 5rem auto 0;
-  max-width: 80vw;
-  padding: 0 20px;
+  flex: 1;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: flex-start;
+
+  overflow-y: auto;   
+  -webkit-overflow-scrolling: touch;
+
+  width: 100%;
+  max-width: 100%;
+
+  @media (pointer: coarse) {
+    .content {
+      scrollbar-width: none;        /* Firefox */
+      -ms-overflow-style: none;     /* IE */
+    }
+    .content::-webkit-scrollbar {
+      display: none;                /* Chrome/Safari */
+    }
+  }
 }
 .footer {
-  position: relative;
+  width: 100%;
+  position: sticky;
   bottom: 0;
+  left: 0;
+  right: 0;
   
-  width: 100vw;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  // padding: 0;
   padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
-  
-  background-color: rgba(245, 245, 245, 0.569);
+  background-color: var(--background);
+}
+@media screen and (max-width: 767px) and (min-width: 260px) {
+    .footer {
+        padding: 0;
+        max-width: 100vw;
+        flex-direction: column;
+        justify-content: center;
+    }
 }
 </style>

@@ -7,8 +7,6 @@ import MiniGallery from './components/MiniGallery.vue'
     <div class="dashboard">
         <nav class="admin-menu">
             <router-link to="/admin/create" class="btn">Create</router-link>
-            <router-link to="/admin/edit" class="btn">Edit</router-link>
-            <router-link to="/admin/blog" class="btn">Blog</router-link>
         </nav>
         <MiniGallery />
     </div>
@@ -21,6 +19,7 @@ import MiniGallery from './components/MiniGallery.vue'
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    margin-bottom: 3rem;
 
     .admin-menu {
         display: flex;
@@ -28,6 +27,19 @@ import MiniGallery from './components/MiniGallery.vue'
         justify-content: space-around;
         gap: 0.5rem;
         margin: 20px 0;
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+
+            &:hover {
+                font-weight: 600;
+            }
+        }   
     }
 }
 </style>

@@ -1,0 +1,23 @@
+button, .btn {
+    border-radius: var(--border-radius);
+    border: 0;
+    padding: 8px 12px;
+    font-weight: 300;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+
+
+    &:hover, &:focus, &:active {
+        background: white;
+        color: var(--background);
+        font-weight: 600;
+    }
+    &:disabled {
+        background: var(--secondary);
+        color: var(--primary);
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

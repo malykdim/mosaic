@@ -9,7 +9,6 @@ const router = useRouter()
 const email = ref('')
 const password = ref('')
 
-/* Supabase Sign up a new user */
 const signUp = async (email, password) => {
     const { user, error } = await supabase.auth.signUp({ email, password })
 }

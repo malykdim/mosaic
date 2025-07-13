@@ -1,89 +1,102 @@
 <script setup>
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import { required, minLength } from '@vuelidate/validators'
+import { minLength, helpers } from '@vuelidate/validators'
 
-import { useCreateItem } from '../../../stores/useCreateItem'
+import { useItem } from '../../../stores/useItem'
 
-const { item } = useCreateItem()
+const { item } = useItem()
+console.log('Initial title:', item.title)
+
+const showErrors = ref(false)
+
+// Use computed to make title reactive to Pinia changes and update immediately
+const title = computed({
+  get: () => item.title,
+  set: (value) => { 
+    item.title = value
+    console.log('Title updated in Pinia (immediately):', item.title)
+  }
+})
 
 const state = reactive({
-    title: item.value.title
+    title: title
 })
-const rules = {
-    title: { required, minLength: minLength(3)  }
+
+const rules = {    
+    title: { 
+        minLength: helpers.withMessage('Title must be at least 3 characters long', minLength(3)),
+    }
 }
 
 const v$ = useVuelidate(rules, state)
 
-watch(() => state.title, (newTitle) => {
-  item.value.title = newTitle
-})
+// Watch for Pinia changes and force Vuelidate to re-evaluate
+watch(() => item.title, (newValue) => {
+  // Force Vuelidate to sync with the new value
+  v$.value.title.$model = newValue
+}, { immediate: true })
 
+// Check if loaded data is invalid and show errors immediately
+if (item.title && item.title.length < 3) {
+    showErrors.value = true
+}
 
+async function onBlur() {
+    showErrors.value = true
+    const isValid = await v$.value.$validate()
+    
+    if (!isValid) {
+        console.log('Title validation failed')
+    }
+}
+
+function onFocus() {
+    // Reset validation state when user starts typing again
+    showErrors.value = false
+    v$.value.$reset()
+}
 </script>
 
 <template>
-<fieldset class="left">
-    <legend>&nbsp; Panneau Name &nbsp;</legend>
-        <label for="title"></label>
-        <input 
-            v-model.trim="state.title"
-            type="text" 
-            id="title" 
-            placeholder="panneaux title"
-            required
-            aria-describedby="title-errors"
-        />
-        <div v-if="v$.$dirty && v$.title.$errors.length" class="error" id="title-errors">
-            <span v-for="error in v$.title.$errors" :key="error.$uid">{{ error.$message }}</span>
-        </div>              
+<fieldset class="fieldset title">
+    <legend class="legend">&nbsp; Panneau Name &nbsp;</legend>
+    <p class="display">{{ item.title }}</p>          
+    <input 
+        v-model.trim="v$.title.$model"
+        type="text" 
+        id="title" 
+        class="input"
+        placeholder="panneaux title"
+        aria-describedby="title-errors"
+        @blur="onBlur"
+        @focus="onFocus"
+    />
+    <ul v-if="showErrors && v$.title.$errors.length" id="errors">
+        <li v-for="error of v$.title.$errors" :key="error.$uid"  class="error" >
+            <p class="message">{{ error.$message }}</p>
+        </li>
+    </ul>    
 </fieldset>
 </template>
 
 <style lang='scss' scoped>
-.left {
-    padding: .5rem 0 .5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 1px solid var(--secondary);
-
-    legend {
-        padding: 0 .5rem;
-        font-size: 1em;
-        font-weight: 600;
+.title {
+        
+    .input {
+        width: 70%;
         margin-bottom: .5rem;
-        color: var(--input);
     }
-    
-    label {
-        width: 100%; 
-        font-size: 1em;
-        font-weight: 400;
-        margin-bottom: .3rem;
-        color: var(--hover);
-    }
-    
-    input {
-        width: 50%;
-        padding: .5rem;
-        margin-bottom: .5rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
 
-        &::placeholder {
-            font-size: 1rem;
-            color: var(--secondary);
-            text-align: center;
-        }
-    }
-    
     .error {
+        font-size: x-small;
         color: red;
-        font-size: .8rem;
-        margin-top: .5rem;
+        padding-bottom: 0.5em;
+    }
+
+    .display {
+        color: var(--primary);
+        font-size: 0.8em;
     }
 }
 </style>

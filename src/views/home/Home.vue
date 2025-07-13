@@ -1,61 +1,83 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 
-const msg = ref('Home');
+import Logo from './components/Logo.vue'
+const MobileHero = defineAsyncComponent(() => import('./components/MobileHero.vue'))
+const TabletHero = defineAsyncComponent(() => import('./components/TabletHero.vue'))
+const DesktopHero = defineAsyncComponent(() => import('./components/DesktopHero.vue'))
+
+import Authors from './components/Authors.vue'
+
+const mobile = ref(window.innerWidth <= 767)
+const tablet = ref(window.innerWidth >= 768 && window.innerWidth <= 1023)
+const desktop = ref(window.innerWidth >= 1024)
 
 </script>
 
 <template>
-  <div class="home">
-    <h2>{{ msg }}</h2>
-   
-    
-    <!-- <div class="content">
-
-        <div class="card">
-          <img src="https://user-images.githubusercontent.com/38568843/189418857-0d16c482-8d90-4d63-a123-73812c8c3ade.jpg" alt="Gallery" class="img">
-        </div>
-      
-        <p>
-          Authors: 
-          <a href="https://www.facebook.com/vladimir.damynov/" target="_blank"
-            >Vladimir Damynov</a
-          > &  
-          <a href="https://www.facebook.com/damyan.damyanov.509/" target="_blank"
-            >Damyan Damyanov</a
-          >
-        </p>
-
-    </div> -->
-  
-  </div>
+    <section class="home">
+        <section class="hero">
+            <MobileHero v-if="mobile" />
+            
+            <TabletHero v-else-if="tablet" />
+            
+            <DesktopHero v-else-if="desktop" />        
+        </section>
+        <!-- <Logo /> -->
+        <section class="about">
+            <Authors /> 
+        </section>    
+    </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .home {
-  max-width: 100vw;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 5rem;
+    background-color: #fff;
+
+    @media screen and (max-width: 1023px) {
+        gap: 3rem; 
+    }
+
+    @media screen and (max-width: 767px) {
+        margin: 0 auto;
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 2rem;
+    }
+
+    @media screen and (max-width: 500px) {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem; 
+    }
+}
+
+.hero {
+    grid-column: 1 / span 12;
+
+    @media screen and (max-width: 767px) {
+        grid-column: span 6; 
+    }
+
+    @media screen and (max-width: 500px) {
+        grid-column: span 12; 
+    }
+}
+.about {
+    grid-column: 1 / -1;
 
 
-  h2 {
-    color: var(--primary);
-  }
-}
-.card {
-  background-color: transparent;
-  width: 600px;
-  height: auto;
-}
-.img {
-  width: 100%;
-  height: auto;
-}
-.read-the-docs {
-  color: #888;
+    @media screen and (max-width: 500px) {
+        grid-column: span 12; 
+        padding: 1rem; 
+    }
 }
 </style>

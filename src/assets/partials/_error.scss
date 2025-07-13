@@ -1,0 +1,16 @@
+/* ERRORS */
+.errors {
+    list-style: none;
+    padding: 0;
+}
+.error {
+    list-style-type: none;
+    color: var(--warning);
+    margin: 10px 0;    
+}
+.message {
+    text-align: center;
+    text-decoration: none;
+    color: var(--warning);
+    font-size: .6em;
+}

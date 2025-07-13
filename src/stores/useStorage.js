@@ -1,18 +1,33 @@
-import { ref } from 'vue'
 import supabase from '../config/supabase'
 
 export const useStorage = () => {
+  // Upload the file to the root of the 'mosaics' bucket
   const uploadImage = async (file) => {
-    const { data, error } = await supabase.storage
+    const filePath = `${Date.now()}-${file.name}` // make sure filename is unique
+    
+    const { data, error } = await supabase
+      .storage
       .from('mosaics')
-      .upload(`public/${file.name}`, file)
-    if (error) throw error
-    return data
+      .upload(filePath, file)
+
+    if (error) {
+      console.error("Upload failed:", error)
+      throw error
+    }
+
+    const imageUrl = getImageUrl(data.path)
+    return { path: data.path, imageUrl }
   }
 
+  // Get public URL for a file
   const getImageUrl = (path) => {
-    return supabase.storage.from('mosaics').getPublicUrl(path).publicURL
+    const { data } = supabase
+      .storage
+      .from('mosaics')
+      .getPublicUrl(path)
+  
+    return data.publicUrl
   }
 
-  return { uploadImage, getImageUrl }
+  return { uploadImage }
 }

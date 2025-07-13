@@ -3,9 +3,15 @@
 </script>
 
 <template>
-not found
+    <div class="page not-found">
+        <h2 class="title">404</h2>
+        <p class="subtitle">Page not found</p>  
+        <router-link to="{name: 'home'}" class="link">Go to Home</router-link>
+    </div>
 </template>
 
 <style lang='scss' scoped>
-
+.not-found {
+    color: #fff;
+}
 </style>
