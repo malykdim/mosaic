@@ -124,7 +124,6 @@ onMounted(() => {
             justify-content: center;
             align-items: flex-start;
             gap: 2rem;
-            border: 1px solid red;
 
             .info {
                 width: 40%;
@@ -133,7 +132,6 @@ onMounted(() => {
             .picture {
                 width: 40%;
                 padding-top: 3rem;
-                border: 1px solid blue;
 
                 .file-upload {
                     .display {
@@ -156,7 +154,7 @@ onMounted(() => {
             }
 
             .info {
-                border: 1px solid green;
+                border: 1px solid transparent;
             }
         }
 

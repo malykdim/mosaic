@@ -1,20 +1,7 @@
 # MOSAICS
+##### Virtual gallery app with admin functionalities (in development)
 
-(in development)
-
-<!-- Virtual gallery app with admin functionalities -->
-A virtual gallery where artists can upload, manage, and showcase mosaic artworks. Built with modern Vue 3 architecture and backed by Supabase for real-time updates, authentication, and media storage.
-
-![Architecture Overview](./architecture-diagram.png)
-
-## 🚀 Features
-
-- User registration and login with Supabase Auth
-- Artwork upload with live image previews
-- Real-time gallery updates (insert/update/delete)
-- Admin dashboard for managing artwork and metadata
-- Responsive design with a clean and intuitive interface
-
+---
 ## 🛠️ Tech Stack
 
 | Layer      | Tools                                |
@@ -23,7 +10,8 @@ A virtual gallery where artists can upload, manage, and showcase mosaic artworks
 | Backend    | Supabase (Database, Auth, Storage, Realtime) |
 | Tooling    | Vite, Vitest, @vuelidate/core, Concurrently |
 
-## 🧠 Architecture Highlights
+---
+## 🏗️ Architecture Highlights
 
 - **Vue Router** handles public pages (Home, Gallery, Login) and protected admin routes.
 - **Pinia Stores** centralize logic:
@@ -36,10 +24,17 @@ A virtual gallery where artists can upload, manage, and showcase mosaic artworks
 - **Global Components**: Navigation, Footer, NotFound
 - **SCSS Modules**: Maintain modular and themeable styles with global variables and utility classes.
 
+---
+## 🚀 Features
+
+- User registration and login with Supabase Auth
+- Artwork upload with live image previews
+- Real-time gallery updates (insert/update/delete)
+- Admin dashboard for managing artwork and metadata
+- Responsive design with a clean and intuitive interface
+
+---
 ## 📸 Screenshots
-
-*(Coming soon – responsive design in progress)*
-
 
 These images showcase core parts of the application.
 
@@ -58,41 +53,34 @@ These images showcase core parts of the application.
 ---
 ### 🎨 Details View
 
-![Details View](./screenshots/details-mobile.png)
+![Details View](./screenshots/details.png)
 *Details for the artwork - title, author, dimensions, materials, and image url*
 
-<!-- 
-💡 Tips for good screenshots
-Use light/dark mode contrast if you support both
-
-Hide dev tools or address bar
-
-Use consistent browser size (e.g., 1280×800)
-
-Consider labeling overlays with arrows/text using tools like CleanShot, Snagit, or even Figma
-
-*******
-
+---
 ### 🔐 Login Page
 
-![Login Page](./screenshots/login.png)
+![Login Page](./screenshots/auth.png)
 *Simple authentication form using Supabase Auth.*
 
 ---
-
 ### 🧑‍🎨 Admin Dashboard
 
-![Admin Dashboard](./screenshots/admin-dashboard.png)
+![Admin Dashboard](./screenshots/dashboard.png)
 *Admin panel for managing artworks, authors, and metadata.*
 
 ---
-
 ### 🎨 Create Mosaic
 
 ![Create Page](./screenshots/create.png)
 *Artwork upload form with live image preview and validation.*
 
- -->
+---
+### ✏️ Edit Mosaic
+
+![Edit Page](./screenshots/edit.png)
+*Edit existing artwork.*
+
+---
 
 ## 📁 Project Structure
 ```

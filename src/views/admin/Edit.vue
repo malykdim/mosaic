@@ -198,7 +198,6 @@ resetOnLeave()
             justify-content: center;
             align-items: flex-start;
             gap: 2rem;
-            border: 1px solid red;
 
             .info {
                 width: 40%;
@@ -207,7 +206,6 @@ resetOnLeave()
             .picture {
                 width: 40%;
                 padding-top: 3rem;
-                border: 1px solid blue;
 
                 .file-upload {
                     .display {
@@ -230,7 +228,7 @@ resetOnLeave()
             }
 
             .info {
-                border: 1px solid green;
+                border: 1px solid transparent;
             }
         }
 

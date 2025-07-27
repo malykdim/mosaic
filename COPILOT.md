@@ -1,24 +1,63 @@
-# mosaic
-
+# MOSAICS
+##### Virtual gallery app with admin functionalities (in development)
+---
 **Goal**: A virtual gallery for artists to upload, manage, and display mosaic artworks with real-time updates, authentication, and admin tools.
 
-The project is a Vue 3 application named "mosaic", described as a virtual gallery for mosaic panels. Below is a visual representation of the project's architecture:
+---
+## Table of Contents
+1. [Key Features](#key-features)
+2. [Architecture Highlights](#architecture-highlights)
+3. [Component Flow](#component-flow)
+4. [Summary](#summary)
+5. [Router Configuration](#router-configuration)
+6. [Supabase](#supabase)
+   - [useUserStore](#useuserstore)
+   - [useItem](#useitem)
+   - [useStorage](#useStorage)
+   - [useCollection](#useCollection)
+   - [useGalleryListener](#useGalleryListener)
+7. [App.vue](#appvue)
+8. [Styles](#styles)
+9. [File Structure](#file-structure)
 
-![Project Architecture](./architecture-diagram.png)
+---
+## Key Features
+- 🔐 **Authentication System** - Supabase Auth with session management
+- 🎨 **CRUD Operations** - Full mosaic management workflow
+- 📁 **File Storage** - Image upload with public URLs
+- 🔄 **Real-time Updates** - Live gallery synchronization
+- 🧭 **Protected Routes** - Admin access control
+- 📱 **Responsive Design** - Mobile-first approach
 
+---
+## Architecture Highlights
 This diagram outlines the relationships between the app's components, stores, and backend services (Supabase). It serves as a quick reference for understanding the project's structure and flow.
 
+
+![Project Architecture](./screenshots/architecture-diagram.png)
+
+- **Vue Router** handles public pages (Home, Gallery, Login) and protected admin routes.
+- **Pinia Stores** centralize logic:
+  - `useUserStore` for authentication/session
+  - `useItem` for item creation workflow
+  - `useStorage` for file upload + public URL generation
+  - `useCollection` for CRUD operations
+  - `useGalleryListener` for real-time sync
+
+- **Global Components**: Navigation, Footer, NotFound
+- **SCSS Modules**: Maintain modular and themeable styles with global variables and utility classes.
+
 *****
+## Component Flow
 
-## Component Flow Diagram
+Below is a detailed UX-flow diagram of the app
 
-Below is a detailed flow diagram of the app's components and their interactions:
-
-![Component Flow Diagram](./component-flow-diagram.png)
+![Component Flow](./screenshots/component-flow-diagram.png)
 
 This diagram highlights the relationships between components, pages, and data flow, making it easier to understand the app's architecture at a glance.
 
-*****
+---
+## Summary
 
 The project uses modern tools and libraries for development, including:
 
@@ -42,24 +81,9 @@ The project uses modern tools and libraries for development, including:
 Vite Configuration:
 
 Configured with Vue plugin and an alias for the src directory (@).
-The project appears to be structured for modularity and [text](obsidian://open?vault%3DObsidian%20Vault%26file%3DPROJECTS%2FMosaics%2FSCAFFOLD-moc%201.canvas)scalability, with a focus on modern development practices.
+The project appears to be structured for modularity and scalability, with a focus on modern development practices.
 
-*****
-
-## Table of Contents
-1. [Router Configuration](#router-configuration)
-2. [Supabase](#supabase)
-   - [useUserStore](#useuserstore)
-   - [useItem](#useitem)
-   - [useStorage](#useStorage)
-   - [useCollection](#useCollection)
-   - [useGalleryListener](#useGalleryListener)
-3. [App.vue](#appvue)
-4. [Styles](#styles)
-5. [File Structure](#File Structure)
-
-*****
-
+---
 ## Router Configuration 
 
 - Implements Vue Router with lazy-loaded routes for better performance.
