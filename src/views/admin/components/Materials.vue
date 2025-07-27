@@ -89,13 +89,6 @@ async function acceptMaterials(event) {
         <button type="button" @click="resetSelectedMaterials" class="reset">Reset Materials</button>
         <button type="button" @click="acceptMaterials" class="reset">Accept Materials</button>
         
-        <!-- Debug info -->
-        <div style="margin-top: 1rem; font-size: 0.7em; color: #666; border: 1px solid #ccc; padding: 0.5rem;">
-            <p><strong>Debug Materials:</strong></p>
-            <p>selectedMaterials: {{ JSON.stringify(selectedMaterials) }}</p>
-            <p>item.materials: {{ JSON.stringify(item.materials) }}</p>
-            <p>Are they equal? {{ JSON.stringify(selectedMaterials) === JSON.stringify(item.materials) }}</p>
-        </div>
     </fieldset>
 
 </template>
