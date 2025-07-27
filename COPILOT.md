@@ -6,7 +6,7 @@
 ---
 ## Table of Contents
 1. [Key Features](#key-features)
-2. [Architecture Highlights](#architecture-highlights)
+2. [App Architecture & Data Flow Overview](#app-architecture--data-flow-overview)
 3. [Component Flow](#component-flow)
 4. [Summary](#summary)
 5. [Router Configuration](#router-configuration)
@@ -30,7 +30,7 @@
 - 📱 **Responsive Design** - Mobile-first approach
 
 ---
-## Architecture Highlights
+## App Architecture & Data Flow Overview
 This diagram outlines the relationships between the app's components, stores, and backend services (Supabase). It serves as a quick reference for understanding the project's structure and flow.
 
 
@@ -50,11 +50,9 @@ This diagram outlines the relationships between the app's components, stores, an
 *****
 ## Component Flow
 
-Below is a detailed UX-flow diagram of the app
-
 ![Component Flow](./screenshots/component-flow-diagram.png)
 
-This diagram highlights the relationships between components, pages, and data flow, making it easier to understand the app's architecture at a glance.
+This diagram highlights a detailed Vue component hierarchy and page flow, showing how UI components and pages are structured and interact in the front-end.
 
 ---
 ## Summary
