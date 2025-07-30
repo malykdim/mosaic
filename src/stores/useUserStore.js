@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import supabase from '../config/supabase'
 
-// 
 export const useUserStore = defineStore('user', () => {
 
     const user = ref(null) // reference to store the current user's data

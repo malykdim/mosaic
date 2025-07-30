@@ -31,9 +31,14 @@ const handleFileChange = (e) => {
 
   // If validation passes, set the file
   file.value = selected
-  item.file = selected
   previewUrl.value = URL.createObjectURL(selected)
 }  
+
+const confirmImageSelection = () => {
+  item.file = file.value
+  console.log('Image confirmed:', file.value.name)
+  // make the call to store
+}
 
 const resetPreviewUrl = () => {
   if (previewUrl.value) {
@@ -49,14 +54,16 @@ onUnmounted(() => {
 
 // Watch for external file clear
 watch(() => item.file, (newVal) => {
-  if (!newVal) resetPreviewUrl()
+  if (!newVal && !file.value) {
+    resetPreviewUrl()
+  }
 })
 </script>
 
 <template>
 <fieldset class="fieldset file-upload">
-    <legend class="legend">&nbsp; Upload an image &nbsp;</legend>
-    
+
+    <legend class="legend">&nbsp; Upload an image &nbsp;</legend>    
     
     <label class="label">
         <input type="file" @change="handleFileChange" class="file">
@@ -67,10 +74,19 @@ watch(() => item.file, (newVal) => {
     <p v-if="fileError" class="error">{{ fileError }}</p>
 
     <div class="preview">
-        <img v-if="item.imageUrl !== null" :src="item.imageUrl" alt="preview" class="image">
-        <img v-else-if="previewUrl" :src="previewUrl" alt="preview" class="image">
+        <img v-if="previewUrl" :src="previewUrl" alt="preview" class="image">
+        <img v-else-if="item.imageUrl" :src="item.imageUrl" alt="preview" class="image">
         <img v-else src="/src/assets/images/dummy-900x600.jpg" alt="placeholder" class="image">
     </div>
+
+    <button 
+      @click="confirmImageSelection"
+      class="confirm-btn"
+      type="button"
+    >
+      ✓ Use This Image
+    </button>
+
   </fieldset>
 </template>
 
@@ -102,9 +118,6 @@ watch(() => item.file, (newVal) => {
         width: 0.1px;
         height: 0.1px;
         overflow: hidden;
-        // max-width: 100%;
-        // box-sizing: border-box;
-        // margin: 0 auto;
     
         &::before {
           position: absolute;
@@ -182,6 +195,15 @@ watch(() => item.file, (newVal) => {
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  .confirm-btn {
+    padding: 1rem;
+    margin: 1rem 0;
+    color: white;
+    background-color: var(--primary);
+    border: 0;
+    font-weight: 600;
   }
 
   @media screen and (max-width: 1023) {

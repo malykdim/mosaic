@@ -1,11 +1,11 @@
 <script setup>
-
+import { onMounted } from 'vue'
 import { useGalleryListener } from '../../../stores/useGalleryListener.js'
 import MiniItem from './MiniItem.vue'
 
 const { mosaics, startListening } = useGalleryListener()
 
-startListening()
+onMounted(() => startListening())
 
 </script>
 
@@ -29,7 +29,8 @@ startListening()
     .items {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
-    }
+    }    
 }
 </style>

@@ -1,9 +1,11 @@
 <script setup>
 import { useCollection } from '../../../stores/useCollection.js'
+import { useGalleryListener } from '../../../stores/useGalleryListener.js'
 
 const props = defineProps(['item']) 
 
 const { delDoc } = useCollection()
+const { startListening } = useGalleryListener()
 
 const getBackgroundStyle = (url) => ({
   background: `linear-gradient(rgba(75, 74, 74, 0.9), rgba(75, 75, 75, 0.3), rgba(75, 75, 75, 0.5)), url('${url}')`,
@@ -14,6 +16,7 @@ const getBackgroundStyle = (url) => ({
 
 const handleDelete = async () => {
     await delDoc('mosaics', props.item.id)
+    startListening()
 }
 </script>
 

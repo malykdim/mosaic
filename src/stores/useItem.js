@@ -31,6 +31,7 @@ export const useItem = defineStore('newItem', () => {
           if (imageUrl) {
             item.imageUrl = imageUrl
             console.log('Image uploaded successfully:', imageUrl)
+            return imageUrl
           } else {
             console.error('No image URL returned after upload')
           }

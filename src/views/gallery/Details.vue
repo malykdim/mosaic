@@ -42,7 +42,7 @@ onMounted(async () => {
                 <hr>
                 <p class="dimensions">{{ singleItem.dimensions.w }}{{ singleItem.dimensions.unit }} x {{ singleItem.dimensions.h }}{{ singleItem.dimensions.unit }}</p>
                 <hr>
-                <p class="materials" v-for="mat in singleItem.materials">{{ mat }}</p>
+                <p class="materials" v-for="mat in singleItem.materials" :key="mat">{{ mat }}</p>
             </div>
         </div>
 

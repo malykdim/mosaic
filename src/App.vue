@@ -18,14 +18,12 @@ import Footer from './components/footer/Footer.vue'
 </template>
 
 <style lang='scss' scoped>
-@import './assets/partials/page';
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--background);
-  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
 }
+
 .content {
   flex: 1;
 
@@ -50,6 +48,7 @@ import Footer from './components/footer/Footer.vue'
     }
   }
 }
+
 .footer {
   width: 100%;
   position: sticky;
@@ -60,9 +59,8 @@ import Footer from './components/footer/Footer.vue'
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);      
-  background-color: var(--background);
 }
+
 @media screen and (max-width: 767px) and (min-width: 260px) {
     .footer {
         padding: 0;

@@ -61,18 +61,18 @@
 
     .link {
         padding: 1rem 2rem;
-        background-color: rgba(210,175,93, 0.8);
-        color: #fff;
-        text-decoration: none;
+        margin-top: auto; /* Push to the bottom */
+        margin-bottom: 15rem;
         border-radius: 2px;
+        
+        color: #fff;
+        background-color: var(--primary);
+        text-decoration: none;
 
         transition: background-color 0.3s ease;
         font-size: clamp(0.9rem, 2vw, 1.1rem);
         
-        margin-bottom: 15rem;
         text-align: center;
-        background-color: var(--primary);
-        margin-top: auto; /* Push to the bottom */
         display: block;
 
         &:hover {

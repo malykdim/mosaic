@@ -1,13 +1,11 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeMount } from 'vue'
-import { useRoute, onBeforeRouteLeave } from 'vue-router'
+import { ref, computed, onBeforeMount } from 'vue'
+import { useRoute } from 'vue-router'
 
 import router from '../../config/router.js'
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 import { useItem } from '../../stores/useItem.js'
-import { useCollection } from '../../stores/useCollection.js'
-import validateUserInput from '../admin/functions/validateUserInput.js'
-import supabase from '../../config/supabase.js'
+import { updateMosaicItem } from './functions/updateItem.js'
 
 import Title from '../admin/components/Title.vue'
 import Author from '../admin/components/Author.vue'
@@ -26,41 +24,31 @@ const isPending = ref(false)
 
 const { item, resetItem, resetOnLeave } = useItem()
 const { getSingleItem } = useGalleryListener()
-const { updateDoc, delDoc } = useCollection()
 
 const isValid = computed(() => 
     item?.title?.length >= 3 && 
     item?.author && 
     item?.dimensions && 
     item?.materials && 
-    item?.imageUrl
+    (item?.imageUrl || item?.file)
 )
 
 const handleUpdate = async () => {
     
-    isPending.value = true
-    
-    // Use the actual item from Pinia which contains all user changes
-    const updatedFields = {
-        title: item.title,
-        author: item.author,
-        dimensions: item.dimensions,
-        materials: item.materials,
-        imageUrl: item.imageUrl
-    }    
+    isPending.value = true    
     
     try {
-        const { data, error } = await updateDoc('mosaics', id, updatedFields)
+        // IF USER SELECTED NEW IMAGE - UPLOAD IT FIRST        
+        const { data, error } = await updateMosaicItem (id, item)
+        console.log('Database updated successfully!')
                 
         if (error) {
-            console.error('Update failed:', error)
-            alert('Failed to update item: ' + (error.message || JSON.stringify(error)))
+            console.error('Failed to update item: ' + (error.message || JSON.stringify(error)))
             isPending.value = false
             return
         }
         
-        if (data) {
-            
+        if (data) {            
             try {
                 const { data: verifyData, error: verifyError } = await getSingleItem('mosaics', id)
                 if (verifyData) {
@@ -99,8 +87,9 @@ const handleUpdate = async () => {
         }
         
     } catch (error) {
-        console.error('Unexpected error during update:', error)
-        alert('An unexpected error occurred: ' + error.message)
+        console.error('Unexpected error during update:', error.message)
+        isPending.value = false
+    } finally {
         isPending.value = false
     }
 }    

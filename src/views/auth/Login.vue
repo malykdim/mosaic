@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/useUserStore'
 
-
 const router = useRouter()
 const userStore = useUserStore()
 
@@ -11,11 +10,6 @@ const email = ref('')
 const password = ref('')
 const error = ref(null)
 const isPending = ref(false)
-
-/* Supabase Sign in an existing user */
-const signIn = async (email, password) => {
-    const { user, error } = await supabase.auth.signIn({ email, password })
-}
 
 const handleSubmit = async () => {
   if (!email.value || !password.value) {
@@ -58,10 +52,7 @@ const handleSubmit = async () => {
 
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-
-	
-	
+	align-items: center;	
 	
 	.form {
 		display: flex;

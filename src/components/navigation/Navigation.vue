@@ -62,7 +62,6 @@ onUnmounted(() => {
 @import '../../assets/partials/_button.scss';
 .nav {
     width: 100vw;
-    // max-width: 1200px;
     background-color: var(--background);
     color: var(--secondary);
     text-transform: lowercase;
@@ -72,9 +71,7 @@ onUnmounted(() => {
     align-items: center;
     gap: 5rem;
 
-    padding: var(--safe-area-inset-top) var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left);  
-    padding: 1rem 0;
-    
+    padding: 1rem 0;    
 
     overflow: hidden;
 
@@ -168,8 +165,6 @@ onUnmounted(() => {
         justify-content: space-around;
         gap: 0.5rem;
         padding: 0.5rem 1rem;
-
-
     }
 }
 </style>
