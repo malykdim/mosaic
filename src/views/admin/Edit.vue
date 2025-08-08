@@ -44,7 +44,6 @@ const handleUpdate = async () => {
                 
         if (error) {
             console.error('Failed to update item: ' + (error.message || JSON.stringify(error)))
-            isPending.value = false
             return
         }
         
@@ -83,7 +82,6 @@ const handleUpdate = async () => {
         } else {
             console.warn('No data returned from update')
             alert('Update completed but no data returned')
-            isPending.value = false
         }
         
     } catch (error) {
