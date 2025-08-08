@@ -1,9 +1,9 @@
 {
-  "name": "mosaic",
-  "description": "virtual gallery for exquisite mosaic panneaux",
+  "name": "the-stone-magic",
+  "description": "The Stone Magic - Virtual Gallery for Exquisite Mosaic Panneaux",
   "homepage": "https://damyanovi.netlify.app/",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
