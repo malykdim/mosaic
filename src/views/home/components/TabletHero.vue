@@ -40,6 +40,11 @@ import Overlay from './Overlay.vue'
     position: relative;
     width: 100%;
 
+    aspect-ratio: 12/6;
+    min-height: 200px;
+    max-height: 95vh;
+    overflow: hidden;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;

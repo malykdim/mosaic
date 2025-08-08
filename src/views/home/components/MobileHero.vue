@@ -21,8 +21,11 @@ import desktopGridItems from '../data/desktopGridItems.js'
 .mobile-hero {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/10; 
 
+    aspect-ratio: 16/14; 
+    min-height: 200px;
+    max-height: 95vh;
+    overflow: hidden;
 
     .slider-container {
         width: 100%;
@@ -54,6 +57,11 @@ import desktopGridItems from '../data/desktopGridItems.js'
                 }
             }
         }
+    }
+
+    @media screen and (orientation: portrait) {
+        aspect-ratio: 16/14;
+        min-height: 65vh;
     }
 }
 

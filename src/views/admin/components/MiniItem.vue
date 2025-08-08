@@ -27,13 +27,13 @@ const handleDelete = async () => {
         <div class="actions-wrapper">
             <div class="icon-holder modify">
                 <router-link :to="{path: `/admin/edit/${item.id}`}" class="link">
-                    <i class="icon material-icons">edit</i>
+                    <i class="icon material-icons" aria-label="Edit mosaic">edit</i>
                 </router-link>
             </div>
     
             <div class="icon-holder remove">
                 <button @click="handleDelete" class="link">
-                    <i class="icon material-icons">delete</i>
+                    <i class="icon material-icons" aria-label="Delete mosaic">delete</i>
                 </button>
             </div>
         </div>

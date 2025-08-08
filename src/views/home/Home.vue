@@ -37,7 +37,7 @@ const desktop = ref(window.innerWidth >= 1024)
     padding: 0;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 5rem;
+    gap: 1rem;
     background-color: #fff;
 
     @media screen and (max-width: 1023px) {

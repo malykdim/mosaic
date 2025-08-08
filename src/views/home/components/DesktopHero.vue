@@ -45,7 +45,11 @@ import desktopGridItems from '../data/desktopGridItems.js'
 .desktop-hero {
     position: relative;
     width: 100%;
-    min-height: 0;
+
+    aspect-ratio: 16/7;
+    min-height: 200px;
+    max-height: 95vh;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;

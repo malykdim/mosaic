@@ -6,7 +6,7 @@ import MiniGallery from './components/MiniGallery.vue'
 <template>
     <div class="dashboard">
         <nav class="admin-menu">
-            <router-link to="/admin/create" class="btn">Create</router-link>
+            <router-link to="/admin/create" class="btn" aria-label="Create mosaic">Create</router-link>
         </nav>
         <MiniGallery />
     </div>

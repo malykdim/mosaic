@@ -14,6 +14,8 @@
 .overlay {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
     padding: 0;
 
     display: flex;
@@ -80,7 +82,7 @@
         }
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 926px) {
 
         .title {
             margin-top: 10rem;
@@ -89,6 +91,16 @@
         .subtitle {
             font-size: clamp(1rem, 6vw, 2rem);
         }
+        .link {
+            width: 55%;
+        }
+    }
+
+    @media screen and (max-width: 568px) {
+        .link {
+            width: 85%;
+        }
+
     }
 }
 </style>
