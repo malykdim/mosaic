@@ -11,7 +11,7 @@ button, .btn {
 
     &:hover, &:focus, &:active {
         background: white;
-        color: var(--background);
+        color: var(--primary);
         font-weight: 600;
     }
     &:disabled {

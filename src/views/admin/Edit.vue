@@ -65,7 +65,7 @@ const handleUpdate = async () => {
             
             if (shouldNavigate) {
                 try {
-                    await router.push({ name: 'dashboard' })
+                    await router.push({ name: 'admin-dashboard' })
                 } catch (navError) {
                     console.error('Navigation failed:', navError)
                     // Try alternative routes

@@ -99,7 +99,7 @@ onMounted(async () => {
             .title {
                 font-size: 3.5em;
                 font-weight: 300;
-                color: var(--background);
+                color: var(--primary);
             }
             .author {
                 font-size: 1.2rem;

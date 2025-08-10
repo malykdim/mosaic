@@ -23,7 +23,7 @@ const handleSubmit = async () => {
 
   if (!signInError) {
     console.log('user logged in: ', user)
-    router.push({ name: 'dashboard' })
+    router.push({ name: 'admin-dashboard' })
   } else {
     console.log('error:', signInError.message)
     error.value = signInError.message
@@ -65,7 +65,7 @@ const handleSubmit = async () => {
 		.title {
 			text-align: center;
 			margin-bottom: 1rem;
-			color: var(--background);
+			color: var(--primary);
 		}
 		
 		.input {
@@ -77,7 +77,7 @@ const handleSubmit = async () => {
 		
 		button {
 			padding: 0.5rem;
-			background-color: var(--background);
+			background-color: var(--primary);
 			font-size: 1.1em;
 			color: white;
 			border: none;

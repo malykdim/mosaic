@@ -76,7 +76,7 @@ defineProps({
             bottom: 0;
             left: 0;    
             right: 0;
-            background: linear-gradient(to top, var(--background), transparent);
+            background: linear-gradient(to top, var(--primary), transparent);
             border-radius: 4px;
 
             z-index: 14;

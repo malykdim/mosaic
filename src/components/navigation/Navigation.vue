@@ -40,7 +40,7 @@ onUnmounted(() => {
             <button v-if="mobileMenu && isMenuOpen" @click="toggleMobileMenu" class="menu-toggle">✖</button>
             <router-link :to="{ name: 'home' }" class="link" @click="toggleMobileMenu">Home</router-link>
             <router-link :to="{ name: 'gallery' }" class="link" @click="toggleMobileMenu">Gallery</router-link>
-            <router-link v-if="userStore.user" :to="{ name: 'dashboard' }" class="link" @click="toggleMobileMenu">Dashboard</router-link>
+            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" class="link" @click="toggleMobileMenu">Dashboard</router-link>
         </div>
 
         <!-- Hamburger or Close button -->
@@ -52,7 +52,7 @@ onUnmounted(() => {
         <div v-if="!mobileMenu" class="desktop-links">
             <router-link :to="{ name: 'home' }" class="link btn">Home</router-link>
             <router-link :to="{ name: 'gallery' }" :class="['link', { btn: !mobileMenu }]">Gallery</router-link>
-            <router-link v-if="userStore.user" :to="{ name: 'dashboard' }" :class="['link', { btn: !mobileMenu }]">Dashboard</router-link>
+            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" :class="['link', { btn: !mobileMenu }]">Dashboard</router-link>
         </div>
     </nav>
 </template>
@@ -62,7 +62,7 @@ onUnmounted(() => {
 @import '../../assets/partials/_button.scss';
 .nav {
     width: 100vw;
-    background-color: var(--background);
+    background-color: var(--primary);
     color: var(--secondary);
     text-transform: lowercase;
     
@@ -100,7 +100,7 @@ onUnmounted(() => {
 
     .menu-toggle {
         background-color: white;
-        color: var(--background);
+        color: var(--primary);
         border: none;
     }
 
@@ -118,7 +118,7 @@ onUnmounted(() => {
         align-items: center; 
         padding: 0;
         background-color: #fff;
-        color: var(--background);
+        color: var(--primary);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
         z-index: 10; 
         font-size: 1.2em;
@@ -128,7 +128,7 @@ onUnmounted(() => {
         
         .link {
             background-color: white;
-            color: var(--background);
+            color: var(--primary);
             border: none;
             padding: .5em 2em;
 
