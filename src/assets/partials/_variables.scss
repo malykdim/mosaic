@@ -1,0 +1,48 @@
+:root {
+    --background: rgba(210,175,93, 0.8);
+    --primary: rgba(210,175,93, 0.8);
+    --primary-accent: rgba(210, 175, 93, 0.164);
+
+    --hover: rgba(66, 184, 131, 0.05);
+    --secondary: rgba(210, 204, 198, 1);
+    --warning: rgba(102, 10, 41, 0.644);
+    --input: rgba(39, 41, 39, 0.667);
+    --test-background: rgba(15, 75, 45, 0.849);
+
+    --border: 1px solid var(--secondary);
+    --border-radius: 4px;
+    --shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
+
+    /* Safe area insets */
+    --safe-area-inset-top: env(safe-area-inset-top);
+    --safe-area-inset-right: env(safe-area-inset-right);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+    --safe-area-inset-left: env(safe-area-inset-left);
+
+    /* Breakpoints */
+    --mobile-xs: 320px; /* Extra small devices (phones, 320px and up) */
+    --breakpoint-sm: 576px; /* Small devices (tablets, 576px and up) */
+    --breakpoint-md: 768px; /* Medium devices (desktops, 768px and up) */
+    --breakpoint-lg: 992px; /* Large devices (large desktops, 992px and up) */
+    --breakpoint-xl: 1200px; /* Extra large devices (larger desktops, 1200px and up) */
+    --breakpoint-xxl: 1400px; /* Extra extra large devices (larger desktops, 1400px and up) */
+    --breakpoint-xxxl: 1600px; /* Extra extra extra large devices (larger desktops, 1600px and up) */  
+    --breakpoint-xxxxl: 1800px; /* Extra extra extra extra large devices (larger desktops, 1800px and up) */
+
+
+    accent-color: var(--primary);
+
+    scrollbar-color: var(--primary) Canvas;
+    :focus-visible { outline-color: var(--primary); }
+    ::selection { background-color: var(--primary); }
+    ::marker { color: var(--primary); }
+    :is(
+        ::-webkit-calendar-picker-indicator,
+        ::-webkit-clear-button,
+        ::-webkit-inner-spin-button, 
+        ::-webkit-outer-spin-button
+    ) {
+        color: var(--primary);
+        opacity: 1;
+    }
+}
