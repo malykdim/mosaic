@@ -1,15 +1,15 @@
+@use 'partials/variables' as *;
+@use 'partials/footer' as *;
+@use 'partials/error' as *;
+@use 'partials/page' as *;
+@use 'partials/form' as *;
+@use 'partials/link' as *;
+@use 'partials/button' as *;
+
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&display=swap');
-
-@import 'partials/variables';
-@import 'partials/footer';
-@import 'partials/error';
-@import 'partials/page';
-@import 'partials/form';
-@import 'partials/link';
-@import 'partials/button';
 
 
 * {

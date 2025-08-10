@@ -58,8 +58,6 @@ onUnmounted(() => {
 </template>
 
 <style lang='scss' scoped>
-@import '../../assets/partials/_link.scss';
-@import '../../assets/partials/_button.scss';
 .nav {
     width: 100vw;
     background-color: var(--primary);
