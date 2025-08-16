@@ -114,7 +114,6 @@ onUnmounted(() => {
         flex-direction: column;
         gap: 1rem;
         align-items: center; 
-        padding: 0;
         background-color: #fff;
         color: var(--primary);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
