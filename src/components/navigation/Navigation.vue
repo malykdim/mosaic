@@ -37,15 +37,26 @@ onUnmounted(() => {
 
         <!-- Mobile menu -->
         <div v-if="mobileMenu && isMenuOpen" class="mobile-menu">
-            <button v-if="mobileMenu && isMenuOpen" @click="toggleMobileMenu" class="menu-toggle">✖</button>
+            <button 
+                @click="toggleMobileMenu" 
+                class="menu-toggle"
+                aria-label="Close menu"
+            >                
+                ✖
+            </button>
             <router-link :to="{ name: 'home' }" class="link" @click="toggleMobileMenu">Home</router-link>
             <router-link :to="{ name: 'gallery' }" class="link" @click="toggleMobileMenu">Gallery</router-link>
             <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" class="link" @click="toggleMobileMenu">Dashboard</router-link>
         </div>
 
         <!-- Hamburger or Close button -->
-        <button v-if="mobileMenu && !isMenuOpen" class="menu-toggle" @click="toggleMobileMenu">
-            {{ isMenuOpen ? '✖' : '☰' }}
+        <button 
+            v-if="mobileMenu && !isMenuOpen" 
+            class="menu-toggle" 
+            @click="toggleMobileMenu"
+            aria-label="Open menu"
+        >
+            ☰
         </button>
 
         <!-- Desktop links -->
@@ -58,110 +69,5 @@ onUnmounted(() => {
 </template>
 
 <style lang='scss' scoped>
-.nav {
-    width: 100vw;
-    background-color: var(--primary);
-    color: var(--secondary);
-    text-transform: lowercase;
-    
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 5rem;
-
-    padding: 1rem 0;    
-
-    overflow: hidden;
-
-    .logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        padding-bottom: 0;
-        will-change: filter;
-        transition: filter 300ms;
-
-        .logo {
-            height: 2em;
-            will-change: filter;
-            transition: filter 300ms;
-    
-            &:hover {
-                filter: drop-shadow(0 0 2em var(--hover));
-            }
-            &.vue:hover {
-                filter: drop-shadow(0 0 2em var(--primary));
-            }
-        }        
-    }
-
-    .menu-toggle {
-        background-color: white;
-        color: var(--primary);
-        border: none;
-    }
-
-    &.menu-open {
-        padding: 0;
-    }
-    
-    .mobile-menu {
-        max-width: 100%;
-        margin: 0 auto;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center; 
-        background-color: #fff;
-        color: var(--primary);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-        z-index: 10; 
-        font-size: 1.2em;
-        letter-spacing: .2em;
-        text-transform: uppercase; 
-        padding: 1rem 0;
-        
-        .link {
-            background-color: white;
-            color: var(--primary);
-            border: none;
-            padding: .5em 2em;
-
-            &:hover {
-                font-weight: bold;
-                transition: all 250ms ease-in;
-                box-shadow: var(--shadow);
-            }
-        }
-    }
-
-    .desktop-links {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        gap: 10rem;
-        padding: 0 1rem;
-
-        .link, .btn {
-            font-size: 1.2em;
-            letter-spacing: .2em;
-            text-transform: uppercase;    
-
-            &:hover {
-                filter: drop-shadow(0 0 2em var(--hover));
-            }
-        }
-    }
-
-    @media screen and (max-width: 667px) {
-        max-width: 100%;
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-    }
-}
+@use '../../assets/partials/navigation' as *;
 </style>
