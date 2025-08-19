@@ -40,9 +40,9 @@ onMounted(async () => {
                 <h4 class="title">{{ singleItem.title }}</h4>
                 <h5 class="author">{{ singleItem.author }}</h5>
                 <hr>
-                <p class="dimensions">{{ singleItem.dimensions.w }}{{ singleItem.dimensions.unit }} x {{ singleItem.dimensions.h }}{{ singleItem.dimensions.unit }}</p>
-                <hr>
                 <p class="materials" v-for="mat in singleItem.materials" :key="mat">{{ mat }}</p>
+                <hr>
+                <p class="dimensions">{{ singleItem.dimensions.w }}{{ singleItem.dimensions.unit }} x {{ singleItem.dimensions.h }}{{ singleItem.dimensions.unit }}</p>
             </div>
         </div>
 
@@ -102,16 +102,14 @@ onMounted(async () => {
                 color: var(--primary);
             }
             .author {
-                font-size: 1.2rem;
+                font-size: 1.2em;
                 color: #666;
             }
-            .dimensions {
-                font-size: 1rem;
-                color: #333;
-            }
-            .materials {
-                font-size: 1rem;
+            .dimensions, .materials {
+                font-family: 'Caudex';
+                font-size: 1.2em;
                 color: #888;
+                letter-spacing: 0.05em;
                 text-transform: lowercase;
             }
         }

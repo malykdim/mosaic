@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
       // Registers a new user and redirects to the dashboard on success.
         const { data, error } = await supabase.auth.signUp({ email, password })
         if (data.user) {
-          router.push({ name: 'admin-dashboard' })
+          console.log(`Current user: ${data.user}`)
         }
         return { user: data.user, error }
     }
@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', () => {
       // Logs in a user and redirects to the dashboard on success.
         const { data, error } = await supabase.auth.signInWithPassword({ email, password })
         if (data.user) {
-          router.push({ name: 'admin-dashboard' })
+          console.log(`Current user: ${data.user}`)
         }
         return { user: data.user, error }
     }

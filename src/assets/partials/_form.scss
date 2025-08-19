@@ -71,10 +71,6 @@ form {
     label {
         font-size: 12px;
         display: block;
-        margin-top: 4px;
-        color: var(--input);
-    }
-    button {
-        margin-top: 14px;
+        color: var(--text, transparent);
     }
 }

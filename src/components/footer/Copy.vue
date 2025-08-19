@@ -8,9 +8,9 @@
 
 <style lang='scss' scoped>
 .copy {
-    font-family: 'M PLUS 1p', sans-serif;
+    font-family: 'Caudex', sans-serif;
     color: var(--text, white); // fallback to white if --text not set
-    font-size: 1em;
+    font-size: 1.2em;
     opacity: 1;
     text-transform: lowercase;
 }

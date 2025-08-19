@@ -18,7 +18,7 @@
 
         <div class="about">
             <div class="text">
-                <h2 class="name">Vladimir Damyanov</h2>
+                <h3 class="name">Vladimir Damyanov</h3>
                 <div class="author">
                     <p class="p">
                     Wins the Annual Award of the Society of Plovdiv Artists in the sculpture category for 2024.
@@ -32,7 +32,7 @@
                     </p>   
                 </div>
                 
-                <h2 class="name">Damyan Damyanov</h2>
+                <h3 class="name">Damyan Damyanov</h3>
                 <div class="author">
                     <p class="p">
                     Master of mosaic with his own style.
@@ -123,12 +123,12 @@
             .author {
                 margin-bottom: 1.8rem;
                 .p {
-                    font-family: 'Verdana';
+                    font-family: 'Caudex';
                     font-size: 1em;
                     padding-bottom: .8rem;
                     color: var(--input);
-                    line-height: 1.8em;
-                    letter-spacing: 0.1em;
+                    line-height: 1.6em;
+                    letter-spacing: 0.05em;
                 }
             }
         }
@@ -151,7 +151,7 @@
             }
     
             .delimiter {
-                font-size: xx-large;
+                font-size: x-large;
                 color: var(--primary);
             }
         }

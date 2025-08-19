@@ -1,17 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
-import supabase from '../../config/supabase'
+import { useUserStore } from '../../stores/useUserStore'
 
 const router = useRouter()
+const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
-
-const signUp = async (email, password) => {
-    const { user, error } = await supabase.auth.signUp({ email, password })
-}
+const error = ref(null)
+const isPending = ref(false)
 
 const handleSubmit = async () => {
     if (!email.value || !password.value) {
@@ -19,33 +17,37 @@ const handleSubmit = async () => {
         return
     }
 
-    const response = await signUp(email.value, password.value)
-    console.log(response)
+    isPending.value = true
+    const { user, error: signUpError} = await userStore.signUp(email.value, password.value)
+    isPending.value = false
 
-    if (!error.value) {
-        console.log('user signed up: ', response.user)
-        router.push({ name: 'dashboard' })
-    }
-    if (response.error) {
-        console.log('error:', response.error.message)
-    }
+  if (!signUpError) {
+    console.log('user logged in: ', user)
+    router.push({ name: 'admin-dashboard' })
+  } else {
+    console.log('error:', signUpError.message)
+    error.value = signUpError.message
+  }
 }
 </script>
 
 <template>
-    
-    <form @submit.prevent="handleSubmit">
-        <h3>Sign up</h3>
-        <input type="email" placeholder="Email" v-model="email">
-        <input type="password" placeholder="Password" v-model="password">
-        <div v-if="error" class="error">
-            {{ error }}
-        </div>
-        <button v-if="!isPending" type="submit">Sign up</button>
-        <button v-if="isPending" type="submit" disabled>Loading...</button>
-    </form>
+    <section class="auth-page">
+        <form @submit.prevent="handleSubmit" class="form card">
+            <h3 class="title">Sign up</h3>
+            <label>
+                Email
+                <input type="email" placeholder="Email" v-model="email" class="input" autocomplete="off">
+            </label>
+            <label>
+                Password
+                <input type="password" placeholder="Password" v-model="password" class="input" autocomplete="off">
+            </label>
+            <div v-if="error" class="error">
+                {{ error }}
+            </div>
+            <button v-if="!isPending" type="submit" class="button">Sign up</button>
+            <button v-if="isPending" disabled>Loading...</button>
+        </form>
+    </section>    
 </template>
-
-<style lang='scss' scoped>
-
-</style>
