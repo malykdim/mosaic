@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 
+const router = useRouter()
 const route = useRoute()
 const id = Number(route.params.id)
 console.log(id)
@@ -14,15 +15,25 @@ const error = ref(null)
 const { getSingleItem } = useGalleryListener()
 
 onMounted(async () => {
-    const { data, error: fetchError } = await getSingleItem('mosaics', id)
-    
-    if (fetchError) {
-        console.error(`Error during getSingleItem: ${fetchError.message}`)
-        error.value = fetchError.message
-    } else {
-        singleItem.value = data
-        console.log(singleItem.value)
-    }
+    try {
+        const { data, error: fetchError } = await getSingleItem('mosaics', id)
+        
+        if (fetchError) {
+            console.error(`Error during getSingleItem: ${fetchError.message}`)
+            error.value = fetchError.message
+            router.replace({ name: 'not-found' })
+            return
+        } else if(!data){
+            router.replace({ name: 'not-found' })
+            return
+        } else {
+            singleItem.value = data
+            // console.log(singleItem.value)
+        }
+    } catch (err) {
+        console.error('Unexpected error fetching details:', err)
+        router.replace({ name: 'not-found' })
+    }    
 })
 </script>
 

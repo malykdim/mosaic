@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
-import router from '../../config/router.js'
+import { ref, onMounted, onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useUserStore } from '../../stores/useUserStore'
 
@@ -16,33 +15,51 @@ import Author from './components/Author.vue'
 import Dimensions from './components/Dimensions.vue'
 import Materials from './components/Materials.vue'
 import Image from './components/Image.vue'
-import Notifications from '../../components/Notifications.vue'
+// import Notifications from '../../components/Notifications.vue'
+
+const router = useRouter()
 
 const { user, checkUser } = useUserStore()
 
-const { item, resetItem, resetOnLeave, fileToImageUrl } = useItem() 
+const { item, resetItem, fileToImageUrl } = useItem() 
 // {title, author, dimensions, materials, file, imageUrl}
 
 const { addDoc } = useCollection()
 
 const isPending = ref(false)
 const handleCreate = async () => {    
-    /* 1. Validate item in Pinia */
-    validateUserInput(item)      
+    isPending.value = true
 
-    /* 2. Save image in Supabase storage */
-    /* 3. Update item.imageUrl in Pinia */
-    await fileToImageUrl(item)
-
-    /* 4. Add item to Supabase database in bucket mosaics */
-    await addDoc('mosaics', item)
-
-    /* 5. Notify the user */ /* TODO */
-
-    resetItem()
-
-    router.push({ name: 'dashboard' })
+    try {
+        /* 1. Validate item in Pinia */
+        validateUserInput(item)      
+    
+        /* 2. Save image in Supabase storage */
+        /* 3. Update item.imageUrl in Pinia */
+        await fileToImageUrl(item)
+    
+        /* 4. Add item to Supabase database in bucket mosaics */
+        await addDoc('mosaics', item)
+        resetItem()        
+        router.push({ name: 'admin-dashboard' })
+    } catch (err) {
+        console.error('Create failed:', err)
+        /* 5. Notify the user */ /* TODO */
+    } finally {
+       isPending.value = false
+    }
 }
+
+onBeforeMount(async () => {
+  try {
+    await checkUser()
+    const hasUser = user?.value ?? user
+    if (!hasUser) router.replace({ name: 'home' })
+  } catch (e) {
+    console.error('Auth check failed:', e)
+    router.replace({ name: 'home' })
+  }
+})
 
 // Reset item when Create page loads to ensure clean slate
 onMounted(() => {
@@ -52,7 +69,7 @@ onMounted(() => {
 </script>
 
 <template>
-<div class="page create-container">
+<div class="page create-edit-container">
     <h3 class="title">Create new panneaux</h3>
 
     <form @submit.prevent="handleCreate" class="create">
@@ -73,7 +90,7 @@ onMounted(() => {
         
         <div class="submit">
             <button 
-                v-if="item.title.length < 3 || !item.author || !item.dimensions || !item.materials | !item.file" 
+                v-if="item.title.length < 3 || !item.author || !item.dimensions || !item.materials || !item.file" 
                 type="button" 
                 disabled
             >
@@ -90,115 +107,3 @@ onMounted(() => {
     </form>
 </div>
 </template>
-
-<style lang='scss' scoped>
-.create-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .title {
-        margin: 3rem 0;
-    }
-
-    .create {
-        width: 80%;
-        margin: 0 auto;
-        margin-bottom: 2rem;
-        padding: 3rem 2rem;
-
-		background-color: rgba(210,175,93, 0.07);
-        border-radius: 4px;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-
-        .formFields {
-            width: 100%;
-            margin: 0 auto;
-
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 2rem;
-
-            .info {
-                width: 40%;
-            }
-
-            .picture {
-                width: 40%;
-                padding-top: 3rem;
-
-                .file-upload {
-                    .display {
-                        padding: 1rem;
-                    }
-
-                    .file {
-                        color: var(--primary);
-                        &::before {
-                            content: '';
-                            display: inline-block;
-                            width: 1rem;
-                            height: 1rem;
-                            background-color: var(--primary);
-                            border-radius: 50%;
-                            margin-right: 0.5rem;
-                        }
-                    }
-                }
-            }
-
-            .info {
-                border: 1px solid transparent;
-            }
-        }
-
-        .submit {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-
-            button {
-                padding: 0.5rem 1rem;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                background-color: var(--primary);
-                color: #fff;
-
-                &:disabled {
-                    background-color: #ccc;
-                    cursor: not-allowed;
-                }
-            }
-        }
-
-        .display {
-            padding: 1rem 0;
-        }
-
-        @media screen and (max-width: 1300px) {
-            width: 90%;
-        }
-
-        @media screen and (max-width: 1023px) {
-            .formFields {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-                
-                .info, .picture {
-                    width: 100%;
-                }
-            }
-        }
-    }
-}
-</style>

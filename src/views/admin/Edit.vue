@@ -1,8 +1,10 @@
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue'
-import { useRoute } from 'vue-router'
 
-import router from '../../config/router.js'
+import { useRouter, useRoute } from 'vue-router'
+
+import { useUserStore } from '../../stores/useUserStore'
+
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 import { useItem } from '../../stores/useItem.js'
 import { updateMosaicItem } from './functions/updateItem.js'
@@ -14,12 +16,15 @@ import Materials from '../admin/components/Materials.vue'
 import Image from '../admin/components/Image.vue'
 import Notifications from '../../components/Notifications.vue'
 
-
+const router = useRouter()
 const route = useRoute()
+
+const { user, checkUser } = useUserStore()
+
 const id = Number(route.params.id)
 
 const singleItem = ref(null)
-const error = ref(null)
+const loadError = ref(null)
 const isPending = ref(false)
 
 const { item, resetItem, resetOnLeave } = useItem()
@@ -86,21 +91,52 @@ const handleUpdate = async () => {
         
     } catch (error) {
         console.error('Unexpected error during update:', error.message)
-        isPending.value = false
     } finally {
         isPending.value = false
     }
 }    
 
 onBeforeMount(async () => {
+    isPending.value = true   
     try {
-        const { data } = await getSingleItem('mosaics', id)
-        if (data) {
-            singleItem.value = data
-            Object.assign(item, data)
+        await checkUser()
+        const hasUser = user?.value ?? user
+        if (!hasUser) router.replace({ name: 'home' })
+    } catch (error) {
+        console.error('Auth check failed:', error.message)
+        loadError.value = error.message
+        router.replace({ name: 'home' })
+    }
+
+    // validate id param early
+    if (!Number.isFinite(id) || id <= 0) {
+        console.error('Invalid or missing id param:', route.params.id)
+        router.replace({ name: 'admin-dashboard' })
+        return
+    }
+
+    try {
+        const { data, error } = await getSingleItem('mosaics', id)
+
+        if (error) {
+            console.error('Error from getSingleItem:', error)
+            router.replace({ name: 'not-found' })
+            return
         }
+
+        if (!data) {
+            console.warn('No item found for id:', id)
+            router.replace({ name: 'not-found' })
+            return
+        }
+
+        singleItem.value = data
+        Object.assign(item, data)
     } catch (error) {
         console.error('Error loading item:', error)
+        router.replace({ name: 'not-found' })
+    } finally {
+        isPending.value = false
     }
 })
 
@@ -108,10 +144,10 @@ resetOnLeave()
 </script>
 
 <template>
-    <div class="page">
+    <div class="page create-edit-container">
         <h3 v-if="singleItem" class="title">Edit {{ singleItem.title }}</h3>
-        <p v-else>Loading item...</p>
-        <form @submit.prevent="handleUpdate" class="edit form">
+        <p v-else-if="isPending">Loading item...</p>
+        <form v-if="singleItem"  @submit.prevent="handleUpdate" class="edit form">
             <div class="formFields">
                 <!-- LEFT -->
                 <div class="picture">
@@ -150,116 +186,6 @@ resetOnLeave()
                 
             </div>
         </form> 
+        <p v-else-if="!isPending">Item with this ID does not exist</p>
     </div>
 </template>
-
-<style lang='scss' scoped>
-.page {
-    width: 100%;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .title {
-        margin: 3rem 0;
-    }
-
-    .edit {
-        width: 80%;
-        margin: 0 auto;
-        margin-bottom: 2rem;
-        padding: 3rem 2rem;
-
-        background-color: rgba(210,175,93, 0.07);
-        border-radius: 4px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-        .formFields {
-            width: 100%;
-            margin: 0 auto;
-
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 2rem;
-
-            .info {
-                width: 40%;
-            }
-
-            .picture {
-                width: 40%;
-                padding-top: 3rem;
-
-                .file-upload {
-                    .display {
-                        padding: 1rem;
-                    }
-
-                    .file {
-                        color: var(--primary);
-                        &::before {
-                            content: '';
-                            display: inline-block;
-                            width: 1rem;
-                            height: 1rem;
-                            background-color: var(--primary);
-                            border-radius: 50%;
-                            margin-right: 0.5rem;
-                        }
-                    }
-                }
-            }
-
-            .info {
-                border: 1px solid transparent;
-            }
-        }
-
-        .submit {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-
-            button {
-                padding: 0.5rem 1rem;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                background-color: var(--primary);
-                color: #fff;
-
-                &:disabled {
-                    background-color: #ccc;
-                    cursor: not-allowed;
-                }
-            }
-        }
-
-        .display {
-            padding: 1rem 0;
-        }
-
-        @media screen and (max-width: 1300px) {
-            width: 90%;
-        }
-
-        @media screen and (max-width: 1023px) {
-            .formFields {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-                
-                .info, .picture {
-                    width: 100%;
-                }
-            }
-        }
-    }
-}
-</style>

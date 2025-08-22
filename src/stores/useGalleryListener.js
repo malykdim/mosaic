@@ -23,7 +23,8 @@ export const useGalleryListener = () => {
       if (error) {
         console.error(`Error during getSingleItem: ${error.message}`)
       } else {
-        console.log(data)
+        console.log('success')
+        // console.log(data)
       }
     
       return {data, error}

@@ -6,6 +6,9 @@
 @use 'partials/link' as *;
 @use 'partials/button' as *;
 @use 'partials/auth-page' as *;
+@use 'partials/admin-dashboard' as *;
+@use 'partials/admin-create-edit' as *;
+
 
 @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');

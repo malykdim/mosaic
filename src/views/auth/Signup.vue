@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/useUserStore'
 
@@ -29,6 +29,17 @@ const handleSubmit = async () => {
     error.value = signUpError.message
   }
 }
+
+onBeforeMount(async () => {
+  try {
+    await userStore.checkUser()
+    const hasUser = userStore.user?.value ?? userStore.user
+    if (hasUser) router.replace({ name: 'admin-dashboard' })
+  } catch (e) {
+    console.error('Auth check failed:', e) // allow guest if check fails
+  }
+})
+
 </script>
 
 <template>

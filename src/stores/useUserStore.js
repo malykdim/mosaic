@@ -1,12 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import supabase from '../config/supabase'
 
 export const useUserStore = defineStore('user', () => {
 
     const user = ref(null) // reference to store the current user's data
-    const router = useRouter()
 
     const checkUser = async () => {
       // Checks the current session and updates the user state.
@@ -46,7 +44,6 @@ export const useUserStore = defineStore('user', () => {
         } else {
             console.log('User logged out successfully')
             user.value = null
-            router.push({ name: 'home' })
         }
     }  
 
