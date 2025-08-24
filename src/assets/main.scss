@@ -6,17 +6,24 @@
 @use 'partials/link' as *;
 @use 'partials/button' as *;
 @use 'partials/auth-page' as *;
+@use 'partials/home' as *;
+@use 'partials/hero-overlay' as *;
 @use 'partials/admin-dashboard' as *;
 @use 'partials/admin-create-edit' as *;
 
 
 @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Klee+One&display=swap');
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Cinzel Decorative', sans-serif;
+    // font-family: 'Cinzel Decorative', sans-serif;
+    font-family: "Cinzel Decorative", "Klee One", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    // font-family: "Cinzel Decorative", "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    // font-family: "Cinzel Decorative", "PT Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    // font-family: "Cinzel Decorative", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    // font-family: "Cinzel Decorative", "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 *, *:before, *:after {
@@ -34,7 +41,7 @@ html, body {
 }
 
 body {
-
+    
     @media (prefers-color-scheme: dark) {
         & {
           color: #fafafa;
