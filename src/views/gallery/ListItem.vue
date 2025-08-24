@@ -30,7 +30,3 @@ defineProps({
 
     </div>
 </template>
-
-<style lang='scss' scoped>
-@use 'partials/list-item' as *;
-</style>

@@ -16,7 +16,3 @@ import Footer from './components/footer/Footer.vue'
     <Footer />
   </footer>
 </template>
-
-<style lang='scss' scoped>
-@use 'partials/app' as *;
-</style>
