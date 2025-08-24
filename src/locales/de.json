@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "gallery": "Galerie",
+    "details": "Details",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "dashboard": "Dashboard"
+  },
+  "footer": {
+    "copy": "Die Steinmagie © {year}"
+  },
+  "home": {
+    "hero": {
+      "title": "DIE STEINMAGIE",
+      "subtitle": "Virtuelle Galerie für exquisite Mosaikpaneele",
+      "cta": "Galerie ansehen"
+    },
+    "authors": {
+      "imageAlt": "Bild von Vladimir Damyanov und Damyan Damyanov",
+      "vladimir": {
+        "name": "Vladimir Damyanov",
+        "p1": "Gewinner des Jahrespreises der Gesellschaft der Plovdiver Künstler (Skulptur, 2024).",
+        "p2": "Seine Mosaiktafeln nehmen an vielen Ausstellungen in Bulgarien, Schweden, Norwegen, Österreich, Deutschland, Italien, Frankreich, Großbritannien und den USA teil.",
+        "p3": "Zudem erweitert er sein Spektrum um abstrakte Kompositionen aus Glaskeramik."
+      },
+      "damyan": {
+        "name": "Damyan Damyanov",
+        "p1": "Meister der Mosaikkunst mit eigenem Stil.",
+        "p2": "Seine Werke wurden in zahlreichen Ausstellungen gezeigt.",
+        "p3": "Seine Kompositionen bestehen ausschließlich aus Natursteinen: schwarzer Mergel, Syenit, Marmor, Granit, Tigerauge, verschiedene Kalksteinsorten, Bergkristalle und Halbedelsteine wie Jaspis, Achat und andere."
+      },
+      "links": {
+        "vladimir_facebook_label": "Facebook-Profil von Vladimir Damyanov",
+        "damyan_facebook_label": "Facebook-Profil von Damyan Damyanov",
+        "vladimir_text": "Vladimir Damyanov",
+        "damyan_text": "Damyan Damyanov"
+      }
+    }
+  },
+  "form": {
+    "title": "Titel",
+    "author": "Autor",
+    "dimensions": "Abmessungen",
+    "materials": "Materialien",
+    "submit": "Speichern"
+  },
+  "messages": {
+    "loading": "Lädt...",
+    "notFound": "Eintrag nicht gefunden",
+    "saved": "Erfolgreich gespeichert"
+  },
+  "admin": {
+    "create": "Mosaik erstellen",
+    "edit": "Mosaik bearbeiten"
+  }
+}

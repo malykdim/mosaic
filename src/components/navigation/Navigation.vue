@@ -1,8 +1,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useUserStore } from '../../stores/useUserStore'
+import { useI18n } from '../../stores/useI18n'
+
+// import TranslationSelectorButtons from './TranslationSelectorButtons.vue'
+import TranslationSelectorDropdown from './TranslationSelectorDropdown.vue'
 
 const userStore = useUserStore()
+const { translate } = useI18n()
 
 const mobileMenu = ref(window.innerWidth <= 667)
 const isMenuOpen = ref(false)
@@ -44,9 +49,11 @@ onUnmounted(() => {
             >                
                 ✖
             </button>
-            <router-link :to="{ name: 'home' }" class="link" @click="toggleMobileMenu">Home</router-link>
-            <router-link :to="{ name: 'gallery' }" class="link" @click="toggleMobileMenu">Gallery</router-link>
-            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" class="link" @click="toggleMobileMenu">Dashboard</router-link>
+            <!-- <TranslationSelectorButtons /> -->
+            <TranslationSelectorDropdown />
+            <router-link :to="{ name: 'home' }" class="link" @click="toggleMobileMenu">{{translate('nav.home')}}</router-link>
+            <router-link :to="{ name: 'gallery' }" class="link" @click="toggleMobileMenu">{{translate('nav.gallery')}}</router-link>
+            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" class="link" @click="toggleMobileMenu">{{translate('nav.dashboard')}}</router-link>
         </div>
 
         <!-- Hamburger or Close button -->
@@ -61,9 +68,11 @@ onUnmounted(() => {
 
         <!-- Desktop links -->
         <div v-if="!mobileMenu" class="desktop-links">
-            <router-link :to="{ name: 'home' }" class="link btn">Home</router-link>
-            <router-link :to="{ name: 'gallery' }" :class="['link', { btn: !mobileMenu }]">Gallery</router-link>
-            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" :class="['link', { btn: !mobileMenu }]">Dashboard</router-link>
+            <router-link :to="{ name: 'home' }" class="link btn">{{translate('nav.home')}}</router-link>
+            <router-link :to="{ name: 'gallery' }" :class="['link', { btn: !mobileMenu }]">{{translate('nav.gallery')}}</router-link>
+            <router-link v-if="userStore.user" :to="{ name: 'admin-dashboard' }" :class="['link', { btn: !mobileMenu }]">{{translate('nav.dashboard')}}</router-link>
+            <!-- <TranslationSelectorButtons /> -->
+            <TranslationSelectorDropdown />
         </div>
     </nav>
 </template>

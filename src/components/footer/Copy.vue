@@ -1,9 +1,10 @@
 <script setup>
-
+import { useI18n } from '../../stores/useI18n'
+const { translate } = useI18n()
 </script>
 
 <template>
-    <p class="copy">The Stone magic &copy; 2024</p>
+    <p class="copy">{{ translate('footer.copy', { year: new Date().getFullYear() }) }}</p>
 </template>
 
 <style lang='scss' scoped>

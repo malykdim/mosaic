@@ -1,5 +1,7 @@
 <script setup>
-
+import { useI18n } from '../../../stores/useI18n'
+const { translate } = useI18n()
+console.log('i18n test:', translate('home.authors.vladimir.name'))
 </script>
 
 <template>
@@ -18,44 +20,43 @@
 
         <div class="about">
             <div class="text">
-                <h3 class="name">Vladimir Damyanov</h3>
+                <h3 class="name">{{ translate('home.authors.vladimir.name') }}</h3>
                 <div class="author">
                     <p class="p">
-                    Wins the Annual Award of the Society of Plovdiv Artists in the sculpture category for 2024.
+                    {{ translate('home.authors.vladimir.p1') }}
                     </p>
                     <p class="p">
-                    His mosaic panels participate in many exhibitions in Bulgaria, 
-                    Sweden, Norway, Austria, Germany, Italy, France, Great Britain, and the USA.
+                    {{ translate('home.authors.vladimir.p2') }}
                     </p>
                     <p class="p">
-                    The artist also experiments in the field of abstract compositions of glass ceramics.
+                    {{ translate('home.authors.vladimir.p3') }}
                     </p>   
                 </div>
                 
-                <h3 class="name">Damyan Damyanov</h3>
+                <h3 class="name">{{ translate('home.authors.damyan.name') }}</h3>
                 <div class="author">
                     <p class="p">
-                    Master of mosaic with his own style.
+                    {{ translate('home.authors.damyan.p1') }}
                     </p>
                     <p class="p">
-                    His works have been presented in numerous exhibitions.
+                    {{ translate('home.authors.damyan.p2') }}
                     </p>
                     <p class="p">
-                    His compositions are made entirely with natural stones: black marl, syenite, marble, granite, tiger's eye, 
-                    limestone species, rock crystals, and semi-precious stones like jasper, agate and others. 
+                    {{ translate('home.authors.damyan.p3') }}
                     </p>
                 </div>
             </div>
 
             <div class="links">
-                <a href="https://www.facebook.com/vladimir.damynov/" 
+                <a href="https://www.facebook.com/vladimir.damyanov/" 
                     class="link" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    aria-label="Facebook profile of Vladimir Damynov"
+                    aria-label="Facebook profile of Vladimir Damyanov"
+                    :aria-label="translate('home.authors.links.vladimir_facebook_label')"
                 >
-                    <i class="icon material-icons" aria-label="Vladimir Damynov on facebook">facebook</i>
-                    Vladimir Damynov
+                    <i class="icon material-icons" :aria-label="translate('home.authors.links.vladimir_facebook_label')">facebook</i>
+                    {{ translate('home.authors.links.vladimir_text') }}
                 </a>
     
                 <p class="delimiter">&</p>
@@ -65,9 +66,10 @@
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Facebook profile of Damyan Damynov"
+                    :aria-label="translate('home.authors.links.damyan_facebook_label')"
                 >
-                    <i class="icon material-icons" aria-label="Damyan Damyanov on facebook">facebook</i>
-                    Damyan Damyanov
+                    <i class="icon material-icons" :aria-label="translate('home.authors.links.damyan_facebook_label')">facebook</i>
+                    {{ translate('home.authors.links.damyan_text') }}
                 </a>
             </div>
         </div>

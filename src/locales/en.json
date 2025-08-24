@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "home": "Home",
+    "gallery": "Gallery",
+    "details": "Details",
+    "login": "Log in",
+    "signup": "Sign up",
+    "dashboard": "Dashboard"
+  },
+  "footer": {
+    "copy": "The Stone magic © {year}"
+  },
+  "home": {
+    "hero": {
+      "title": "THE STONE MAGIC",
+      "subtitle": "virtual gallery for exquisite mosaic panneaux",
+      "cta": "View the Gallery"
+    },
+    "authors": {
+      "imageAlt": "Picture of Vladimir Damynov and Damyan Damyanov",
+      "vladimir": {
+        "name": "Vladimir Damynov",
+        "p1": "Winner of the Annual Award of the Society of Plovdiv Artists (Sculpture, 2024)",
+        "p2": "His mosaic panels participate in many exhibitions in Bulgaria, Sweden, Norway, Austria, Germany, Italy, France, Great Britain, and the USA.",
+        "p3": "He further broadens his artistic range with abstract compositions in glass ceramics."
+      },
+      "damyan": {
+        "name": "Damyan Damyanov",
+        "p1": "Master of mosaic with his own style.",
+        "p2": "His works have been presented in numerous exhibitions.",
+        "p3": "His compositions are made entirely with natural stones: black marl, syenite, marble, granite, tiger's eye, limestone species, rock crystals, and semi-precious stones like jasper, agate and others."
+      },
+      "links": {
+        "vladimir_facebook_label": "Facebook profile of Vladimir Damynov",
+        "damyan_facebook_label": "Facebook profile of Damyan Damyanov",
+        "vladimir_text": "Vladimir Damynov",
+        "damyan_text": "Damyan Damyanov"
+      }
+    }
+  },
+  "form": {
+    "title": "Title",
+    "author": "Author",
+    "dimensions": "Dimensions",
+    "materials": "Materials",
+    "submit": "Save"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "notFound": "Item not found",
+    "saved": "Saved successfully"
+  },
+  "admin": {
+    "create": "Create mosaic",
+    "edit": "Edit mosaic"
+  }
+}
