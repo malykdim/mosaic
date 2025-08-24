@@ -10,7 +10,12 @@
   "footer": {
     "copy": "Магията на камъка © {year}"
   },
-    "home": {
+  "messages": {
+    "loading": "Зареждане...",
+    "notFound": "Елементът не е намерен",
+    "saved": "Запазено успешно"
+  },
+  "home": {
     "hero": {
       "title": "Магията на камъка",
       "subtitle": "виртуална галерия за изящни мозаечни пана",
@@ -38,37 +43,44 @@
       }
     }
   },
-  "form": {
-    "title": "Заглавие",
-    "titlePlaceholder": "Въведете заглавие",
-    "author": "Автор",
-    "authorPlaceholder": "Име на автора",
-    "dimensions": "Размери",
-    "dimensionsPlaceholder": "напр. 100 x 80 см",
-    "materials": "Материали",
-    "materialsPlaceholder": "Избройте материали и техники",
-    "image": {
-        "legend": "Качи изображение",
-        "display": "Няма избран файл",
-        "error": "Грешка с файла: ",
-        "errors": {
-          "invalidType": "Невалиден тип файл. Допустими: .jpg, .jpeg, .png.",
-          "sizeExceeded": "Размерът на файла надвишава 1 MB."
-        },
-        "altPreviewExisting": "Преглед на предварително заредения URL", 
-        "altPreviewNew": "Преглед на новия URL", 
-        "altPlaceholderImage": "Пробно изображение",
-        "confirmButton": "✓ Използвай това изображение"
-    },
-    "submit": "Запази"
-  },
-  "messages": {
-    "loading": "Зареждане...",
-    "notFound": "Елементът не е намерен",
-    "saved": "Запазено успешно"
-  },
   "admin": {
     "create": "Създай мозаика",
-    "edit": "Редактирай мозаика"
+    "edit": "Редактирай мозаика",
+    "form": {
+      "image": {
+          "legend": "Качи изображение",
+          "display": "Няма избран файл",
+          "alt": {
+            "previewExisting": "Преглед на предварително заредения URL", 
+            "previewNew": "Преглед на новия URL", 
+            "placeholder": "Пробно изображение"
+          },
+          "confirmButton": "✓ Използвай това изображение"
+      },
+      "title": {
+        "legend": "Заглавие",
+        "titlePlaceholder": "Въведете заглавие"
+      },
+      "author": {
+        "legend": "Автор",
+        "vladimir": "Владимир",
+        "damyan": "Дамян"
+      },
+      "dimensions": {
+        "legend": "Размери",
+        "dimensionsPlaceholder": "напр. 100 x 80 см"
+      },
+      "materials": {
+        "legend": "Материали",
+        "materialsPlaceholder": "Избройте материали и техники"        
+      },
+      "errors": {
+          "fileError": "Грешка с файла: ",
+          "invalidType": "Невалиден тип файл. Допустими: .jpg, .jpeg, .png.",
+          "sizeExceeded": "Размерът на файла надвишава 1 MB.",
+          "authorRequired": "Името на автора е задължително."
+      },
+      "submit": "Запази"
+    }
   }
 }

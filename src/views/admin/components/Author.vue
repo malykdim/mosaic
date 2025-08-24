@@ -4,8 +4,11 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 
 import { useItem } from '../../../stores/useItem'
+import { useI18n } from '../../../stores/useI18n'
 
 const { item } = useItem()
+
+const { translate } = useI18n()
 
 // Use computed to make state reactive to Pinia changes
 const state = reactive({
@@ -20,7 +23,7 @@ const state = reactive({
 
 const rules = {
   author: { 
-    required: helpers.withMessage('Author is required', required) 
+    required: helpers.withMessage(() => translate('.admin.form.errors.authorRequired'), required) 
   }
 }
 
@@ -56,7 +59,7 @@ function onChange() {
 
 <template>
 	<fieldset @blur="onBlur" class="fieldset author">
-        <legend class="legend">&nbsp; Author &nbsp;</legend>   
+        <legend class="legend">&nbsp; {{ translate('admin.form.author.legend') }} &nbsp;</legend>   
 
         <p class="display">{{ state.author }}</p>  
 
@@ -65,30 +68,30 @@ function onChange() {
                 <input 
                     v-model="v$.author.$model" 
                     type="radio" 
-                    value="Vladimir Damyanov" 
+                    :value="translate('admin.form.author.vladimir')" 
                     class="radio" 
                     aria-describedby="author-errors"                    
                     @change="onChange"
                 />
-                <span class="span">Vladimir</span>
+                <span class="span">{{ translate('admin.form.author.vladimir') }}</span>
             </label>
 
             <label class="radio-label">
                 <input 
                     v-model="v$.author.$model"                     
                     type="radio" 
-                    value="Damyan Damyanov" 
+                    :value="translate('admin.form.author.damyan')" 
                     class="radio" 
                     aria-describedby="author-errors" 
                     @change="onChange"
                 />
-                <span class="span">Damyan</span> 
+                <span class="span">{{ translate('admin.form.author.damyan') }}</span> 
             </label>
         </div>
 
 		<ul v-if="v$.author.$errors.length" id="author-errors" class="errors">
 			<li v-for="error of v$.author.$errors" :key="error.$uid" class="error">
-                <p class="message">{{ error.$message }}</p>
+                <p class="message">{{ translate('admin.form.errors.authorRequired') }}</p>
             </li>
 		</ul>
     </fieldset>

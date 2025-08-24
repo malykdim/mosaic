@@ -10,6 +10,11 @@
   "footer": {
     "copy": "Die Steinmagie © {year}"
   },
+  "messages": {
+    "loading": "Lädt...",
+    "notFound": "Eintrag nicht gefunden",
+    "saved": "Erfolgreich gespeichert"
+  },
   "home": {
     "hero": {
       "title": "DIE STEINMAGIE",
@@ -38,37 +43,44 @@
       }
     }
   },
-  "form": {
-    "title": "Titel",
-    "titlePlaceholder": "Geben Sie den Titel ein",
-    "author": "Künstler",
-    "authorPlaceholder": "Name des Künstlers",
-    "dimensions": "Abmessungen",
-    "dimensionsPlaceholder": "z. B. 100 x 80 cm",
-    "materials": "Materialien",
-    "materialsPlaceholder": "Materialien und Techniken aufführen",
-    "image": {
-        "legend": "Bild hochladen",
-        "display": "Keine Datei ausgewählt",
-        "error": "Dateifehler: ",
-        "errors": {
-            "invalidType": "Ungültiger Dateityp. Nur .jpg, .jpeg oder .png sind erlaubt.",
-            "sizeExceeded": "Dateigröße überschreitet 1 MB."
-        },
-        "altPreviewExisting": "Vorschau der geladenen URL", 
-        "altPreviewNew": "Vorschau der neuen URL", 
-        "altPlaceholderImage": "Platzhalterbild",
-        "confirmButton": "✓ Dieses Bild verwenden"
-    },
-    "submit": "Speichern"
-  },
-  "messages": {
-    "loading": "Lädt...",
-    "notFound": "Eintrag nicht gefunden",
-    "saved": "Erfolgreich gespeichert"
-  },
   "admin": {
     "create": "Mosaik erstellen",
-    "edit": "Mosaik bearbeiten"
+    "edit": "Mosaik bearbeiten",
+    "form": {
+      "image": {
+          "legend": "Bild hochladen",
+          "display": "Keine Datei ausgewählt",
+          "alt": {
+            "previewExisting": "Vorschau der geladenen URL", 
+            "previewNew": "Vorschau der neuen URL", 
+            "placeholder": "Platzhalterbild"            
+          },
+          "confirmButton": "✓ Dieses Bild verwenden"
+      },
+      "title": {
+          "legend": "Titel",
+          "titlePlaceholder": "Geben Sie den Titel ein"
+      },
+      "author": {
+        "legend": "Künstler",
+        "vladimir": "Vladimir",
+        "damyan": "Damyan"
+      },
+      "dimensions": {
+        "legend": "Abmessungen",
+        "dimensionsPlaceholder": "z. B. 100 x 80 cm"
+      },
+      "materials": {
+        "legend": "Materialien",
+        "materialsPlaceholder": "Materialien und Techniken aufführen"
+      },
+      "errors": {
+        "fileError": "Dateifehler: ",
+        "invalidType": "Ungültiger Dateityp. Nur .jpg, .jpeg oder .png sind erlaubt.",
+        "sizeExceeded": "Dateigröße überschreitet 1 MB.",
+        "authorRequired": "Name des Künstlers ist erforderlich."
+      },
+      "submit": "Speichern"
+    }
   }
 }

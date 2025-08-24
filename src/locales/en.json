@@ -8,7 +8,12 @@
     "dashboard": "Dashboard"
   },
   "footer": {
-    "copy": "The Stone magic © {year}"
+    "copy": "The Stone Magic © {year}"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "notFound": "Item not found",
+    "saved": "Saved successfully"
   },
   "home": {
     "hero": {
@@ -20,7 +25,7 @@
       "imageAlt": "Picture of Vladimir Damynov and Damyan Damyanov",
       "vladimir": {
         "name": "Vladimir Damynov",
-        "p1": "Winner of the Annual Award of the Society of Plovdiv Artists (Sculpture, 2024)",
+        "p1": "Winner of the Annual Award of the Society of Plovdiv Artists (Sculpture, 2024).",
         "p2": "His mosaic panels participate in many exhibitions in Bulgaria, Sweden, Norway, Austria, Germany, Italy, France, Great Britain, and the USA.",
         "p3": "He further broadens his artistic range with abstract compositions in glass ceramics."
       },
@@ -38,37 +43,44 @@
       }
     }
   },
-  "form": {
-    "title": "Title",
-    "titlePlaceholder": "Enter title",
-    "author": "Author",
-    "authorPlaceholder": "Author name",
-    "dimensions": "Dimensions",
-    "dimensionsPlaceholder": "e.g. 100 x 80 cm",
-    "materials": "Materials",
-    "materialsPlaceholder": "List materials and techniques",
-    "image": {
-        "legend": "Upload an image",
-        "display": "No file selected",
-        "error": "File Error: ",
-        "errors": {
-            "invalidType": "Invalid file type. Only .jpg, .jpeg or .png are allowed.",
-            "sizeExceeded": "File size exceeds 1 MB."
-        },
-        "altPreviewExisting": "Preview preloaded URL", 
-        "altPreviewNew": "Preview new URL", 
-        "altPlaceholderImage": "Placeholder image",
-        "confirmButton": "✓ Use This Image"
-    },
-    "submit": "Save"
-  },
-  "messages": {
-    "loading": "Loading...",
-    "notFound": "Item not found",
-    "saved": "Saved successfully"
-  },
   "admin": {
     "create": "Create mosaic",
-    "edit": "Edit mosaic"
+    "edit": "Edit mosaic",
+    "form": {
+      "image": {
+          "legend": "Upload an image",
+          "display": "No file selected",  
+          "alt": {
+            "previewExisting": "Preview existing URL", 
+            "previewNew": "Preview new URL", 
+            "placeholder": "Placeholder image"
+          },         
+          "confirmButton": "✓ Use This Image"
+      },
+      "title": {
+        "legend": "Title",
+        "titlePlaceholder": "Enter title"
+      },
+      "author": {
+        "legend": "Author",
+        "vladimir": "Vladimir",
+        "damyan": "Damyan"
+      },
+      "dimensions": {
+        "legend": "Dimensions",
+        "dimensionsPlaceholder": "e.g. 100 x 80 cm"
+      },
+      "materials": {
+        "legend": "Materials",
+        "materialsPlaceholder": "List materials and techniques"
+      },
+      "errors": {
+        "fileError": "File Error: ",
+        "invalidType": "Invalid file type. Only .jpg, .jpeg or .png are allowed.",
+        "sizeExceeded": "File size exceeds 1 MB.",
+        "authorRequired": "Author is required"
+      },
+      "submit": "Save"
+    }
   }
 }
