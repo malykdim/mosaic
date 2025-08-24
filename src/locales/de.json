@@ -40,9 +40,26 @@
   },
   "form": {
     "title": "Titel",
-    "author": "Autor",
+    "titlePlaceholder": "Geben Sie den Titel ein",
+    "author": "Künstler",
+    "authorPlaceholder": "Name des Künstlers",
     "dimensions": "Abmessungen",
+    "dimensionsPlaceholder": "z. B. 100 x 80 cm",
     "materials": "Materialien",
+    "materialsPlaceholder": "Materialien und Techniken aufführen",
+    "image": {
+        "legend": "Bild hochladen",
+        "display": "Keine Datei ausgewählt",
+        "error": "Dateifehler: ",
+        "errors": {
+            "invalidType": "Ungültiger Dateityp. Nur .jpg, .jpeg oder .png sind erlaubt.",
+            "sizeExceeded": "Dateigröße überschreitet 1 MB."
+        },
+        "altPreviewExisting": "Vorschau der geladenen URL", 
+        "altPreviewNew": "Vorschau der neuen URL", 
+        "altPlaceholderImage": "Platzhalterbild",
+        "confirmButton": "✓ Dieses Bild verwenden"
+    },
     "submit": "Speichern"
   },
   "messages": {

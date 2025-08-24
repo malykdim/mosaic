@@ -1,7 +1,9 @@
 <script setup>
 import { ref, watch, onUnmounted } from 'vue'
+import { useI18n } from '../../../stores/useI18n'
 import { useItem } from '../../../stores/useItem'
 
+const { translate } = useI18n()
 const { item } = useItem()
 
 let file = ref(null)
@@ -14,18 +16,18 @@ const handleFileChange = (e) => {
 
   if (!selected) return
 
-  const validTypes = ['image/jpeg', 'image/jpg', 'image/png']
+  const validTypes = ['image/jpeg','image/jpg','image/png']
   const maxSize = 1 * 1024 * 1024 // 1MB
 
   // Check file type
   if (!validTypes.includes(selected.type)) {
-    fileError.value = 'Invalid file type. Only .jpg, .jpeg, or .png allowed.'
+    fileError.value = translate('form.image.errors.invalidType')
     return
   }
 
   // Check file size
   if (selected.size > maxSize) {
-    fileError.value = 'File size exceeds 1MB.'
+    fileError.value = translate('form.image.errors.sizeExceeded')
     return
   }
 
@@ -63,28 +65,29 @@ watch(() => item.file, (newVal) => {
 <template>
 <fieldset class="fieldset file-upload">
 
-    <legend class="legend">&nbsp; Upload an image &nbsp;</legend>    
+    <legend class="legend">&nbsp; {{ translate('form.image.legend') }} &nbsp;</legend>    
     
     <label class="label">
-        <input type="file" @change="handleFileChange" class="file">
+        <input type="file" accept="image/jpeg, image/jpg, image/png" @change="handleFileChange" class="file">
     </label>
     
-    <p class="display">{{ file?.name || 'No file selected' }}</p> 
+    <p class="display">{{ file?.name || translate('form.image.display') }}</p> 
     
-    <p v-if="fileError" class="error">{{ fileError }}</p>
+    <p v-if="fileError" class="error">{{ translate('form.image.error') }} {{ fileError }}</p>
 
     <div class="preview">
-        <img v-if="previewUrl" :src="previewUrl" alt="preview" class="image">
-        <img v-else-if="item.imageUrl" :src="item.imageUrl" alt="preview" class="image">
-        <img v-else src="/src/assets/images/dummy-900x600.jpg" alt="placeholder" class="image">
+        <img v-if="previewUrl" :src="previewUrl" :alt="translate('form.image.altPreviewNew')" class="image">
+        <img v-else-if="item.imageUrl" :src="item.imageUrl" :alt="translate('form.image.altPreviewExisting')" class="image">
+        <img v-else src="/src/assets/images/dummy-900x600.jpg" :alt="translate('form.image.altPlaceholderImage')" class="image">
     </div>
 
     <button 
       @click="confirmImageSelection"
       class="confirm-btn"
       type="button"
+      :disabled="!file"
     >
-      ✓ Use This Image
+      {{ translate('form.image.confirmButton') }}
     </button>
 
   </fieldset>

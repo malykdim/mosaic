@@ -40,9 +40,26 @@
   },
   "form": {
     "title": "Заглавие",
+    "titlePlaceholder": "Въведете заглавие",
     "author": "Автор",
+    "authorPlaceholder": "Име на автора",
     "dimensions": "Размери",
+    "dimensionsPlaceholder": "напр. 100 x 80 см",
     "materials": "Материали",
+    "materialsPlaceholder": "Избройте материали и техники",
+    "image": {
+        "legend": "Качи изображение",
+        "display": "Няма избран файл",
+        "error": "Грешка с файла: ",
+        "errors": {
+          "invalidType": "Невалиден тип файл. Допустими: .jpg, .jpeg, .png.",
+          "sizeExceeded": "Размерът на файла надвишава 1 MB."
+        },
+        "altPreviewExisting": "Преглед на предварително заредения URL", 
+        "altPreviewNew": "Преглед на новия URL", 
+        "altPlaceholderImage": "Пробно изображение",
+        "confirmButton": "✓ Използвай това изображение"
+    },
     "submit": "Запази"
   },
   "messages": {

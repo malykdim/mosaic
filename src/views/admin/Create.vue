@@ -72,7 +72,7 @@ onMounted(() => {
 <div class="page create-edit-container">
     <h3 class="title">Create new panneaux</h3>
 
-    <form @submit.prevent="handleCreate" class="create">
+    <form @submit.prevent="handleCreate" class="create" novalidate>
         <div class="formFields">
             <div class="picture">
                 <Image />   

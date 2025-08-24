@@ -147,7 +147,7 @@ resetOnLeave()
     <div class="page create-edit-container">
         <h3 v-if="singleItem" class="title">Edit {{ singleItem.title }}</h3>
         <p v-else-if="isPending">Loading item...</p>
-        <form v-if="singleItem"  @submit.prevent="handleUpdate" class="edit form">
+        <form v-if="singleItem"  @submit.prevent="handleUpdate" class="edit form" novalidate>
             <div class="formFields">
                 <!-- LEFT -->
                 <div class="picture">

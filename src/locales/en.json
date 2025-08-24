@@ -40,9 +40,26 @@
   },
   "form": {
     "title": "Title",
+    "titlePlaceholder": "Enter title",
     "author": "Author",
+    "authorPlaceholder": "Author name",
     "dimensions": "Dimensions",
+    "dimensionsPlaceholder": "e.g. 100 x 80 cm",
     "materials": "Materials",
+    "materialsPlaceholder": "List materials and techniques",
+    "image": {
+        "legend": "Upload an image",
+        "display": "No file selected",
+        "error": "File Error: ",
+        "errors": {
+            "invalidType": "Invalid file type. Only .jpg, .jpeg or .png are allowed.",
+            "sizeExceeded": "File size exceeds 1 MB."
+        },
+        "altPreviewExisting": "Preview preloaded URL", 
+        "altPreviewNew": "Preview new URL", 
+        "altPlaceholderImage": "Placeholder image",
+        "confirmButton": "✓ Use This Image"
+    },
     "submit": "Save"
   },
   "messages": {
