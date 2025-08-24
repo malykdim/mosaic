@@ -5,11 +5,26 @@
 @use 'partials/form' as *;
 @use 'partials/link' as *;
 @use 'partials/button' as *;
+@use 'partials/app' as *;
 @use 'partials/auth-page' as *;
 @use 'partials/home' as *;
 @use 'partials/hero-overlay' as *;
+@use 'partials/mobile-hero' as *;
+@use 'partials/tablet-hero' as *;
+@use 'partials/desktop-hero' as *;
+@use 'partials/authors' as *;
+@use 'partials/gallery' as *;
+@use 'partials/list-item' as *;
+@use 'partials/details' as *;
 @use 'partials/admin-dashboard' as *;
+@use 'partials/mini-gallery' as *;
+@use 'partials/mini-item' as *;
 @use 'partials/admin-create-edit' as *;
+@use 'partials/title' as *;
+@use 'partials/author' as *;
+@use 'partials/dimensions' as *;
+@use 'partials/image' as *;
+@use 'partials/materials' as *;
 
 
 @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');

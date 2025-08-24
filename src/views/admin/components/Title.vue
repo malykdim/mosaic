@@ -79,24 +79,3 @@ function onFocus() {
     </ul>    
 </fieldset>
 </template>
-
-<style lang='scss' scoped>
-.title {
-        
-    .input {
-        width: 70%;
-        margin-bottom: .5rem;
-    }
-
-    .error {
-        font-size: x-small;
-        color: red;
-        padding-bottom: 0.5em;
-    }
-
-    .display {
-        color: var(--primary);
-        font-size: 0.8em;
-    }
-}
-</style>

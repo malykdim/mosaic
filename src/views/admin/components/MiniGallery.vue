@@ -16,21 +16,3 @@ onMounted(() => startListening())
     </div>
 </div>
 </template>
-
-<style lang='scss' scoped>
-.mini-gallery {
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.5rem;
-
-    .items {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }    
-}
-</style>
