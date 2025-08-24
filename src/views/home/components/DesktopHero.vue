@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import Mosaic from './Mosaic.vue'
+// import Mosaic from './Mosaic.vue'
 import Overlay from './Overlay.vue'
-import desktopGridItems from '../data/desktopGridItems.js'
+// import desktopGridItems from '../data/desktopGridItems.js'
 
 </script>
 
@@ -40,80 +40,3 @@ import desktopGridItems from '../data/desktopGridItems.js'
 </div>        
 
 </template>
-
-<style lang='scss' scoped>
-.desktop-hero {
-    position: relative;
-    width: 100%;
-
-    aspect-ratio: 16/7;
-    min-height: 200px;
-    max-height: 95vh;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #413f3f; 
-
-    .background-grid {
-        position: relative;
-        width: 100%;
-
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: repeat(2, minmax(200px, 1fr));
-        gap: 0.5rem; 
-
-        aspect-ratio: 16/9; 
-
-        .mosaic {
-            overflow: hidden;
-            border-radius: 2px;
-            border: 1px solid #fff;
-            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
-            position: relative;
-
-            .image {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: 50% 50%;
-                filter:  grayscale(10%);
-            }
-
-        }  
-        .moon {
-            grid-column: 2 / span 3;
-            grid-row: 1 / span 1;
-        }
-        .tear {
-            grid-column: 5 / span 4;
-            grid-row: 1 / span 2;
-        }
-        .dragon{
-            grid-column: 9 / span 3;
-            grid-row: 1 / span 1;
-        }
-        .four{
-            grid-column: 9 / span 3;
-            grid-row: 2 / span 1;
-        }
-        .sun{
-            grid-column: 2 / span 3;
-            grid-row: 2 / span 1;
-        }
-        .flower{
-            grid-column: 9 / span 3;
-            grid-row: 2 / span 1;
-        }
-    }
-}
-
-@media (max-width: 768px) {
-  .desktop-hero {
-    display: none;
-  }
-}
-</style>
