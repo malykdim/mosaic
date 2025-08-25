@@ -4,11 +4,15 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, helpers } from '@vuelidate/validators'
 
 import { useItem } from '../../../stores/useItem'
+import { useI18n } from '../../../stores/useI18n'
 
 const { item } = useItem()
+const { translate } = useI18n()
 
-const materialsArray = ['Marbel', 'Amethyst', 'Jasper', 'Labrador', 'Pyryt', 'Agate', 'Onyx', 'Jade', 
-    'Malachite', 'Citrine', 'Obsidian', 'Serpentine', 'Quartz', 'Firestone', 'Tiger\'s Eye', 'Mountain Crystal', 'Glass', 'Wood','Other'
+const materialsIds = [
+  'marble','amethyst','jasper','labradorite','pyrite','agate','onyx','jade',
+  'malachite','citrine','obsidian','serpentine','quartz','firestone','tigers-eye',
+  'mountain-crystal','glass','wood','other'
 ]
 
 // Use computed to make selectedMaterials reactive to Pinia changes
@@ -20,14 +24,20 @@ const selectedMaterials = computed({
   }
 })
 
+const selectedMaterialsTranslated = computed(() =>
+  (selectedMaterials.value || [])
+    .map(id => translate(`admin.form.materials.items.${id}`) || id)
+    .join(', ')
+)
+
 const state = reactive({
   materials: selectedMaterials
 })
 
 const rules = {
     materials: {
-        required: helpers.withMessage('Materials are required', required),
-        minLength: helpers.withMessage('There must be at least 2 materials selected.', minLength(2)),
+        required: helpers.withMessage(() => translate('admin.form.errors.materialsRequired'), required),
+        minLength: helpers.withMessage(() => translate('admin.form.errors.materialsMin'), minLength(2)),
     }
 }
 
@@ -71,23 +81,26 @@ async function acceptMaterials(event) {
 
 <template>
     <fieldset class="fieldset materials" @blur="onBlur">
-        <legend class="legend">&nbsp; Materials used &nbsp;</legend>    
+        <legend class="legend">&nbsp; {{ translate('admin.form.materials.legend') }} &nbsp;</legend>    
         
-        <p class="display">{{ selectedMaterials.join(', ') }}</p>
+        <!-- <p class="display">{{ selectedMaterials.join(', ') }}</p> -->
+        <p class="display">{{ selectedMaterialsTranslated }}</p> 
 
         <div class="options">
-            <label v-for="material in materialsArray" :key="material" class="label">
+            <label v-for="material in materialsIds" :key="material" class="label">
                 <input type="checkbox" :value="material" v-model="selectedMaterials" class="input"/>
-                <span class="span">{{material}}</span>
+                <span class="span">{{ translate(`admin.form.materials.items.${material}`) || material }}</span>
             </label>
         </div>
                 
         <ul v-if="v$.materials.$errors.length" id="materials-errors" class="errors">
-            <li v-for="error of v$.materials.$errors" :key="error.$uid"  class="error" ><p>{{ error.$message }}</p></li>
+            <li v-for="error of v$.materials.$errors" :key="error.$uid"  class="error" >
+                <p class="message">{{ error.$message }}</p>
+            </li>
         </ul>
     
-        <button type="button" @click="resetSelectedMaterials" class="reset">Reset Materials</button>
-        <button type="button" @click="acceptMaterials" class="reset">Accept Materials</button>
+        <button type="button" @click="resetSelectedMaterials" class="reset">{{ translate('admin.form.materials.buttons.reset') }}</button>
+        <button type="button" @click="acceptMaterials" class="reset" :disabled="v$.materials.$invalid">{{ translate('admin.form.materials.buttons.accept') }}</button>
         
     </fieldset>
 

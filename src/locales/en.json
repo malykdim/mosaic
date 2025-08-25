@@ -68,17 +68,54 @@
       },
       "dimensions": {
         "legend": "Dimensions",
-        "dimensionsPlaceholder": "e.g. 100 x 80 cm"
+        "width": "Width",
+        "height": "Height",
+        "unit": "Unit",
+        "select": "Select unit",
+        "cm": "cm",
+        "inch": "inch"
       },
       "materials": {
-        "legend": "Materials",
-        "materialsPlaceholder": "List materials and techniques"
+        "legend": "Materials used",
+        "items": {
+          "marble": "Marble",
+          "amethyst": "Amethyst",
+          "jasper": "Jasper",
+          "labradorite": "Labradorite",
+          "pyrite": "Pyrite",
+          "agate": "Agate",
+          "onyx": "Onyx",
+          "jade": "Jade",
+          "malachite": "Malachite",
+          "citrine": "Citrine",
+          "obsidian": "Obsidian",
+          "serpentine": "Serpentine",
+          "quartz": "Quartz",
+          "firestone": "Firestone",
+          "tigers-eye": "Tiger's Eye",
+          "mountain-crystal": "Mountain Crystal",
+          "glass": "Glass",
+          "wood": "Wood",
+          "other": "Other"
+        },
+        "buttons": {
+          "reset": "Reset Materials",
+          "accept": "Accept Materials"
+        }
       },
       "errors": {
         "fileError": "File Error: ",
-        "invalidType": "Invalid file type. Only .jpg, .jpeg or .png are allowed.",
-        "sizeExceeded": "File size exceeds 1 MB.",
-        "authorRequired": "Author is required"
+        "invalidType": "Invalid file type. Only .jpg, .jpeg or .png are allowed",
+        "sizeExceeded": "File size exceeds 1 MB",
+        "authorRequired": "Author is required",
+        "widthRequired": "Width is required",
+        "widthTooSmall": "Width must be at least 30 cm",
+        "heightRequired": "Height is required",
+        "heightTooSmall": "Height must be at least 30 cm",
+        "unitRequired": "Unit is required",
+        "materialsRequired": "Materials are required",
+        "materialsMin": "Select at least 2 materials",
+        "titleLength": "Title must be at least 3 characters long"
       },
       "submit": "Save"
     }

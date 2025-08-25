@@ -58,8 +58,8 @@
           "confirmButton": "✓ Използвай това изображение"
       },
       "title": {
-        "legend": "Заглавие",
-        "titlePlaceholder": "Въведете заглавие"
+        "legend": "Име на паното",
+        "titlePlaceholder": "Въведете име"
       },
       "author": {
         "legend": "Автор",
@@ -68,17 +68,54 @@
       },
       "dimensions": {
         "legend": "Размери",
-        "dimensionsPlaceholder": "напр. 100 x 80 см"
+        "width": "Широчина",
+        "height": "Височина",
+        "unit": "Мерна единица",
+        "select": "Избери",
+        "cm": "см",
+        "inch": "инч"
       },
       "materials": {
-        "legend": "Материали",
-        "materialsPlaceholder": "Избройте материали и техники"        
+        "legend": "Използвани материали",
+        "items": {
+          "marble": "Мрамор",
+          "amethyst": "Аметист",
+          "jasper": "Яспис",
+          "labradorite": "Лабрадорит",
+          "pyrite": "Пирит",
+          "agate": "Ахат",
+          "onyx": "Оникс",
+          "jade": "Нефрит",
+          "malachite": "Малахит",
+          "citrine": "Цитрин",
+          "obsidian": "Обсидиан",
+          "serpentine": "Серпентин",
+          "quartz": "Кварц",
+          "firestone": "Кремък",
+          "tigers-eye": "Тигрово око",
+          "mountain-crystal": "Планински кристал",
+          "glass": "Стъкло",
+          "wood": "Дърво",
+          "other": "Друго"
+        },
+        "buttons": {
+          "reset": "Изчисти материалите",
+          "accept": "Приеми материалите"
+        }
       },
       "errors": {
-          "fileError": "Грешка с файла: ",
-          "invalidType": "Невалиден тип файл. Допустими: .jpg, .jpeg, .png.",
-          "sizeExceeded": "Размерът на файла надвишава 1 MB.",
-          "authorRequired": "Името на автора е задължително."
+        "fileError": "Грешка с файла: ",
+        "invalidType": "Невалиден тип файл. Допустими: .jpg, .jpeg, .png",
+        "sizeExceeded": "Размерът на файла надвишава 1 MB",
+        "authorRequired": "Името на автора е задължително",
+        "widthRequired": "Ширината е задължителна",
+        "widthTooSmall": "Ширината трябва да бъде поне 30 см",
+        "heightRequired": "Височината е задължителна",
+        "heightTooSmall": "Височината трябва да бъде поне 30 см",
+        "unitRequired": "Моля, изберете единица",
+        "materialsRequired": "Материалите са задължителни",
+        "materialsMin": "Изберете поне 2 материала",
+        "titleLength": "Името трябва да съдържа поне 3 символа"
       },
       "submit": "Запази"
     }

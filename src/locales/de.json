@@ -59,7 +59,7 @@
       },
       "title": {
           "legend": "Titel",
-          "titlePlaceholder": "Geben Sie den Titel ein"
+          "titlePlaceholder": "Titel eingeben"
       },
       "author": {
         "legend": "Künstler",
@@ -68,17 +68,54 @@
       },
       "dimensions": {
         "legend": "Abmessungen",
-        "dimensionsPlaceholder": "z. B. 100 x 80 cm"
+        "width": "Breite",
+        "height": "Höhe",
+        "unit": "Einheit",
+        "select": "Einheit wählen",
+        "cm": "Zentimeter",
+        "inch": "Zoll"
       },
       "materials": {
-        "legend": "Materialien",
-        "materialsPlaceholder": "Materialien und Techniken aufführen"
+        "legend": "Verwendete Materialien",
+        "items": {
+          "marble": "Marmor",
+          "amethyst": "Amethyst",
+          "jasper": "Jaspis",
+          "labradorite": "Labradorit",
+          "pyrite": "Pyrit",
+          "agate": "Achat",
+          "onyx": "Onyx",
+          "jade": "Jade",
+          "malachite": "Malachit",
+          "citrine": "Citrin",
+          "obsidian": "Obsidian",
+          "serpentine": "Serpentin",
+          "quartz": "Quarz",
+          "firestone": "Feuerstein",
+          "tigers-eye": "Tigerauge",
+          "mountain-crystal": "Bergkristall",
+          "glass": "Glas",
+          "wood": "Holz",
+          "other": "Andere"
+        },
+        "buttons": {
+          "reset": "Materialien zurücksetzen",
+          "accept": "Materialien übernehmen"
+        }
       },
       "errors": {
         "fileError": "Dateifehler: ",
-        "invalidType": "Ungültiger Dateityp. Nur .jpg, .jpeg oder .png sind erlaubt.",
-        "sizeExceeded": "Dateigröße überschreitet 1 MB.",
-        "authorRequired": "Name des Künstlers ist erforderlich."
+        "invalidType": "Ungültiger Dateityp. Nur .jpg, .jpeg oder .png sind erlaubt",
+        "sizeExceeded": "Dateigröße überschreitet 1 MB",
+        "authorRequired": "Name des Künstlers ist erforderlich",
+        "widthRequired": "Breite ist erforderlich",
+        "widthTooSmall": "Die Breite muss mindestens 30 cm betragen",
+        "heightRequired": "Höhe ist erforderlich",
+        "heightTooSmall": "Die Höhe muss mindestens 30 cm betragen",
+        "unitRequired": "Bitte wählen Sie eine Einheit",
+        "materialsRequired": "Materialien sind erforderlich",
+        "materialsMin": "Wählen Sie mindestens 2 Materialien",
+        "titleLength": "Der Titel muss mindestens 3 Zeichen lang sein"    
       },
       "submit": "Speichern"
     }

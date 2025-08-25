@@ -3,10 +3,14 @@ import { reactive, watch, ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { minLength, helpers } from '@vuelidate/validators'
 
+import { useI18n } from '../../../stores/useI18n'
+
 import { useItem } from '../../../stores/useItem'
 
 const { item } = useItem()
 console.log('Initial title:', item.title)
+
+const { translate } = useI18n()
 
 const showErrors = ref(false)
 
@@ -25,7 +29,7 @@ const state = reactive({
 
 const rules = {    
     title: { 
-        minLength: helpers.withMessage('Title must be at least 3 characters long', minLength(3)),
+        minLength: helpers.withMessage(() => translate('admin.form.errors.titleLength'), minLength(3)),
     }
 }
 
@@ -59,23 +63,23 @@ function onFocus() {
 </script>
 
 <template>
-<fieldset class="fieldset title">
-    <legend class="legend">&nbsp; Panneau Name &nbsp;</legend>
-    <p class="display">{{ item.title }}</p>          
-    <input 
-        v-model.trim="v$.title.$model"
-        type="text" 
-        id="title" 
-        class="input"
-        placeholder="panneaux title"
-        aria-describedby="title-errors"
-        @blur="onBlur"
-        @focus="onFocus"
-    />
-    <ul v-if="showErrors && v$.title.$errors.length" id="errors">
-        <li v-for="error of v$.title.$errors" :key="error.$uid"  class="error" >
-            <p class="message">{{ error.$message }}</p>
-        </li>
-    </ul>    
-</fieldset>
+    <fieldset class="fieldset title">
+        <legend class="legend">&nbsp; {{ translate('admin.form.title.legend') }} &nbsp;</legend>
+        <p class="display">{{ item.title }}</p>          
+        <input 
+            v-model.trim="v$.title.$model"
+            type="text" 
+            id="title" 
+            class="input"
+            :placeholder="translate('admin.form.title.titlePlaceholder')"
+            aria-describedby="title-errors"
+            @blur="onBlur"
+            @focus="onFocus"
+        />
+        <ul v-if="showErrors && v$.title.$errors.length" id="errors">
+            <li v-for="error of v$.title.$errors" :key="error.$uid"  class="error" >
+                <p class="message">{{ error.$message }}</p>
+            </li>
+        </ul>    
+    </fieldset>
 </template>
