@@ -12,6 +12,10 @@
   },
   "messages": {
     "loading": "Lädt...",
+    "invalid": "Ungültig",
+    "saving": "Speichern...",
+    "loadingItem": "Eintrag wird geladen...",
+    "saveChanges": "Änderungen speichern",
     "notFound": "Eintrag nicht gefunden",
     "saved": "Erfolgreich gespeichert"
   },
@@ -45,6 +49,7 @@
   },
   "auth": {
     "loading": "Laden...",
+    "logout": "Abmelden",
     "login": {
       "title": "Anmelden",
       "email": "E-Mail",
@@ -69,7 +74,7 @@
   },
   "admin": {
     "create": "Mosaik erstellen",
-    "edit": "Mosaik bearbeiten",
+    "edit": "Bearbeiten",
     "form": {
       "image": {
           "legend": "Bild hochladen",

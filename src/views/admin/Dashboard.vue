@@ -2,11 +2,13 @@
 import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/useUserStore'
+import { useI18n } from '../../stores/useI18n'
 
 import MiniGallery from './components/MiniGallery.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const { translate } = useI18n()
 
 const dashboardLogout = async () => {
     await userStore.logout()
@@ -28,8 +30,8 @@ onBeforeMount(async () => {
 <template>
     <div class="dashboard">
         <nav class="admin-menu">
-            <router-link to="/admin/create" class="btn" aria-label="Create mosaic">Create</router-link>
-            <button v-if="userStore.user" @click="dashboardLogout" class="btn" aria-label="Logout">Logout</button>
+            <router-link to="/admin/create" class="btn" aria-label="Create mosaic">{{ translate('admin.create') }}</router-link>
+            <button v-if="userStore.user" @click="dashboardLogout" class="btn" aria-label="Logout">{{ translate('auth.logout') }}</button>
         </nav>
         <MiniGallery />
     </div>

@@ -3,11 +3,10 @@ import { ref, onMounted, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { useUserStore } from '../../stores/useUserStore'
+import { useI18n } from '../../stores/useI18n.js'
 
 import { useItem } from '../../stores/useItem' 
-
 import validateUserInput from '../admin/functions/validateUserInput.js'
-
 import { useCollection } from '../../stores/useCollection' 
 
 import Title from './components/Title.vue'
@@ -20,6 +19,7 @@ import Image from './components/Image.vue'
 const router = useRouter()
 
 const { user, checkUser } = useUserStore()
+const { translate } = useI18n()
 
 const { item, resetItem, fileToImageUrl } = useItem() 
 // {title, author, dimensions, materials, file, imageUrl}
@@ -70,7 +70,7 @@ onMounted(() => {
 
 <template>
 <div class="page create-edit-container">
-    <h3 class="title">Create new panneaux</h3>
+    <h3 class="title">{{ translate('admin.create') }}</h3>
 
     <form @submit.prevent="handleCreate" class="create" novalidate>
         <div class="formFields">
@@ -94,15 +94,15 @@ onMounted(() => {
                 type="button" 
                 disabled
             >
-                Invalid
+                {{ translate('messages.invalid') }}
             </button>
             <button 
                 v-if="item.title.length >= 3 && item.author && item.dimensions && item.materials && item.file && !isPending" 
                 type="submit"
             >
-                Create
+                {{ translate('admin.create') }}
             </button>        
-            <button v-if="isPending" type="button" disabled>Saving...</button> 
+            <button v-if="isPending" type="button" disabled>{{ translate('messages.saving') }}</button> 
         </div>
     </form>
 </div>

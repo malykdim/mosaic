@@ -12,6 +12,10 @@
   },
   "messages": {
     "loading": "Loading...",
+    "invalid": "Invalid",
+    "saving": "Saving...",
+    "loadingItem": "Loading item...",
+    "saveChanges": "Save Changes",
     "notFound": "Item not found",
     "saved": "Saved successfully"
   },
@@ -45,6 +49,7 @@
   },
   "auth": {
     "loading": "Loading...",
+    "logout": "Log out",
     "login": {
       "title": "Log in",
       "email": "Email",
@@ -69,7 +74,7 @@
   },
   "admin": {
     "create": "Create mosaic",
-    "edit": "Edit mosaic",
+    "edit": "Edit",
     "form": {
       "image": {
           "legend": "Upload an image",

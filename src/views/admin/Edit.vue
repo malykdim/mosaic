@@ -1,9 +1,9 @@
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue'
-
 import { useRouter, useRoute } from 'vue-router'
 
 import { useUserStore } from '../../stores/useUserStore'
+import { useI18n } from '../../stores/useI18n.js'
 
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 import { useItem } from '../../stores/useItem.js'
@@ -20,6 +20,7 @@ const router = useRouter()
 const route = useRoute()
 
 const { user, checkUser } = useUserStore()
+const { translate } = useI18n()
 
 const id = Number(route.params.id)
 
@@ -145,8 +146,8 @@ resetOnLeave()
 
 <template>
     <div class="page create-edit-container">
-        <h3 v-if="singleItem" class="title">Edit {{ singleItem.title }}</h3>
-        <p v-else-if="isPending">Loading item...</p>
+        <h3 v-if="singleItem" class="title">{{ translate('admin.edit') }} {{ singleItem.title }}</h3>
+        <p v-else-if="isPending">{{ translate('messages.loadingItem') }}</p>
         <form v-if="singleItem"  @submit.prevent="handleUpdate" class="edit form" novalidate>
             <div class="formFields">
                 <!-- LEFT -->
@@ -171,7 +172,7 @@ resetOnLeave()
                     v-if="isValid && !isPending" 
                     type="submit"
                 >
-                    Save Changes
+                    {{ translate('messages.saveChanges') }}
                 </button>
 
                 <button 
@@ -179,13 +180,13 @@ resetOnLeave()
                     type="button" 
                     disabled
                 >    
-                    Invalid Inputs
+                    {{ translate('messages.invalid') }}
                 </button>    
 
-                <button v-if="isPending" type="button" disabled>Saving...</button> 
+                <button v-if="isPending" type="button" disabled>{{ translate('messages.saving') }}</button> 
                 
             </div>
         </form> 
-        <p v-else-if="!isPending">Item with this ID does not exist</p>
+        <p v-else-if="!isPending">{{ translate('messages.notFound') }}</p>
     </div>
 </template>
