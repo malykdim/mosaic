@@ -43,6 +43,30 @@
       }
     }
   },
+  "auth": {
+    "loading": "Laden...",
+    "login": {
+      "title": "Anmelden",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "submit": "Anmelden"
+    },
+    "register": {
+      "title": "Registrieren",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "submit": "Registrieren"
+    },
+    "errors": {
+      "fillAllFields": "Bitte füllen Sie alle Felder aus",
+      "invalidCredentials": "Ungültige E-Mail oder Passwort",
+      "networkError": "Netzwerkfehler. Bitte versuchen Sie es erneut.",
+      "registrationFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "invalidEmail": "Ungültige E-Mail oder Passwort",
+      "passwordMin": "Ungültige E-Mail oder Passwort",
+      "userExists": "Ungültige E-Mail oder Passwort"
+    }
+  },
   "admin": {
     "create": "Mosaik erstellen",
     "edit": "Mosaik bearbeiten",

@@ -2,9 +2,11 @@
 import { ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../stores/useUserStore'
+import { useI18n } from '../../stores/useI18n'
 
 const router = useRouter()
 const userStore = useUserStore()
+const { translate } = useI18n()
 
 const email = ref('')
 const password = ref('')
@@ -13,21 +15,27 @@ const isPending = ref(false)
 
 const handleSubmit = async () => {
     if (!email.value || !password.value) {
-        error.value = 'Please fill in all fields'
+        error.value = translate('auth.errors.fillAllFields')
         return
     }
 
     isPending.value = true
-    const { user, error: signUpError} = await userStore.signUp(email.value, password.value)
-    isPending.value = false
-
-  if (!signUpError) {
-    console.log('user logged in: ', user)
-    router.push({ name: 'admin-dashboard' })
-  } else {
-    console.log('error:', signUpError.message)
-    error.value = signUpError.message
-  }
+    try {
+      const { user, error: signUpError} = await userStore.signUp(email.value, password.value)
+      
+      if (!signUpError) {
+        console.log('user logged in: ', user)
+        router.push({ name: 'admin-dashboard' })
+      } else {
+        console.log('error:', signUpError.message)
+        error.value = translate('auth.errors.invalidCredentials')
+      }
+    } catch (err) {
+      console.error('Signup failed:', err)
+      error.value = translate('auth.errors.networkError')
+    } finally {
+      isPending.value = false
+    }
 }
 
 onBeforeMount(async () => {
@@ -45,20 +53,20 @@ onBeforeMount(async () => {
 <template>
     <section class="auth-page">
         <form @submit.prevent="handleSubmit" class="form card">
-            <h3 class="title">Sign up</h3>
+            <h3 class="title">{{ translate('auth.register.title') }}</h3>
             <label>
-                Email
-                <input type="email" placeholder="Email" v-model="email" class="input" autocomplete="off">
+                {{ translate('auth.register.email') }}
+                <input type="email" :placeholder="translate('auth.register.email')" v-model="email" class="input" autocomplete="off">
             </label>
             <label>
-                Password
-                <input type="password" placeholder="Password" v-model="password" class="input" autocomplete="off">
+                {{ translate('auth.register.password') }}
+                <input type="password" :placeholder="translate('auth.register.password')" v-model="password" class="input" autocomplete="off">
             </label>
             <div v-if="error" class="error">
                 {{ error }}
             </div>
-            <button v-if="!isPending" type="submit" class="button">Sign up</button>
-            <button v-if="isPending" disabled>Loading...</button>
+            <button v-if="!isPending" type="submit" class="button">{{ translate('auth.register.submit') }}</button>
+            <button v-if="isPending" disabled>{{ translate('auth.loading') }}</button>
         </form>
     </section>    
 </template>

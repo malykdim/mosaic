@@ -43,6 +43,30 @@
       }
     }
   },
+  "auth": {
+    "loading": "Loading...",
+    "login": {
+      "title": "Log in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in"
+    },
+    "register": {
+      "title": "Register",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Register"
+    },
+    "errors": {
+      "fillAllFields": "Please fill in all fields",
+      "invalidCredentials": "Invalid email or password",
+      "networkError": "Network error. Please try again.",
+      "registrationFailed": "Registration failed. Please try again.",
+      "invalidEmail": "Invalid email or password",
+      "passwordMin": "Invalid email or password",
+      "userExists": "Invalid email or password"
+    }
+  },
   "admin": {
     "create": "Create mosaic",
     "edit": "Edit mosaic",
