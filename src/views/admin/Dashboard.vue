@@ -18,8 +18,18 @@ const dashboardLogout = async () => {
 onBeforeMount(async () => {
   try {
     await userStore.checkUser()
-    const hasUser = userStore.user?.value ?? userStore.user
-    if (!hasUser) router.replace({ name: 'home' })
+    // await new Promise(resolve => setTimeout(resolve, 100))
+    
+    console.log('userStore.user after checkUser:', userStore.user.email)
+    
+    // Try both ways to access the user
+    const hasUser = userStore.user?.value || userStore.user
+    console.log('hasUser:', hasUser)
+    
+    if (!hasUser || (!userStore.user?.value && !userStore.user?.id)) {
+      console.log('No user found, redirecting to home')
+      router.replace({ name: 'home' })
+    }
   } catch (e) {
     console.error('Auth check failed:', e)
     router.replace({ name: 'home' })
@@ -29,6 +39,7 @@ onBeforeMount(async () => {
 
 <template>
     <div class="dashboard">
+        <p class="user">{{ userStore.user.email }}</p>
         <nav class="admin-menu">
             <router-link to="/admin/create" class="btn" aria-label="Create mosaic">{{ translate('admin.create') }}</router-link>
             <button v-if="userStore.user" @click="dashboardLogout" class="btn" aria-label="Logout">{{ translate('auth.logout') }}</button>

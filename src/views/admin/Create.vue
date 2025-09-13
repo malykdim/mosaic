@@ -90,14 +90,14 @@ onMounted(() => {
         
         <div class="submit">
             <button 
-                v-if="item.title.length < 3 || !item.author || !item.dimensions || !item.materials || !item.file" 
+                v-if="item.title?.bg.length < 3 || !item.author || !item.dimensions || !item.materials || !item.file" 
                 type="button" 
                 disabled
             >
                 {{ translate('messages.invalid') }}
             </button>
             <button 
-                v-if="item.title.length >= 3 && item.author && item.dimensions && item.materials && item.file && !isPending" 
+                v-if="item.title?.bg.length >= 3 && item.author && item.dimensions && item.materials && item.file && !isPending" 
                 type="submit"
             >
                 {{ translate('admin.create') }}

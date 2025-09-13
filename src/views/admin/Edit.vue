@@ -14,7 +14,7 @@ import Author from '../admin/components/Author.vue'
 import Dimensions from '../admin/components/Dimensions.vue'
 import Materials from '../admin/components/Materials.vue'
 import Image from '../admin/components/Image.vue'
-import Notifications from '../../components/Notifications.vue'
+// import Notifications from '../../components/Notifications.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -32,7 +32,7 @@ const { item, resetItem, resetOnLeave } = useItem()
 const { getSingleItem } = useGalleryListener()
 
 const isValid = computed(() => 
-    item?.title?.length >= 3 && 
+    item?.title?.bg?.length >= 3 && 
     item?.author && 
     item?.dimensions && 
     item?.materials && 
@@ -133,6 +133,22 @@ onBeforeMount(async () => {
 
         singleItem.value = data
         Object.assign(item, data)
+
+        if (typeof item.title === 'string') {
+            console.log('Migrating old title format:', item.title)
+            const oldTitle = item.title
+            item.title = {
+                bg: oldTitle,
+                en: '',
+                de: ''
+            }
+            singleItem.value.title = item.title // Also update the display reference
+        }
+        
+        // Ensure title object structure exists
+        if (!item.title || typeof item.title !== 'object') {
+            item.title = { bg: '', en: '', de: '' }
+        }
     } catch (error) {
         console.error('Error loading item:', error)
         router.replace({ name: 'not-found' })
@@ -146,7 +162,7 @@ resetOnLeave()
 
 <template>
     <div class="page create-edit-container">
-        <h3 v-if="singleItem" class="title">{{ translate('admin.edit') }} {{ singleItem.title }}</h3>
+        <h3 v-if="singleItem" class="title">{{ translate('admin.edit') }} {{ singleItem.title.bg }}</h3>
         <p v-else-if="isPending">{{ translate('messages.loadingItem') }}</p>
         <form v-if="singleItem"  @submit.prevent="handleUpdate" class="edit form" novalidate>
             <div class="formFields">
@@ -164,7 +180,7 @@ resetOnLeave()
                 </div>    
             </div>
 
-            <Notifications />
+            <!-- <Notifications /> -->
 
             <div class="submit">
 

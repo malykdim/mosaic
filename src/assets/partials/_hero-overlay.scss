@@ -18,14 +18,14 @@
     .title {
         color: rgba(210,175,93, 0.8);
         text-transform: uppercase;
-        letter-spacing: 0.5em;
-        font-weight: 300;
+        letter-spacing: 0.05em;
+        font-weight: 600;
         text-shadow: 15px 8px 20px rgba(255, 255, 255, 0.4);
 
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
         margin-top: 15rem;
 
-        font-size: clamp(1.5rem, 4vw, 3rem);
+        font-size: clamp(1.5rem, 4vw, 7rem);
 
         @media screen and (max-width: 1024px) {
             font-size: 2em; /* Adjust font size for tablets */
@@ -39,12 +39,12 @@
 
     .subtitle {
         color: var(--secondary);
-        letter-spacing: .4em;
+        letter-spacing: 0.0001em;
         margin-bottom: 2rem;
-        font-size: clamp(0.8rem, 2vw, 1.2rem);
+        font-size: clamp(0.6rem, 2vw, 1.4em);
 
         @media screen and (max-width: 500px) {
-            letter-spacing: 0.2em;
+            letter-spacing: 0.002em;
         }
     }
 
@@ -59,7 +59,8 @@
         text-decoration: none;
 
         transition: background-color 0.3s ease;
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        font-size: clamp(0.9rem, 2vw, 1.3rem);
+        font-weight: 600;
         
         text-align: center;
         display: block;

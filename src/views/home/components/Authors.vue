@@ -1,7 +1,6 @@
 <script setup>
 import { useI18n } from '../../../stores/useI18n'
 const { translate } = useI18n()
-console.log('i18n test:', translate('home.authors.vladimir.name'))
 </script>
 
 <template>

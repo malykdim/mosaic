@@ -68,7 +68,7 @@ function onChange() {
                 <input 
                     v-model="v$.author.$model" 
                     type="radio" 
-                    :value="translate('admin.form.author.vladimir')" 
+                    :value="translate('home.authors.vladimir.name')" 
                     class="radio" 
                     aria-describedby="author-errors"                    
                     @change="onChange"
@@ -80,7 +80,7 @@ function onChange() {
                 <input 
                     v-model="v$.author.$model"                     
                     type="radio" 
-                    :value="translate('admin.form.author.damyan')" 
+                    :value="translate('home.authors.damyan.name')" 
                     class="radio" 
                     aria-describedby="author-errors" 
                     @change="onChange"
@@ -91,8 +91,12 @@ function onChange() {
 
 		<ul v-if="v$.author.$errors.length" id="author-errors" class="errors">
 			<li v-for="error of v$.author.$errors" :key="error.$uid" class="error">
-                <p class="message">{{ translate('admin.form.errors.authorRequired') }}</p>
+                <p class="message form-inline-error-display">{{ translate('admin.form.errors.authorRequired') }}</p>
             </li>
 		</ul>
-    </fieldset>
+  </fieldset>
 </template>
+
+<style lang="scss" scoped>
+  @use '../../../assets/partials/author' as *;
+</style>

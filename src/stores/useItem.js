@@ -7,7 +7,11 @@ const { uploadImage } = useStorage()
 
 export const useItem = defineStore('newItem', () => {
     let item = reactive({
-        title: '',
+        title: {
+          bg: "", 
+          en: "",
+          de: ""
+        },
         author: '',
         dimensions: {
             w: 0,
@@ -42,7 +46,11 @@ export const useItem = defineStore('newItem', () => {
 
     const resetItem = () => {
       Object.assign(item, {
-        title: '',
+        title: {
+          bg: "", 
+          en: "",
+          de: ""
+        },
         author: '',
         dimensions: {
             w: 0,

@@ -1,4 +1,5 @@
 @use 'partials/variables' as *;
+@use 'partials/lang-select' as *;
 @use 'partials/footer' as *;
 @use 'partials/error' as *;
 @use 'partials/page' as *;
@@ -21,7 +22,7 @@
 @use 'partials/mini-item' as *;
 @use 'partials/admin-create-edit' as *;
 @use 'partials/title' as *;
-@use 'partials/author' as *;
+// @use 'partials/author' as *;
 @use 'partials/dimensions' as *;
 @use 'partials/image' as *;
 @use 'partials/materials' as *;

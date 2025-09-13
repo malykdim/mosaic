@@ -12,6 +12,7 @@
 
 <style lang='scss' scoped>
 .not-found {
+    margin-top: 15rem;
     color: #fff;
 }
 </style>

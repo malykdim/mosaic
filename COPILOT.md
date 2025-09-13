@@ -297,7 +297,6 @@ src/
     ├── home/ # Home page 
         Home.vue
         |__ components
-            GalleryGrid.vue
             Authors.vue
             Logo.vue
             Mosaic.vue

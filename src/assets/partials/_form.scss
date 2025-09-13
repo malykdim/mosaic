@@ -73,4 +73,9 @@ form {
         display: block;
         color: var(--text, transparent);
     }
+
+    .form-inline-error-display {
+        font-size: 1.2em;
+        color: var(--warning);
+    }
 }

@@ -11,6 +11,7 @@
         align-items: center;
         gap: 1.5rem;
         margin: 1rem auto;
+        
 
         .radio-label {
             width: 100%; 
@@ -35,8 +36,8 @@
                 cursor: pointer;
 
                 /* Custom radio button design */
-                width: 1.5em;
-                height: 1.5em;
+                width: 1.2em;
+                height: 1.2em;
                 border: 0.15em solid var(--primary);
                 border-radius: 50%;
                 transform: translateY(-0.075em);
@@ -85,5 +86,10 @@
                 cursor: pointer;
             }
         }
+    }
+
+    .form-inline-error-display {
+        font-size: 0.7em;
+        color: var(--warning);
     }
 }

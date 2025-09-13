@@ -1,0 +1,115 @@
+div.translation-select { 
+	display: flex; 
+	gap: 0.4rem; 
+	align-items: center; 
+	position: relative;
+    
+    select.lang-select {
+        /* Remove default browser styling */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        /* Use accent-color to influence dropdown styling */
+        accent-color: var(--primary);
+        color-scheme: light;
+
+		/* Spacing and sizing */
+        padding: 0.35rem 2.2rem 0.35rem 0.6rem; /* More right padding for custom arrow */
+        border-radius: var(--border-radius);
+        border: 1px solid rgba(255,255,255,0.2);
+        height: 36px;
+        min-width: 120px;
+
+		/* Colors and typography */
+        color: white;
+        background-color: var(--primary);
+        font-size: 1.05rem;
+        letter-spacing: .15em;
+        font-weight: 500;
+        cursor: pointer;
+
+		/* Transitions and effects */
+		// transition: background-color 0.25s, color 0.25s, box-shadow 0.15s, transform 0.15s;
+        transition: all 0.25s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        opacity: 0.95;
+
+		/* Custom dropdown arrow using background-image */
+        // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 30px;
+
+		/* Remove IE/Edge default arrow */
+        &::-ms-expand { 
+            display: none; 
+        }
+
+		/* Focus state - removes blue outline, adds custom focus ring */
+        &:focus {
+            outline: none !important; /* This removes the browser default blue outline */
+			// Custom focus styling instead
+			/* subtle focus halo; if you have a RGB var for primary you can use it */
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0,120,212), 0.15);
+            transform: translateY(-1px);
+        }
+        &:focus:not(:focus-visible) {
+            outline: none !important;
+        }
+
+        &:focus,
+        &:focus-visible,
+        &:active {
+            outline: none !important;
+            border: 1px solid rgba(255,255,255,0.3) !important; /* keeps your original border */
+            // box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0,120,212), 0.15) !important;
+            box-shadow: none !important; /* Remove any box-shadow that might look like outline */
+        }
+
+		/* Hover state */
+        &:hover {
+            background-color: white;
+            color: var(--primary);
+            opacity: 1;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+            
+            /* Change arrow color on hover */
+            // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d2af5d' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d2af5d' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        }
+
+		/* Active state */
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(255,255,255,0.3);
+        	border-radius: var(--border-radius);
+        }
+
+
+		/* Option styling (limited browser support, but helps where possible) */
+		option.option {
+			padding: 0.5rem 0.75rem;
+            background: white;
+            color: var(--primary);
+            font-weight: 500;
+            border: none;
+        	border-radius: var(--border-radius);
+
+            
+            &:hover,
+            &:focus {
+                background: var(--primary) !important;
+                color: white !important;
+            }
+            
+            &:checked {
+                background: var(--primary) !important;
+                color: white !important;
+                font-weight: 600;
+            }
+		}
+    }
+}

@@ -4,16 +4,34 @@ import { fileURLToPath } from 'url'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue({
+    template: {
+      compilerOptions: {
+        sourceMap: true
+      }
+    }
+  })],
   base: '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  css: {
+    devSourcemap: true, // Explicitly enable CSS source maps in dev
+    preprocessorOptions: {
+      scss: {
+        sourcemap: true,
+        api: 'modern-compiler', // if you're using sass-embedded
+      }
+    },
+  },
   server: {
     open: true  // Auto-open browser
   },
+  build: {
+    sourcemap: true // Enable source maps in build
+  }
   // PRODUCTION CONFIG - UNCOMMENT WHEN DEPLOYING TO damyanovi.netlify.app
   // build: {
   //   target: 'esnext',
