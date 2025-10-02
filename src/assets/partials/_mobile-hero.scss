@@ -1,29 +1,35 @@
 .mobile-hero {
     position: relative;
     width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
 
     aspect-ratio: 16/14; 
     min-height: 200px;
     max-height: 95vh;
     overflow: hidden;
 
+    contain: layout;
+
     .slider-container {
         width: 100%;
         height: 100%;
         overflow: hidden;
+        position: relative;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding: 0;
 
         .slider-track {
             height: 100%;
+            width: 400%;
             
             display: flex;
 
             transition: transform 0.5s ease-in-out;
 
             .slide {
-                flex: 0 0 100%;
+                flex: 0 0 25%;
                 scroll-snap-align: center;
                 height: 100%;
                 animation: auto 16s infinite;

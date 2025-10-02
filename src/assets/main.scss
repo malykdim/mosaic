@@ -6,10 +6,11 @@
 @use 'partials/form' as *;
 @use 'partials/link' as *;
 @use 'partials/button' as *;
+@use 'partials/background' as *;
 @use 'partials/app' as *;
 @use 'partials/auth-page' as *;
 @use 'partials/home' as *;
-@use 'partials/hero-overlay' as *;
+// @use 'partials/hero-overlay' as *;
 @use 'partials/mobile-hero' as *;
 @use 'partials/tablet-hero' as *;
 @use 'partials/desktop-hero' as *;

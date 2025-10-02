@@ -12,3 +12,7 @@ const { translate } = useI18n()
         <router-link :to="{name: 'gallery'}" class="link">{{ translate('home.hero.cta') }}</router-link>       
     </div>
 </template>
+
+<style lang="scss" scoped>
+@use '../../../assets/partials/hero-overlay' as *
+</style>

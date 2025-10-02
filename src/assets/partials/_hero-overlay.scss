@@ -31,8 +31,8 @@
             font-size: 2em; /* Adjust font size for tablets */
         }
 
-        @media screen and (max-width: 500px) {
-            // font-size: 1.8em; /* Smaller font size for mobile */
+        @media screen and (max-width: 360px) {
+            font-size: 1.2em; /* Smaller font size for mobile */
             letter-spacing: 0.2em; // Reduce letter spacing on small screens
         }
     }
@@ -52,7 +52,8 @@
         padding: 1rem 2rem;
         margin-top: auto; /* Push to the bottom */
         margin-bottom: 15rem;
-        border-radius: 2px;
+        border: 1px solid var(--primary);
+        border-radius: var(--border-radius);
         
         color: #fff;
         background-color: var(--primary);
