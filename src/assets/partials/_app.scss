@@ -19,12 +19,11 @@
   max-width: 100%;
 
   @media (pointer: coarse) {
-    .content {
-      scrollbar-width: none;        /* Firefox */
-      -ms-overflow-style: none;     /* IE */
-    }
-    .content::-webkit-scrollbar {
-      display: none;                /* Chrome/Safari */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE */
+    
+    &::-webkit-scrollbar {
+      display: none;              /* Chrome/Safari */
     }
   }
 }
