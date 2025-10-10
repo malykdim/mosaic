@@ -17,9 +17,6 @@ const { translate } = useI18n()
                     loading="lazy"
                 />
             </picture>    
-        </div>
-
-        <div class="row">
             <div class="about">
                 <div class="text">
                     <h2 class="name">{{ translate('home.authors.vladimir.name') }}</h2>
@@ -50,7 +47,7 @@ const { translate } = useI18n()
                 </div>
             </div>
         </div>
-        
+     
         <div class="row">
             <div class="links">
                 <a href="https://www.facebook.com/vladimir.damyanov/" 
@@ -61,7 +58,7 @@ const { translate } = useI18n()
                     :aria-label="translate('home.authors.links.vladimir_facebook_label')"
                 >
                     <i class="icon material-icons" :aria-label="translate('home.authors.links.vladimir_facebook_label')">facebook</i>
-                    {{ translate('home.authors.links.vladimir_text') }}
+                    <span class="span">{{ translate('home.authors.links.vladimir_text') }}</span>
                 </a>
     
                 <p class="delimiter">&</p>
@@ -74,7 +71,7 @@ const { translate } = useI18n()
                     :aria-label="translate('home.authors.links.damyan_facebook_label')"
                 >
                     <i class="icon material-icons" :aria-label="translate('home.authors.links.damyan_facebook_label')">facebook</i>
-                    {{ translate('home.authors.links.damyan_text') }}
+                    <span class="span">{{ translate('home.authors.links.damyan_text') }}</span>                    
                 </a>
             </div>            
         </div>
