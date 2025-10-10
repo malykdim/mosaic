@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from '../../stores/useI18n'
 
 const props = defineProps({
@@ -10,6 +10,9 @@ const props = defineProps({
 })
 
 const { locale } = useI18n()
+
+const imageLoaded = ref(false)
+const imageError = ref(false)
 
 const displayTitle = computed(() => {
   console.log('Current locale:', locale.value)
@@ -30,6 +33,15 @@ const displayTitle = computed(() => {
   
   return String(titleData).trim()
 })
+
+const handleImageLoad = () => {
+  imageLoaded.value = true
+}
+
+const handleImageError = () => {
+  imageError.value = true
+  console.error('Failed to load image:', props.item.imageUrl)
+}
 </script>
 
 <template>
@@ -40,7 +52,23 @@ const displayTitle = computed(() => {
             <figure class="figure"> 
 
                 <div class="image-container"> 
-                    <img :src="item.imageUrl" :alt="item.title" />
+                    <!-- Skeleton while loading -->
+                    <div v-if="!imageLoaded && !imageError" class="image-skeleton"></div>
+                    
+                    <!-- Error state -->
+                    <div v-if="imageError" class="image-error">
+                        Изображението не може да се зареди
+                    </div>
+                    
+                    <!-- Actual image with lazy loading -->
+                    <img 
+                      v-else
+                      :src="item.imageUrl" 
+                      :alt="displayTitle || 'Мозайка'"
+                      loading="lazy"
+                      @load="handleImageLoad"
+                      @error="handleImageError"
+                    />
                 </div>
                 
                 <figcaption class="figure-caption"> 

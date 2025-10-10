@@ -4,13 +4,22 @@ import supabase from '../config/supabase'
 export const useGalleryListener = () => {
     const mosaics = ref([])
     const error = ref(null)
+    const isLoading = ref(true)
 
     const channel = supabase.channel('mosaics-listener')
 
     const getAllMosaics = async () => {
-        const { data, error } = await supabase.from('mosaics').select('*')
-        if (!error) mosaics.value = data
-        else console.error('Initial fetch failed:', error)
+        isLoading.value = true
+        const { data, error: fetchError } = await supabase.from('mosaics').select('*')
+        
+        if (!fetchError) {
+          mosaics.value = data
+        } else {
+          console.error('Initial fetch failed:', fetchError)
+          error.value = fetchError
+        } 
+
+        isLoading.value = false
     }
 
     const getSingleItem = async (collection, id) => {
@@ -65,6 +74,7 @@ export const useGalleryListener = () => {
     
       return { 
         mosaics, 
+        isLoading,
         getAllMosaics, 
         getSingleItem,  
         startListening, 
