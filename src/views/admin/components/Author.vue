@@ -16,7 +16,7 @@ const state = reactive({
     get: () => item.author,
     set: (value) => { 
       item.author = value
-      console.log('Author updated in Pinia (immediately):', item.author)
+      console.log('Author key stored:', item.author)
     }
   })
 })
@@ -29,7 +29,7 @@ const rules = {
 
 const v$ = useVuelidate(rules, state)
 
-// Watch for Pinia changes and force Vuelidate to re-evaluate
+// Watch for Pinia changes and sync with Vuelidate (force Vuelidate to re-evaluate)
 watch(() => item.author, (newValue) => {
   // Force Vuelidate to sync with the new value
   v$.value.author.$model = newValue
@@ -53,6 +53,7 @@ function handleFocusOut(event) {
 
 function onChange() {
     console.log('handleChange => state.author: ', state.author)
+    console.log('Author key selected:', state.author)
 }
 
 </script>
@@ -68,7 +69,7 @@ function onChange() {
                 <input 
                     v-model="v$.author.$model" 
                     type="radio" 
-                    :value="translate('home.authors.vladimir.name')" 
+                    value="vladimir" 
                     class="radio" 
                     aria-describedby="author-errors"                    
                     @change="onChange"
@@ -80,13 +81,17 @@ function onChange() {
                 <input 
                     v-model="v$.author.$model"                     
                     type="radio" 
-                    :value="translate('home.authors.damyan.name')" 
+                    value="damyan"
                     class="radio" 
                     aria-describedby="author-errors" 
                     @change="onChange"
                 />
                 <span class="span">{{ translate('admin.form.author.damyan') }}</span> 
             </label>
+        </div>
+
+        <div v-if="v$.author.$error" id="author-errors">
+            {{ v$.author.$errors[0].$message }}
         </div>
 
 		<ul v-if="v$.author.$errors.length" id="author-errors" class="errors">

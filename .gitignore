@@ -26,3 +26,6 @@ src/assets/roadmap.md
 
 # Environment variables
 .env
+
+# Others
+/src/assets/ignore

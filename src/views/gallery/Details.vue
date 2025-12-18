@@ -61,23 +61,59 @@ const displayTitle = computed(() => {
   return String(titleData).trim()
 })
 
+// const displayAuthor = computed(() => {
+//   const a = singleItem.value?.author
+//   if (!a) return ''
+//   if (typeof a === 'object') {
+//     return a[translate('locale')] || a.en || Object.values(a)[0]
+//   }
+//   const norm = String(a).toLowerCase().replace(/[^a-zа-я0-9]+/gi, '')
+//   const map = {
+//     'vladimir': 'vladimir',
+//     'vladimirdamyanov': 'vladimir',
+//     'damyan': 'damyan',
+//     'damyandamyanov': 'damyan'
+//   }
+//   const id = map[norm] || norm
+//   return translate(`home.authors.${id}.name`) || a
+// })
+
 const displayAuthor = computed(() => {
-  const a = singleItem.value?.author
-  if (!a) return ''
-  if (typeof a === 'object') {
-    // stored as translations object { en: "...", bg: "...", de: "..." }
-    return a[translate('locale')] || a.en || Object.values(a)[0]
+  const authorKey = singleItem.value?.author
+  
+  if (!authorKey) return ''
+  
+  // If it's already a clean key like "vladimir" or "damyan"
+  if (authorKey === 'vladimir' || authorKey === 'damyan') {
+    return translate(`home.authors.${authorKey}.name`)
   }
-  // normalize label -> simple id
-  const norm = String(a).toLowerCase().replace(/[^a-zа-я0-9]+/gi, '')
-  const map = {
-    'vladimir': 'vladimir',
+  
+  // ⚠️ MIGRATION FALLBACK - Handle old data from DB
+  // This handles your 2 correct and 2 wrong entries
+  const normalized = String(authorKey)
+    .toLowerCase()
+    .replace(/[^a-zа-я0-9]+/gi, '')
+  
+  const migrationMap = {
     'vladimirdamyanov': 'vladimir',
+    'vladimir': 'vladimir',
+    'владимирдамянов': 'vladimir',
+    'владимир': 'vladimir',
+    'damyandamyanov': 'damyan',
     'damyan': 'damyan',
-    'damyandamyanov': 'damyan'
+    'дамяндамянов': 'damyan',
+    'дамян': 'damyan'
   }
-  const id = map[norm] || norm
-  return translate(`home.authors.${id}.name`) || a
+  
+  const mappedKey = migrationMap[normalized]
+  
+  if (mappedKey) {
+    return translate(`home.authors.${mappedKey}.name`)
+  }
+  
+  // If all else fails, return the raw value
+  console.warn(`[displayAuthor] Unknown author value: ${authorKey}`)
+  return authorKey
 })
 
 // translate materials for display
