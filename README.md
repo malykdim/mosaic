@@ -59,7 +59,7 @@ These images showcase core parts of the application.
 ---
 ### 🔐 Login Page
 
-![Login Page](./screenshots/auth.png)
+![Login Page](./screenshots/login.png)
 *Simple authentication form using Supabase Auth.*
 
 ---
