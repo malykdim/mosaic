@@ -2,7 +2,7 @@
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 import ListItem from './ListItem.vue'
 import ImageSkeleton from '../../components/ImageSkeleton.vue'
-const { mosaics, isLoading, error, startListening } = useGalleryListener()
+const { mosaics, isLoading, error, selectedAuthor, setAuthorFilter, startListening } = useGalleryListener()
 
 startListening()
 </script>
@@ -12,6 +12,30 @@ startListening()
         <!-- Show error if it exists -->
         <!-- <div v-if="error" class="error">Could not fetch the data</div> -->
         <div v-if="error" class="error">Не можахме да заредим галерията. Моля, опитайте отново.</div>
+
+        <div v-if="mosaics.length" class="sort">
+            <button 
+                class="name" 
+                :class="{ active: selectedAuthor === 'all' }"
+                @click="setAuthorFilter('all')"
+            >
+                all
+            </button>
+            <button 
+                class="name" 
+                :class="{ active: selectedAuthor === 'vladimir' }"
+                @click="setAuthorFilter('vladimir')"
+            >
+                vladimir
+            </button>
+            <button 
+                class="name" 
+                :class="{ active: selectedAuthor === 'damyan' }"
+                @click="setAuthorFilter('damyan')"
+            >
+                damyan
+            </button>
+        </div>
 
         <!-- Show skeletons while loading -->
         <div v-if="isLoading" class="items">
@@ -23,7 +47,7 @@ startListening()
         <!-- Show actual content when loaded -->
         <div  v-if="mosaics.length" class="items">
             <div v-for="item in mosaics" :key="item.id" class="item">
-                <ListItem :item="item" />
+                <ListItem :item="item" :author="selectedAuthor"/>
             </div>
         </div>
 
@@ -47,5 +71,10 @@ startListening()
   text-align: center;
   color: var(--input);
   font-size: 1.1rem;
+}
+
+.sort button.active {
+    background-color: var(--input);
+    font-weight: bold;
 }
 </style>

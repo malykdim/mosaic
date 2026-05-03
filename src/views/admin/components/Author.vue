@@ -23,17 +23,21 @@ const state = reactive({
 
 const rules = {
   author: { 
-    required: helpers.withMessage(() => translate('.admin.form.errors.authorRequired'), required) 
+    required: helpers.withMessage(() => translate('admin.form.errors.authorRequired'), required) 
   }
 }
 
 const v$ = useVuelidate(rules, state)
 
 // Watch for Pinia changes and sync with Vuelidate (force Vuelidate to re-evaluate)
-watch(() => item.author, (newValue) => {
-  // Force Vuelidate to sync with the new value
-  v$.value.author.$model = newValue
-}, { immediate: true })
+// watch(() => item.author, (newValue) => {
+//   // Force Vuelidate to sync with the new value
+//   v$.value.author.$model = newValue
+// })
+// watch(() => item.author, (newValue) => {
+//   // Force Vuelidate to sync with the new value
+//   v$.value.author.$model = newValue
+// }, { immediate: true })
 
 async function onBlur() {
     const isValid = await v$.value.$validate()
@@ -88,10 +92,6 @@ function onChange() {
                 />
                 <span class="span">{{ translate('admin.form.author.damyan') }}</span> 
             </label>
-        </div>
-
-        <div v-if="v$.author.$error" id="author-errors">
-            {{ v$.author.$errors[0].$message }}
         </div>
 
 		<ul v-if="v$.author.$errors.length" id="author-errors" class="errors">

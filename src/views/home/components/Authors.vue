@@ -18,7 +18,15 @@ const { translate } = useI18n()
                 />
             </picture>    
             <div class="about">
-                <div class="text">
+                <div class="text">                    
+
+                    <h2 class="name">{{ translate('home.philosophy.title') }}</h2>
+                    <div class="author">
+                        <p class="p">
+                        {{ translate('home.philosophy.philosophy') }}
+                        </p>
+                    </div>
+
                     <h2 class="name">{{ translate('home.authors.vladimir.name') }}</h2>
                     <div class="author">
                         <p class="p">

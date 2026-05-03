@@ -6,6 +6,7 @@ const NotFound = () => import('../views/NotFound.vue')
 const routes = [
   { path: '/', name: 'home', component: Home },
   { path: '/gallery', name: 'gallery', component: () => import('../views/gallery/Gallery.vue') },
+  { path: '/gallery/viewer/:id', name: 'viewer', component: () => import('../views/gallery/Viewer.vue') },
   { path: '/gallery/:id', name: 'details', component: () => import('../views/gallery/Details.vue') },
   { path: '/admin/login', name: 'admin-login', component: () => import('../views/auth/Login.vue') },
   { path: '/admin/signup', name: 'admin-signup', component: () => import('../views/auth/Signup.vue') },

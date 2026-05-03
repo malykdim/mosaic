@@ -50,7 +50,7 @@ const handleDelete = async () => {
 
 <template>    
     <div class="mini-item" :style="getBackgroundStyle(item.imageUrl)">
-        <h2 class="title">{{ displayTitle }}</h2>
+        <!-- <h2 class="title">{{ displayTitle }}</h2> -->
 
         <div class="actions-wrapper">
             <div class="icon-holder modify">

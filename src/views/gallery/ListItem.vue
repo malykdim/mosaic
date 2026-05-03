@@ -6,7 +6,11 @@ const props = defineProps({
     item: {
         type: Object,
         required: true
-    }
+    },
+    author: {
+        type: String,
+        default: 'all'
+    } 
 })
 
 const { locale } = useI18n()
@@ -15,8 +19,8 @@ const imageLoaded = ref(false)
 const imageError = ref(false)
 
 const displayTitle = computed(() => {
-  console.log('Current locale:', locale.value)
-  console.log('Available locales:', Object.keys(props.item?.title || {}))
+//   console.log('Current locale:', locale.value)
+//   console.log('Available locales:', Object.keys(props.item?.title || {}))
   
   if (!props.item?.title) return ''
   
@@ -47,7 +51,7 @@ const handleImageError = () => {
 <template>
     <div class="card"> 
 
-        <router-link :to="{path: `/gallery/${item.id}`}" class="link">
+        <router-link :to="{ path: `/gallery/viewer/${item.id}`, query: { author: props.author } }" class="link">
         
             <figure class="figure"> 
 
@@ -62,17 +66,18 @@ const handleImageError = () => {
                     
                     <!-- Actual image with lazy loading -->
                     <img 
-                      v-else
-                      :src="item.imageUrl" 
-                      :alt="displayTitle || 'Мозайка'"
-                      loading="lazy"
-                      @load="handleImageLoad"
-                      @error="handleImageError"
+                        v-else
+                        :src="item.imageUrl" 
+                        :alt="displayTitle || 'Мозайка'"
+                        loading="lazy"
+                        @load="handleImageLoad"
+                        @error="handleImageError"
                     />
                 </div>
                 
                 <figcaption class="figure-caption"> 
                     <h4 class="title">{{ displayTitle }}</h4>                      
+                    <p>{{ item.id }}</p>
                 </figcaption>
 
             </figure>

@@ -16,6 +16,7 @@
 @use 'partials/desktop-hero' as *;
 @use 'partials/authors' as *;
 @use 'partials/gallery' as *;
+@use 'partials/viewer' as *;
 @use 'partials/list-item' as *;
 @use 'partials/details' as *;
 @use 'partials/admin-dashboard' as *;
@@ -54,11 +55,18 @@ html, body {
     width: 100%;
     height: 100%;
 
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 body {
-    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .content {
+        flex: 1;
+    }
+
     @media (prefers-color-scheme: dark) {
         & {
           color: #fafafa;
@@ -70,6 +78,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .header,

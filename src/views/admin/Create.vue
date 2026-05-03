@@ -6,13 +6,9 @@ import { useUserStore } from '../../stores/useUserStore'
 import { useI18n } from '../../stores/useI18n.js'
 
 import { useItem } from '../../stores/useItem' 
-import validateUserInput from '../admin/functions/validateUserInput.js'
 import { useCollection } from '../../stores/useCollection' 
 
-import Title from './components/Title.vue'
 import Author from './components/Author.vue'
-import Dimensions from './components/Dimensions.vue'
-import Materials from './components/Materials.vue'
 import Image from './components/Image.vue'
 // import Notifications from '../../components/Notifications.vue'
 
@@ -22,7 +18,7 @@ const { user, checkUser } = useUserStore()
 const { translate } = useI18n()
 
 const { item, resetItem, fileToImageUrl } = useItem() 
-// {title, author, dimensions, materials, file, imageUrl}
+// { author, file, imageUrl}
 
 const { addDoc } = useCollection()
 
@@ -31,14 +27,8 @@ const handleCreate = async () => {
     isPending.value = true
 
     try {
-        /* 1. Validate item in Pinia */
-        validateUserInput(item)      
-    
-        /* 2. Save image in Supabase storage */
-        /* 3. Update item.imageUrl in Pinia */
         await fileToImageUrl(item)
     
-        /* 4. Add item to Supabase database in bucket mosaics */
         await addDoc('mosaics', item)
         resetItem()        
         router.push({ name: 'admin-dashboard' })
@@ -79,10 +69,7 @@ onMounted(() => {
             </div>            
             
             <div class="info">
-                <Title />
                 <Author />
-                <Dimensions />
-                <Materials />
             </div>    
         </div>
 
@@ -90,14 +77,14 @@ onMounted(() => {
         
         <div class="submit">
             <button 
-                v-if="item.title?.bg.length < 3 || !item.author || !item.dimensions || !item.materials || !item.file" 
+                v-if="!item.author || !item.file" 
                 type="button" 
                 disabled
             >
                 {{ translate('messages.invalid') }}
             </button>
             <button 
-                v-if="item.title?.bg.length >= 3 && item.author && item.dimensions && item.materials && item.file && !isPending" 
+                v-if="item.author && item.file && !isPending" 
                 type="submit"
             >
                 {{ translate('admin.create') }}

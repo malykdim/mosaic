@@ -1,127 +1,16 @@
 import supabase from '../config/supabase'
 
 export const useCollection = () => {
-
-//   const addDoc = async (collection, item) => {
-
-//     if (item.title && item.author && item.dimensions && item.materials && item.imageUrl) {
-//       let titleTranslations = {
-//         bg: item.title.bg || '',
-//         en: item.title.en || '',
-//         de: item.title.de || ''
-//       }
-
-//     const authorTranslation = (authorRaw) => {
-//       let author = authorRaw
-      
-//       if (!author) {
-//         alert('Author is required')
-//         return
-//       }
-      
-//       if (author === "Владимир Дамянов" || author === "Vladimir Damyanov") {
-//         author = "Vladimir Damyanov" 
-//         return author
-//       } else if (author === "Дамян Дамянов" || author === "Damyan Damyanov") {
-//         author = "Damyan Damyanov"
-//         return author
-//       }
-//     }
-
-
-//       const newItem = {
-//         title: titleTranslations, 
-//         author: authorTranslation(item.author),
-//         dimensions: item.dimensions,
-//         materials: item.materials,
-//         imageUrl: item.imageUrl
-//       }
-
-//       try {
-//         const { data, error } = await supabase.from(collection).insert([newItem]).select()
-  
-//         if (error) {
-//           console.error('Supabase error:', error)
-//           return { data: null, error }
-//         }
-
-//         if (data) {
-//           alert('Mosaic added successfully')
-//           console.log("Created item:", data)
-//         }
-        
-//         return { data, error }
-
-//       } catch (error) {
-//         console.error('Error during addDoc: ', error)
-//         return { data: null, error }
-//       }
-//     } else {
-//       const err = 'Some item properties are missing'
-//       console.log(err, item)
-//       console.log('Missing check - title.bg:', item.title?.bg, 'author:', item.author, 'dimensions:', item.dimensions, 'materials:', item.materials, 'imageUrl:', item.imageUrl)
-//       return { data: null, error: err }
-//     }
-
-//   }
-  
-//   const updateDoc = async (collection, id, updatedFields) => {
-//     let idNum = Number(id)
-        
-//     if (!Number.isInteger(idNum) || idNum <= 0) {
-//       return { data: null, error: 'Invalid ID' }
-//     }
-
-//     id = idNum
-
-//     if (updatedFields && updatedFields.title && !updatedFields.title.bg) {
-//         updatedFields.title_translations = { 
-//         bg: updatedFields.title.bg || '', 
-//         en: updatedFields.title.en || '', 
-//         de: updatedFields.title.de || '' 
-//       }
-//     }
-
-//     try {
-//       const { data, error } = await supabase
-//         .from(collection)
-//         .update(updatedFields)
-//         .eq('id', id)
-//         .select()
-
-//       if (error) {
-//         return { data: null, error }
-//       }
-      
-//       return { data, error }
-      
-//     } catch (error) {
-//       return { data: null, error }
-//     }    
-
-//   }
     const addDoc = async (collection, item) => {
-        // Validate required fields
-        if (!item.title || !item.author || !item.dimensions || !item.materials || !item.imageUrl) {
+        if (!item.author || !item.imageUrl) {
             const err = 'Some item properties are missing'
             console.log(err, item)
-            console.log('Missing check - title.bg:', item.title?.bg, 'author:', item.author, 'dimensions:', item.dimensions, 'materials:', item.materials, 'imageUrl:', item.imageUrl)
+            console.log( 'author: ', item.author, 'imageUrl: ', item.imageUrl)
             return { data: null, error: err }
         }
 
-        // Prepare the title_translations object
-        const titleTranslations = {
-            bg: item.title.bg || '',
-            en: item.title.en || '',
-            de: item.title.de || ''
-        }
-
-        // ✅ NO TRANSLATION - just store the key directly
         const newItem = {
-            title: titleTranslations,
             author: item.author, // Store "vladimir" or "damyan" directly
-            dimensions: item.dimensions,
-            materials: item.materials,
             imageUrl: item.imageUrl
         }
 
@@ -150,25 +39,13 @@ export const useCollection = () => {
     }
 
     const updateDoc = async (collection, id, updatedFields) => {
-    let idNum = Number(id)
-        
-    if (!Number.isInteger(idNum) || idNum <= 0) {
-        return { data: null, error: 'Invalid ID' }
-    }
-
-    id = idNum
-
-    // Normalize title updates
-    if (updatedFields && updatedFields.title && !updatedFields.title.bg) {
-        updatedFields.title = { 
-        bg: updatedFields.title.bg || '', 
-        en: updatedFields.title.en || '', 
-        de: updatedFields.title.de || '' 
+        let idNum = Number(id)
+            
+        if (!Number.isInteger(idNum) || idNum <= 0) {
+            return { data: null, error: 'Invalid ID' }
         }
-    }
 
-    // ✅ NO TRANSLATION - author is already a key
-    // Just pass through updatedFields.author as-is
+        id = idNum
 
         try {
             const { data, error } = await supabase
@@ -187,7 +64,6 @@ export const useCollection = () => {
             return { data: null, error }
         }    
     }
-
 
     const delDoc = async (collection, id) => {
         let idNum = Number(id)

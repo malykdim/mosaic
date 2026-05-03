@@ -145,7 +145,6 @@ watch(singleItem, (val) => {
                 <img :src="singleItem.imageUrl" :alt="singleItem.title">
             </div>
             <div class="info">
-
                 <h4 class="title">{{ displayTitle }}</h4>
                 <h5 class="author">{{ displayAuthor }}</h5>
                 <hr>

@@ -24,7 +24,7 @@ const desktop = ref(window.innerWidth >= 1024)
             <DesktopHero v-else-if="desktop" />        
         </section>
         <!-- <Logo /> -->
-        <section class="about">
+        <section class="about">            
             <Authors /> 
         </section>    
     </section>

@@ -50,14 +50,15 @@
             color: #333;
             padding: 3.5rem 2rem;
             line-height: 1.5;
-
+            
             .name {
                 color: var(--primary);
                 padding-bottom: .8rem;
                 font-size: xx-large;
             }
-
+            
             .author {
+                max-width: 1200px;
                 margin-bottom: 1.8rem;
                 .p {
                     font-family: 'Caudex';
