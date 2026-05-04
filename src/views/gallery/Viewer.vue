@@ -50,21 +50,21 @@ onMounted(async () => {
         <nav class="overlay-filters">
             <div v-if="mosaics.length" class="sort">
                 <button 
-                    class="name" 
+                    class="filter" 
                     :class="{ active: selectedAuthor === 'all' }"
                     @click="handleFilterChange('all')"
                 >
                     all
                 </button>
                 <button 
-                    class="name" 
+                    class="filter" 
                     :class="{ active: selectedAuthor === 'vladimir' }"
                     @click="handleFilterChange('vladimir')"
                 >
                     vladimir
                 </button>
                 <button 
-                    class="name" 
+                    class="filter" 
                     :class="{ active: selectedAuthor === 'damyan' }"
                     @click="handleFilterChange('damyan')"
                 >
@@ -74,15 +74,19 @@ onMounted(async () => {
         </nav>
 
         <div class="item">
-            <div class="arrow left" @click="goPrev"><</div>
+            <div class="arrow left" @click="goPrev">
+                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 -960 960 960" width="2em" fill="rgba(210, 175, 93, 0.8)"><path d="M576-240 336-480l240-240 51 51-189 189 189 189-51 51Z"/></svg>
+            </div>
             <div class="img-holder">
                 <img :src="singleItem?.imageUrl" alt="exquisite mosaic panneau" class="img">
             </div>
-            <div class="arrow right" @click="goNext">></div>
+            <div class="arrow right" @click="goNext">
+                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 -960 960 960" width="2em" fill="rgba(210, 175, 93, 0.8)"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"/></svg>
+            </div>
         </div>
 
         <nav class="overlay-back">
-            <router-link to="/gallery" class="link">Back to gallery</router-link>
+            <router-link to="/gallery" class="overlay-nav">Back to gallery</router-link>
         </nav>
 </section>
 </template>
