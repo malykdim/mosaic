@@ -7,6 +7,12 @@
     "signup": "Registrieren",
     "dashboard": "Dashboard"
   },
+  "filters": {
+    "all": "Alle",
+    "vladimir": "Vladimir Damyanov",
+    "damyan": "Damyan Damyanov",
+    "back": "Ausstellung"
+  },
   "footer": {
     "copy": "Die Steinmagie © {year}"
   },

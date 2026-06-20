@@ -2,12 +2,15 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGalleryListener } from '../../stores/useGalleryListener'
+import { useI18n } from '../../stores/useI18n'
 
 const route = useRoute()
 const id = Number(route.params.id)
 
 const singleItem = ref(null)
 const currentIndex = ref(0)
+
+const { locale, setLocale, availableLocales, translate } = useI18n()
 
 const { 
     mosaics, 
@@ -54,21 +57,21 @@ onMounted(async () => {
                     :class="{ active: selectedAuthor === 'all' }"
                     @click="handleFilterChange('all')"
                 >
-                    all
+                    {{translate('filters.all')}}
                 </button>
                 <button 
                     class="filter" 
                     :class="{ active: selectedAuthor === 'vladimir' }"
                     @click="handleFilterChange('vladimir')"
                 >
-                    vladimir
+                    {{translate('filters.vladimir')}}
                 </button>
                 <button 
                     class="filter" 
                     :class="{ active: selectedAuthor === 'damyan' }"
                     @click="handleFilterChange('damyan')"
                 >
-                    damyan
+                    {{translate('filters.damyan')}}
                 </button>
             </div>
         </nav>
@@ -86,7 +89,7 @@ onMounted(async () => {
         </div>
 
         <nav class="overlay-back">
-            <router-link to="/gallery" class="overlay-nav">Back to gallery</router-link>
+            <router-link to="/gallery" class="overlay-nav">{{translate('filters.back')}}</router-link>
         </nav>
 </section>
 </template>

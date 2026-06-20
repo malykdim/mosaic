@@ -7,6 +7,12 @@
     "signup": "Sign up",
     "dashboard": "Dashboard"
   },
+  "filters": {
+    "all": "All",
+    "vladimir": "Vladimir Damyanov",
+    "damyan": "Damyan Damyanov",
+    "back": "Exhibition"
+  },
   "footer": {
     "copy": "The Stone Magic © {year}"
   },

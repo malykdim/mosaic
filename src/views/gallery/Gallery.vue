@@ -2,8 +2,9 @@
 import { useGalleryListener } from '../../stores/useGalleryListener.js'
 import ListItem from './ListItem.vue'
 import ImageSkeleton from '../../components/ImageSkeleton.vue'
+import { useI18n } from '../../stores/useI18n'
 const { mosaics, isLoading, error, selectedAuthor, setAuthorFilter, startListening } = useGalleryListener()
-
+const { translate } = useI18n()
 startListening()
 </script>
 
@@ -19,21 +20,21 @@ startListening()
                 :class="{ active: selectedAuthor === 'all' }"
                 @click="setAuthorFilter('all')"
             >
-                all
+                {{translate('filters.all')}}
             </button>
             <button 
                 class="name" 
                 :class="{ active: selectedAuthor === 'vladimir' }"
                 @click="setAuthorFilter('vladimir')"
             >
-                vladimir
+                {{translate('filters.vladimir')}}
             </button>
             <button 
                 class="name" 
                 :class="{ active: selectedAuthor === 'damyan' }"
                 @click="setAuthorFilter('damyan')"
             >
-                damyan
+                {{translate('filters.damyan')}}
             </button>
         </div>
 
