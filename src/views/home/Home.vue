@@ -1,10 +1,11 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { ref } from 'vue'
 
 import Logo from './components/Logo.vue'
-const MobileHero = defineAsyncComponent(() => import('./components/MobileHero.vue'))
-const TabletHero = defineAsyncComponent(() => import('./components/TabletHero.vue'))
-const DesktopHero = defineAsyncComponent(() => import('./components/DesktopHero.vue'))
+
+import MobileHero from './components/MobileHero.vue'
+import TableteHero from './components/TabletHero.vue'
+import DesktopHero from './components/DesktopHero.vue'
 
 import Authors from './components/Authors.vue'
 
