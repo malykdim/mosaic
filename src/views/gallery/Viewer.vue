@@ -1,8 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGalleryListener } from '../../stores/useGalleryListener'
+import { useGalleryListener } from '../../stores/useGalleryListenerNew'
 import { useI18n } from '../../stores/useI18n'
+import Filters from '../../components/navigation/Filters.vue'
 
 const route = useRoute()
 const id = Number(route.params.id)
@@ -32,11 +33,25 @@ const goPrev = () => {
     singleItem.value = mosaics.value[currentIndex.value]
 }
 
-const handleFilterChange = async (author) => {
-    await setAuthorFilter(author)
-    currentIndex.value = 0
-    singleItem.value = mosaics.value[0]
-}
+// const handleFilterChange = async (author) => {
+//     await setAuthorFilter(author)
+//     currentIndex.value = 0
+//     singleItem.value = mosaics.value[0]
+// }
+
+// React whenever the shared filtered list changes — no matter who triggered it
+watch(mosaics, (newMosaics) => {
+    const stillVisible = newMosaics.some(m => m.id === singleItem.value?.id)
+
+    if (stillVisible) {
+        // Same artwork still matches — keep showing it, just refresh its index
+        currentIndex.value = newMosaics.findIndex(m => m.id === singleItem.value.id)
+    } else {
+        // Filtered out — fall back to the first item in the new set
+        currentIndex.value = 0
+        singleItem.value = newMosaics[0] ?? null
+    }
+})
 
 onMounted(async () => {
     const authorFilter = route.query.author || 'all'
@@ -51,29 +66,7 @@ onMounted(async () => {
 <template>
 <section class="page viewer">
         <nav class="overlay-filters">
-            <div v-if="mosaics.length" class="sort">
-                <button 
-                    class="filter" 
-                    :class="{ active: selectedAuthor === 'all' }"
-                    @click="handleFilterChange('all')"
-                >
-                    {{translate('filters.all')}}
-                </button>
-                <button 
-                    class="filter" 
-                    :class="{ active: selectedAuthor === 'vladimir' }"
-                    @click="handleFilterChange('vladimir')"
-                >
-                    {{translate('filters.vladimir')}}
-                </button>
-                <button 
-                    class="filter" 
-                    :class="{ active: selectedAuthor === 'damyan' }"
-                    @click="handleFilterChange('damyan')"
-                >
-                    {{translate('filters.damyan')}}
-                </button>
-            </div>
+            <Filters />
         </nav>
 
         <div class="item">

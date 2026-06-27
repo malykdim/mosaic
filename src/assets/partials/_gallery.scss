@@ -9,19 +9,7 @@
     h2 {
         color: var(--primary);
     }
-    .sort {
-        display: flex;
-        gap: 1rem;
-        .name {
-            background-color: var(--primary);
-            color: white;
-            &:hover, &:focus, &:active {
-                background: white;
-                color: var(--primary);
-                font-weight: 600;
-            }
-        }
-    }
+    
     .items {
         display: flex;
         flex-wrap: wrap;
@@ -40,6 +28,7 @@
         }
     }
 }
+
 @media screen and (max-width: 767px) and (min-width: 260px) {
     .gallery {
         width: 100%;
